@@ -1,0 +1,89 @@
+<div class="page-container">
+  <!-- Sidebar -->
+  <aside class="sidebar" [class.collapsed]="isSidebarCollapsed">
+    <div class="sidebar-header">
+      <img *ngIf="!isSidebarCollapsed" src="assets/logo.png" alt="iDUELA" class="logo" />
+      <img *ngIf="isSidebarCollapsed" src="assets/logo.png" alt="iDUELA" class="logo-small" />
+    </div>
+    
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <div class="section-title" *ngIf="!isSidebarCollapsed">Home</div>
+        <div class="nav-item" (click)="navigateToDashboard()">
+          <span class="nav-icon"><i class="fas fa-chart-line"></i></span>
+          <span class="nav-text" *ngIf="!isSidebarCollapsed">Dashboard</span>
+        </div>
+        <div class="nav-item active">
+          <span class="nav-icon"><i class="fas fa-clipboard-check"></i></span>
+          <span class="nav-text" *ngIf="!isSidebarCollapsed">Score Cards</span>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="section-title" *ngIf="!isSidebarCollapsed">Settings</div>
+        <div class="nav-item" (click)="navigateToReviewPeriod()">
+          <span class="nav-icon"><i class="fas fa-calendar-alt"></i></span>
+          <span class="nav-text" *ngIf="!isSidebarCollapsed">Review Periods</span>
+        </div>
+        <div class="nav-item">
+          <span class="nav-icon"><i class="fas fa-user-check"></i></span>
+          <span class="nav-text" *ngIf="!isSidebarCollapsed">Eligibility Profile</span>
+        </div>
+      </div>
+      
+      <div class="nav-spacer"></div>
+      
+      <div class="nav-item sign-out" (click)="signOut()">
+        <span class="nav-icon"><i class="fas fa-sign-out-alt"></i></span>
+        <span class="nav-text" *ngIf="!isSidebarCollapsed">Sign Out</span>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Top Bar -->
+    <header class="top-bar">
+      <button class="sidebar-toggle" (click)="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="page-name">Performance Management System</div>
+    </header>
+
+    <!-- Score Cards Content -->
+    <div class="content">
+      <div class="page-header">
+        <h1 class="page-title">Active Score Cards</h1>
+      </div>
+
+      <!-- Score Cards Table -->
+      <div class="table-section">
+        <div class="table-container">
+          <table class="score-cards-table">
+            <thead>
+              <tr>
+                <th>S.No</th>
+                <th>Employee Name</th>
+                <th>Review Period</th>
+                <th>Created On</th>
+                <th>Created By</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let scoreCard of scoreCards; let i = index" (click)="viewScoreCardDetails(scoreCard)" class="clickable-row">
+                <td>{{ i + 1 }}</td>
+                <td>{{ scoreCard.employeeName }}</td>
+                <td>{{ scoreCard.reviewPeriod }}</td>
+                <td>{{ scoreCard.createdOn }}</td>
+                <td>{{ scoreCard.createdBy }}</td>
+                <td><span class="status-text">{{ scoreCard.status }}</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
