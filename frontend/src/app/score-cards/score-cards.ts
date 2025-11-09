@@ -18,8 +18,11 @@ interface ScoreCard {
 })
 export class ScoreCards {
   isSidebarCollapsed = false;
+  showGoalForm = false;
+  showProcessForm = false;
   
   scoreCards: ScoreCard[] = [
+    // Q3 2024
     {
       employeeName: 'Sarah Johnson',
       reviewPeriod: 'Q3 2024',
@@ -42,6 +45,14 @@ export class ScoreCards {
       status: 'Active'
     },
     {
+      employeeName: 'Christopher Lee',
+      reviewPeriod: 'Q3 2024',
+      createdOn: 'Jul 18, 2024',
+      createdBy: 'Manager',
+      status: 'Active'
+    },
+    // Q4 2024
+    {
       employeeName: 'David Thompson',
       reviewPeriod: 'Q4 2024',
       createdOn: 'Oct 5, 2024',
@@ -56,23 +67,31 @@ export class ScoreCards {
       status: 'Active'
     },
     {
+      employeeName: 'Kevin Martinez',
+      reviewPeriod: 'Q4 2024',
+      createdOn: 'Oct 8, 2024',
+      createdBy: 'HR Admin',
+      status: 'Active'
+    },
+    // Annual 2024
+    {
       employeeName: 'Robert Martinez',
-      reviewPeriod: 'Yearly 2024',
+      reviewPeriod: 'Annual 2024',
       createdOn: 'Jan 10, 2024',
       createdBy: 'HR Admin',
       status: 'Active'
     },
     {
       employeeName: 'Amanda Brown',
-      reviewPeriod: 'Yearly 2024',
+      reviewPeriod: 'Annual 2024',
       createdOn: 'Jan 12, 2024',
       createdBy: 'HR Admin',
       status: 'Active'
     },
     {
-      employeeName: 'Christopher Lee',
-      reviewPeriod: 'Q3 2024',
-      createdOn: 'Jul 18, 2024',
+      employeeName: 'Patricia Davis',
+      reviewPeriod: 'Annual 2024',
+      createdOn: 'Jan 15, 2024',
       createdBy: 'Manager',
       status: 'Active'
     }
@@ -110,6 +129,22 @@ export class ScoreCards {
     this.router.navigate(['/score-card-details'], {
       state: { scoreCard }
     });
+  }
+
+  showAddGoalForm() {
+    this.showGoalForm = true;
+  }
+
+  closeAddGoalForm() {
+    this.showGoalForm = false;
+  }
+
+  showStartProcessForm() {
+    this.showProcessForm = true;
+  }
+
+  closeStartProcessForm() {
+    this.showProcessForm = false;
   }
 }
 

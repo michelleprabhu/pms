@@ -10,6 +10,28 @@ interface ScoreCard {
   status: string;
 }
 
+interface Goal {
+  name: string;
+  description: string;
+  status: string;
+  weight: number;
+  reviewPeriod: string;
+  startDate: string;
+  endDate: string;
+}
+
+interface Competency {
+  name: string;
+  description: string;
+  minLevel: number;
+  maxLevel: number;
+}
+
+interface Value {
+  name: string;
+  description: string;
+}
+
 @Component({
   selector: 'app-score-card-details',
   imports: [CommonModule],
@@ -20,6 +42,156 @@ export class ScoreCardDetails implements OnInit {
   isSidebarCollapsed = false;
   activeTab: string = 'goals';
   scoreCard: ScoreCard | null = null;
+  
+  goals: Goal[] = [
+    {
+      name: 'Increase Sales Revenue',
+      description: 'Achieve 20% growth in quarterly sales',
+      status: 'In Progress',
+      weight: 30,
+      reviewPeriod: 'Q3 2024',
+      startDate: 'Jul 1, 2024',
+      endDate: 'Sep 30, 2024'
+    },
+    {
+      name: 'Improve Customer Satisfaction',
+      description: 'Increase CSAT score to 4.5/5',
+      status: 'In Progress',
+      weight: 25,
+      reviewPeriod: 'Q3 2024',
+      startDate: 'Jul 1, 2024',
+      endDate: 'Sep 30, 2024'
+    },
+    {
+      name: 'Complete Product Launch',
+      description: 'Successfully launch new product line',
+      status: 'Not Started',
+      weight: 20,
+      reviewPeriod: 'Q3 2024',
+      startDate: 'Aug 1, 2024',
+      endDate: 'Sep 30, 2024'
+    },
+    {
+      name: 'Team Development',
+      description: 'Conduct training sessions for team members',
+      status: 'In Progress',
+      weight: 15,
+      reviewPeriod: 'Q3 2024',
+      startDate: 'Jul 15, 2024',
+      endDate: 'Sep 15, 2024'
+    },
+    {
+      name: 'Process Improvement',
+      description: 'Streamline workflow processes',
+      status: 'Completed',
+      weight: 10,
+      reviewPeriod: 'Q3 2024',
+      startDate: 'Jul 1, 2024',
+      endDate: 'Aug 31, 2024'
+    }
+  ];
+
+  competencies: Competency[] = [
+    {
+      name: 'Software Development',
+      description: 'Proficiency in coding, debugging, and software design patterns',
+      minLevel: 3,
+      maxLevel: 5
+    },
+    {
+      name: 'Code Review & Quality',
+      description: 'Ability to conduct thorough code reviews and maintain code quality standards',
+      minLevel: 3,
+      maxLevel: 5
+    },
+    {
+      name: 'System Design & Architecture',
+      description: 'Design scalable and maintainable system architectures',
+      minLevel: 3,
+      maxLevel: 5
+    },
+    {
+      name: 'DevOps & CI/CD',
+      description: 'Knowledge of deployment pipelines, containerization, and cloud platforms',
+      minLevel: 2,
+      maxLevel: 5
+    },
+    {
+      name: 'Database Management',
+      description: 'Proficiency in SQL/NoSQL databases, query optimization, and data modeling',
+      minLevel: 3,
+      maxLevel: 5
+    },
+    {
+      name: 'API Development',
+      description: 'Design and implement RESTful APIs and microservices',
+      minLevel: 3,
+      maxLevel: 5
+    },
+    {
+      name: 'Testing & QA',
+      description: 'Unit testing, integration testing, and test automation',
+      minLevel: 3,
+      maxLevel: 5
+    },
+    {
+      name: 'Version Control (Git)',
+      description: 'Proficiency in Git workflows, branching strategies, and collaboration',
+      minLevel: 4,
+      maxLevel: 5
+    },
+    {
+      name: 'Agile Methodologies',
+      description: 'Understanding of Scrum, Kanban, and agile development practices',
+      minLevel: 3,
+      maxLevel: 5
+    },
+    {
+      name: 'Problem Solving',
+      description: 'Analytical thinking and debugging complex technical issues',
+      minLevel: 4,
+      maxLevel: 5
+    },
+    {
+      name: 'Communication',
+      description: 'Clear technical communication with team members and stakeholders',
+      minLevel: 3,
+      maxLevel: 5
+    },
+    {
+      name: 'Leadership & Mentoring',
+      description: 'Ability to mentor junior developers and lead technical initiatives',
+      minLevel: 2,
+      maxLevel: 5
+    }
+  ];
+
+  values: Value[] = [
+    {
+      name: 'Integrity',
+      description: 'Demonstrates honesty and strong moral principles'
+    },
+    {
+      name: 'Innovation',
+      description: 'Brings creative solutions and new ideas'
+    },
+    {
+      name: 'Collaboration',
+      description: 'Works well with team members and stakeholders'
+    },
+    {
+      name: 'Customer Focus',
+      description: 'Prioritizes customer needs and satisfaction'
+    },
+    {
+      name: 'Accountability',
+      description: 'Takes ownership of work and commitments'
+    },
+    {
+      name: 'Continuous Learning',
+      description: 'Actively seeks to improve skills and knowledge'
+    }
+  ];
 
   constructor(private router: Router) {
     const navigation = this.router.getCurrentNavigation();
@@ -33,6 +205,10 @@ export class ScoreCardDetails implements OnInit {
     if (!this.scoreCard) {
       this.navigateToScoreCards();
     }
+  }
+
+  getTotalWeight(): number {
+    return this.goals.reduce((total, goal) => total + goal.weight, 0);
   }
 
   toggleSidebar() {
