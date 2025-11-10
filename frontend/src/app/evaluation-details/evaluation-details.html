@@ -131,25 +131,28 @@
                 <tr>
                   <th>S.No</th>
                   <th>Goal</th>
-                  <th>Weight (%)</th>
+                  <th>Weight</th>
                   <th>Employee Comments</th>
+                  <th>Employee Rating</th>
                   <th>Manager Comments</th>
+                  <th>Manager Rating</th>
                   <th>HR Comments</th>
-                  <th>HR Rating (1-5)</th>
+                  <th>HR Rating</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let goal of goals; let i = index">
                   <td>{{ i + 1 }}</td>
                   <td class="goal-name">{{ goal.name }}</td>
-                  <td class="weight-cell">{{ goal.weight }}</td>
+                  <td class="weight-cell">{{ goal.weight }}%</td>
                   <td class="comments-cell greyed-out">{{ goal.employeeComments }}</td>
+                  <td class="rating-cell greyed-out">{{ goal.employeeRating }}</td>
                   <td class="comments-cell greyed-out">{{ goal.managerComments }}</td>
+                  <td class="rating-cell greyed-out">{{ goal.managerRating }}</td>
                   <td class="comments-cell">
                     <textarea 
                       [(ngModel)]="goal.hrComments" 
-                      placeholder="Enter HR comments..."
-                      rows="3">
+                      placeholder="Enter HR comments...">
                     </textarea>
                   </td>
                   <td class="rating-cell">
@@ -183,12 +186,14 @@
                   <th>S.No</th>
                   <th>Competency</th>
                   <th>Description</th>
-                  <th>Min Proficiency</th>
-                  <th>Max Proficiency</th>
+                  <th>Min Prof.</th>
+                  <th>Max Prof.</th>
                   <th>Employee Comments</th>
+                  <th>Emp. Rating</th>
                   <th>Manager Comments</th>
+                  <th>Mgr. Rating</th>
                   <th>HR Comments</th>
-                  <th>HR Rating (1-5)</th>
+                  <th>HR Rating</th>
                 </tr>
               </thead>
               <tbody>
@@ -199,12 +204,13 @@
                   <td>{{ competency.minProficiency }}</td>
                   <td>{{ competency.maxProficiency }}</td>
                   <td class="comments-cell greyed-out">{{ competency.employeeComments }}</td>
+                  <td class="rating-cell greyed-out">{{ competency.employeeRating }}</td>
                   <td class="comments-cell greyed-out">{{ competency.managerComments }}</td>
+                  <td class="rating-cell greyed-out">{{ competency.managerRating }}</td>
                   <td class="comments-cell">
                     <textarea 
                       [(ngModel)]="competency.hrComments" 
-                      placeholder="Enter HR comments..."
-                      rows="3">
+                      placeholder="Enter HR comments...">
                     </textarea>
                   </td>
                   <td class="rating-cell">
@@ -238,9 +244,11 @@
                   <th>S.No</th>
                   <th>Value</th>
                   <th>Employee Comments</th>
+                  <th>Employee Rating</th>
                   <th>Manager Comments</th>
+                  <th>Manager Rating</th>
                   <th>HR Comments</th>
-                  <th>HR Rating (1-5)</th>
+                  <th>HR Rating</th>
                 </tr>
               </thead>
               <tbody>
@@ -248,12 +256,13 @@
                   <td>{{ i + 1 }}</td>
                   <td class="goal-name">{{ value.name }}</td>
                   <td class="comments-cell greyed-out">{{ value.employeeComments }}</td>
+                  <td class="rating-cell greyed-out">{{ value.employeeRating }}</td>
                   <td class="comments-cell greyed-out">{{ value.managerComments }}</td>
+                  <td class="rating-cell greyed-out">{{ value.managerRating }}</td>
                   <td class="comments-cell">
                     <textarea 
                       [(ngModel)]="value.hrComments" 
-                      placeholder="Enter HR comments..."
-                      rows="3">
+                      placeholder="Enter HR comments...">
                     </textarea>
                   </td>
                   <td class="rating-cell">

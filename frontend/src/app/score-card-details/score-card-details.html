@@ -119,6 +119,7 @@
                     <th>S.No</th>
                     <th>Goal</th>
                     <th>Description</th>
+                    <th>Success Criteria</th>
                     <th>Status</th>
                     <th>Weight (%)</th>
                     <th>Review Period</th>
@@ -131,6 +132,7 @@
                     <td>{{ i + 1 }}</td>
                     <td>{{ goal.name }}</td>
                     <td>{{ goal.description }}</td>
+                    <td class="success-criteria-cell">{{ goal.successCriteria }}</td>
                     <td>{{ goal.status }}</td>
                     <td>{{ goal.weight }}</td>
                     <td>{{ goal.reviewPeriod }}</td>
@@ -138,7 +140,7 @@
                     <td>{{ goal.endDate }}</td>
                   </tr>
                   <tr class="total-row">
-                    <td colspan="4"><strong>Total Weight</strong></td>
+                    <td colspan="5"><strong>Total Weight</strong></td>
                     <td><strong>{{ getTotalWeight() }}%</strong></td>
                     <td colspan="3"></td>
                   </tr>

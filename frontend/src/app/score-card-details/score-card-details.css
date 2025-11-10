@@ -341,6 +341,14 @@
   color: #333;
 }
 
+.success-criteria-cell {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #555;
+  max-width: 300px;
+  word-wrap: break-word;
+}
+
 .total-row {
   background-color: #f8f9fa !important;
   font-weight: 600;

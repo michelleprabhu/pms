@@ -13,6 +13,7 @@ interface ScoreCard {
 interface Goal {
   name: string;
   description: string;
+  successCriteria: string;
   status: string;
   weight: number;
   reviewPeriod: string;
@@ -47,6 +48,7 @@ export class ScoreCardDetails implements OnInit {
     {
       name: 'Increase Sales Revenue',
       description: 'Achieve 20% growth in quarterly sales',
+      successCriteria: 'Revenue increases by $500K and meets or exceeds 20% growth target with documented customer acquisitions',
       status: 'In Progress',
       weight: 30,
       reviewPeriod: 'Q3 2024',
@@ -56,6 +58,7 @@ export class ScoreCardDetails implements OnInit {
     {
       name: 'Improve Customer Satisfaction',
       description: 'Increase CSAT score to 4.5/5',
+      successCriteria: 'CSAT survey results show consistent scores of 4.5 or higher across all customer touchpoints for 3 consecutive months',
       status: 'In Progress',
       weight: 25,
       reviewPeriod: 'Q3 2024',
@@ -65,6 +68,7 @@ export class ScoreCardDetails implements OnInit {
     {
       name: 'Complete Product Launch',
       description: 'Successfully launch new product line',
+      successCriteria: 'Product is live in production, all features are functional, user documentation is published, and 100+ active users within first month',
       status: 'Not Started',
       weight: 20,
       reviewPeriod: 'Q3 2024',
@@ -74,6 +78,7 @@ export class ScoreCardDetails implements OnInit {
     {
       name: 'Team Development',
       description: 'Conduct training sessions for team members',
+      successCriteria: 'Complete 8 training sessions with 90%+ attendance and positive feedback scores above 4/5 from participants',
       status: 'In Progress',
       weight: 15,
       reviewPeriod: 'Q3 2024',
@@ -83,6 +88,7 @@ export class ScoreCardDetails implements OnInit {
     {
       name: 'Process Improvement',
       description: 'Streamline workflow processes',
+      successCriteria: 'Process efficiency improved by 25%, documented procedures created, and team adoption rate of 80% or higher',
       status: 'Completed',
       weight: 10,
       reviewPeriod: 'Q3 2024',
