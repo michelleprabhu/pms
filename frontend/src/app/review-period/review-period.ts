@@ -48,6 +48,10 @@ export class ReviewPeriod {
     this.router.navigate(['/score-cards']);
   }
 
+  navigateToEvaluation() {
+    this.router.navigate(['/evaluation']);
+  }
+
   signOut() {
     this.authService.logout();
     this.router.navigate(['/login']);

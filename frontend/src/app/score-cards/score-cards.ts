@@ -111,6 +111,10 @@ export class ScoreCards {
     this.router.navigate(['/review-period']);
   }
 
+  navigateToEvaluation() {
+    this.router.navigate(['/evaluation']);
+  }
+
   signOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');

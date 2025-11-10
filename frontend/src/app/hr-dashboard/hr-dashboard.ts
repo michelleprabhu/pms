@@ -25,6 +25,10 @@ export class HrDashboard {
     this.router.navigate(['/score-cards']);
   }
 
+  navigateToEvaluation() {
+    this.router.navigate(['/evaluation']);
+  }
+
   signOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');

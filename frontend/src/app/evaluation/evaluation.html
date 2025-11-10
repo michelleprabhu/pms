@@ -1,0 +1,87 @@
+<div class="dashboard-container">
+  <!-- Sidebar -->
+  <aside class="sidebar" [class.collapsed]="isSidebarCollapsed">
+    <div class="sidebar-header">
+      <img *ngIf="!isSidebarCollapsed" src="assets/logo.png" alt="iDUELA Logo" class="sidebar-logo-expanded" />
+      <img *ngIf="isSidebarCollapsed" src="assets/logo.png" alt="iDUELA" class="sidebar-logo-collapsed" />
+    </div>
+    <nav class="sidebar-nav">
+      <a class="nav-item" (click)="navigateToDashboard()">
+        <i class="fas fa-home"></i>
+        <span *ngIf="!isSidebarCollapsed">Dashboard</span>
+      </a>
+      <a class="nav-item" (click)="navigateToReviewPeriods()">
+        <i class="fas fa-calendar-alt"></i>
+        <span *ngIf="!isSidebarCollapsed">Review Period</span>
+      </a>
+      <a class="nav-item" (click)="navigateToScoreCards()">
+        <i class="fas fa-clipboard-list"></i>
+        <span *ngIf="!isSidebarCollapsed">Score Cards</span>
+      </a>
+      <a class="nav-item active" (click)="navigateToEvaluation()">
+        <i class="fas fa-star"></i>
+        <span *ngIf="!isSidebarCollapsed">Evaluation</span>
+      </a>
+      <a class="nav-item">
+        <i class="fas fa-user-check"></i>
+        <span *ngIf="!isSidebarCollapsed">Eligibility Profile</span>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Top Bar -->
+    <header class="top-bar">
+      <div class="top-bar-left">
+        <button class="menu-toggle" (click)="toggleSidebar()">
+          <i class="fas fa-bars"></i>
+        </button>
+        <h1 class="page-title">Performance Management System</h1>
+      </div>
+      <div class="top-bar-right">
+        <div class="user-profile">
+          <i class="fas fa-user-circle"></i>
+          <span>HR Admin</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <div class="page-content">
+      <div class="page-header">
+        <h2>Employee Evaluations</h2>
+      </div>
+
+      <div class="table-container">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>S.No</th>
+              <th>Employee Name</th>
+              <th>Review Period</th>
+              <th>Created On</th>
+              <th>Created By</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let evaluation of evaluations; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>
+                <a class="employee-link" (click)="viewEvaluationDetails(evaluation.id)">
+                  {{ evaluation.employeeName }}
+                </a>
+              </td>
+              <td>{{ evaluation.reviewPeriod }}</td>
+              <td>{{ evaluation.createdOn }}</td>
+              <td>{{ evaluation.createdBy }}</td>
+              <td><span class="status-badge">{{ evaluation.status }}</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
