@@ -77,13 +77,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let evaluation of evaluations; let i = index">
+            <tr *ngFor="let evaluation of evaluations; let i = index" class="clickable-row" (click)="viewEvaluationDetails(evaluation.id)">
               <td>{{ i + 1 }}</td>
-              <td>
-                <a class="employee-link" (click)="viewEvaluationDetails(evaluation.id)">
-                  {{ evaluation.employeeName }}
-                </a>
-              </td>
+              <td>{{ evaluation.employeeName }}</td>
               <td>{{ evaluation.reviewPeriod }}</td>
               <td>{{ evaluation.createdOn }}</td>
               <td>{{ evaluation.createdBy }}</td>

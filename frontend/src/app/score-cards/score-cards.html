@@ -292,7 +292,7 @@
 
   <!-- Start Score Card Process Modal -->
   <div class="modal-overlay" *ngIf="showProcessForm" (click)="closeStartProcessForm()">
-    <div class="modal-container" (click)="$event.stopPropagation()">
+    <div class="modal-container modal-large" (click)="$event.stopPropagation()">
       <div class="modal-header">
         <h2 class="modal-title">Start Score Card Process</h2>
         <button class="btn-close" (click)="closeStartProcessForm()">
@@ -318,143 +318,204 @@
             </select>
           </div>
 
-          <!-- Goals Section -->
-          <div class="selection-section">
-            <h3 class="section-title">Assign Goals</h3>
-            <div class="checkbox-group">
-              <label class="checkbox-item">
-                <input type="checkbox" class="form-checkbox">
-                <div class="checkbox-content">
-                  <span class="checkbox-title">Increase Sales Revenue</span>
-                  <span class="checkbox-desc">Achieve 20% growth in quarterly sales (Weight: 30%)</span>
-                </div>
-              </label>
-              <label class="checkbox-item">
-                <input type="checkbox" class="form-checkbox">
-                <div class="checkbox-content">
-                  <span class="checkbox-title">Improve Customer Satisfaction</span>
-                  <span class="checkbox-desc">Increase CSAT score to 4.5/5 (Weight: 25%)</span>
-                </div>
-              </label>
-              <label class="checkbox-item">
-                <input type="checkbox" class="form-checkbox">
-                <div class="checkbox-content">
-                  <span class="checkbox-title">Complete Product Launch</span>
-                  <span class="checkbox-desc">Successfully launch new product line (Weight: 20%)</span>
-                </div>
-              </label>
-              <label class="checkbox-item">
-                <input type="checkbox" class="form-checkbox">
-                <div class="checkbox-content">
-                  <span class="checkbox-title">Team Development</span>
-                  <span class="checkbox-desc">Conduct training sessions for team members (Weight: 15%)</span>
-                </div>
-              </label>
-              <label class="checkbox-item">
-                <input type="checkbox" class="form-checkbox">
-                <div class="checkbox-content">
-                  <span class="checkbox-title">Process Improvement</span>
-                  <span class="checkbox-desc">Streamline workflow processes (Weight: 10%)</span>
-                </div>
-              </label>
+          <!-- Tabs -->
+          <div class="process-tabs">
+            <button 
+              type="button"
+              class="process-tab" 
+              [class.active]="processFormActiveTab === 'goals'" 
+              (click)="setProcessFormTab('goals')">
+              Goals
+            </button>
+            <button 
+              type="button"
+              class="process-tab" 
+              [class.active]="processFormActiveTab === 'competencies'" 
+              (click)="setProcessFormTab('competencies')">
+              Competencies
+            </button>
+            <button 
+              type="button"
+              class="process-tab" 
+              [class.active]="processFormActiveTab === 'values'" 
+              (click)="setProcessFormTab('values')">
+              Values
+            </button>
+          </div>
+
+          <!-- Goals Tab -->
+          <div class="tab-content" *ngIf="processFormActiveTab === 'goals'">
+            <div class="selection-section">
+              <h3 class="section-title">Assign Goals</h3>
+              <div class="checkbox-group">
+                <label class="checkbox-item">
+                  <input type="checkbox" class="form-checkbox">
+                  <div class="checkbox-content">
+                    <span class="checkbox-title">Increase Sales Revenue</span>
+                    <span class="checkbox-desc">Achieve 20% growth in quarterly sales (Weight: 30%)</span>
+                  </div>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" class="form-checkbox">
+                  <div class="checkbox-content">
+                    <span class="checkbox-title">Improve Customer Satisfaction</span>
+                    <span class="checkbox-desc">Increase CSAT score to 4.5/5 (Weight: 25%)</span>
+                  </div>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" class="form-checkbox">
+                  <div class="checkbox-content">
+                    <span class="checkbox-title">Complete Product Launch</span>
+                    <span class="checkbox-desc">Successfully launch new product line (Weight: 20%)</span>
+                  </div>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" class="form-checkbox">
+                  <div class="checkbox-content">
+                    <span class="checkbox-title">Team Development</span>
+                    <span class="checkbox-desc">Conduct training sessions for team members (Weight: 15%)</span>
+                  </div>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" class="form-checkbox">
+                  <div class="checkbox-content">
+                    <span class="checkbox-title">Process Improvement</span>
+                    <span class="checkbox-desc">Streamline workflow processes (Weight: 10%)</span>
+                  </div>
+                </label>
+              </div>
             </div>
           </div>
 
-          <!-- Competencies Section -->
-          <div class="selection-section">
-            <h3 class="section-title">Assign Competencies</h3>
-            <div class="checkbox-group">
-              <label class="checkbox-item">
-                <input type="checkbox" class="form-checkbox">
-                <div class="checkbox-content">
-                  <span class="checkbox-title">Software Development</span>
-                  <span class="checkbox-desc">Proficiency in coding, debugging, and software design patterns</span>
+          <!-- Competencies Tab -->
+          <div class="tab-content" *ngIf="processFormActiveTab === 'competencies'">
+            <div class="selection-section">
+              <h3 class="section-title">Suggested Competencies</h3>
+              <div class="checkbox-group">
+                <label class="checkbox-item">
+                  <input type="checkbox" class="form-checkbox">
+                  <div class="checkbox-content">
+                    <span class="checkbox-title">Software Development</span>
+                    <span class="checkbox-desc">Proficiency in coding, debugging, and software design patterns</span>
+                  </div>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" class="form-checkbox">
+                  <div class="checkbox-content">
+                    <span class="checkbox-title">Code Review & Quality</span>
+                    <span class="checkbox-desc">Conduct thorough code reviews and maintain quality standards</span>
+                  </div>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" class="form-checkbox">
+                  <div class="checkbox-content">
+                    <span class="checkbox-title">System Design & Architecture</span>
+                    <span class="checkbox-desc">Design scalable and maintainable system architectures</span>
+                  </div>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" class="form-checkbox">
+                  <div class="checkbox-content">
+                    <span class="checkbox-title">DevOps & CI/CD</span>
+                    <span class="checkbox-desc">Knowledge of deployment pipelines and cloud platforms</span>
+                  </div>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" class="form-checkbox">
+                  <div class="checkbox-content">
+                    <span class="checkbox-title">Database Management</span>
+                    <span class="checkbox-desc">Proficiency in SQL/NoSQL databases and data modeling</span>
+                  </div>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" class="form-checkbox">
+                  <div class="checkbox-content">
+                    <span class="checkbox-title">API Development</span>
+                    <span class="checkbox-desc">Design and implement RESTful APIs and microservices</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Add Competency Section -->
+            <div class="add-section">
+              <h3 class="section-title">Add Competency</h3>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Competency Title</label>
+                  <input type="text" class="form-control" placeholder="Enter competency title">
                 </div>
-              </label>
-              <label class="checkbox-item">
-                <input type="checkbox" class="form-checkbox">
-                <div class="checkbox-content">
-                  <span class="checkbox-title">Code Review & Quality</span>
-                  <span class="checkbox-desc">Conduct thorough code reviews and maintain quality standards</span>
-                </div>
-              </label>
-              <label class="checkbox-item">
-                <input type="checkbox" class="form-checkbox">
-                <div class="checkbox-content">
-                  <span class="checkbox-title">System Design & Architecture</span>
-                  <span class="checkbox-desc">Design scalable and maintainable system architectures</span>
-                </div>
-              </label>
-              <label class="checkbox-item">
-                <input type="checkbox" class="form-checkbox">
-                <div class="checkbox-content">
-                  <span class="checkbox-title">DevOps & CI/CD</span>
-                  <span class="checkbox-desc">Knowledge of deployment pipelines and cloud platforms</span>
-                </div>
-              </label>
-              <label class="checkbox-item">
-                <input type="checkbox" class="form-checkbox">
-                <div class="checkbox-content">
-                  <span class="checkbox-title">Database Management</span>
-                  <span class="checkbox-desc">Proficiency in SQL/NoSQL databases and data modeling</span>
-                </div>
-              </label>
-              <label class="checkbox-item">
-                <input type="checkbox" class="form-checkbox">
-                <div class="checkbox-content">
-                  <span class="checkbox-title">API Development</span>
-                  <span class="checkbox-desc">Design and implement RESTful APIs and microservices</span>
-                </div>
-              </label>
+              </div>
+              <div class="form-group">
+                <label>Competency Description</label>
+                <textarea class="form-control" rows="3" placeholder="Enter competency description"></textarea>
+              </div>
             </div>
           </div>
 
-          <!-- Values Section -->
-          <div class="selection-section">
-            <h3 class="section-title">Assign Values</h3>
-            <div class="checkbox-group">
-              <label class="checkbox-item">
-                <input type="checkbox" class="form-checkbox">
-                <div class="checkbox-content">
-                  <span class="checkbox-title">Integrity</span>
-                  <span class="checkbox-desc">Demonstrates honesty and strong moral principles</span>
+          <!-- Values Tab -->
+          <div class="tab-content" *ngIf="processFormActiveTab === 'values'">
+            <div class="selection-section">
+              <h3 class="section-title">Suggested Values</h3>
+              <div class="checkbox-group">
+                <label class="checkbox-item">
+                  <input type="checkbox" class="form-checkbox">
+                  <div class="checkbox-content">
+                    <span class="checkbox-title">Integrity</span>
+                    <span class="checkbox-desc">Demonstrates honesty and strong moral principles</span>
+                  </div>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" class="form-checkbox">
+                  <div class="checkbox-content">
+                    <span class="checkbox-title">Innovation</span>
+                    <span class="checkbox-desc">Brings creative solutions and new ideas</span>
+                  </div>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" class="form-checkbox">
+                  <div class="checkbox-content">
+                    <span class="checkbox-title">Collaboration</span>
+                    <span class="checkbox-desc">Works well with team members and stakeholders</span>
+                  </div>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" class="form-checkbox">
+                  <div class="checkbox-content">
+                    <span class="checkbox-title">Customer Focus</span>
+                    <span class="checkbox-desc">Prioritizes customer needs and satisfaction</span>
+                  </div>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" class="form-checkbox">
+                  <div class="checkbox-content">
+                    <span class="checkbox-title">Accountability</span>
+                    <span class="checkbox-desc">Takes ownership of work and commitments</span>
+                  </div>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" class="form-checkbox">
+                  <div class="checkbox-content">
+                    <span class="checkbox-title">Continuous Learning</span>
+                    <span class="checkbox-desc">Actively seeks to improve skills and knowledge</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Add Value Section -->
+            <div class="add-section">
+              <h3 class="section-title">Add Value</h3>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Value Title</label>
+                  <input type="text" class="form-control" placeholder="Enter value title">
                 </div>
-              </label>
-              <label class="checkbox-item">
-                <input type="checkbox" class="form-checkbox">
-                <div class="checkbox-content">
-                  <span class="checkbox-title">Innovation</span>
-                  <span class="checkbox-desc">Brings creative solutions and new ideas</span>
-                </div>
-              </label>
-              <label class="checkbox-item">
-                <input type="checkbox" class="form-checkbox">
-                <div class="checkbox-content">
-                  <span class="checkbox-title">Collaboration</span>
-                  <span class="checkbox-desc">Works well with team members and stakeholders</span>
-                </div>
-              </label>
-              <label class="checkbox-item">
-                <input type="checkbox" class="form-checkbox">
-                <div class="checkbox-content">
-                  <span class="checkbox-title">Customer Focus</span>
-                  <span class="checkbox-desc">Prioritizes customer needs and satisfaction</span>
-                </div>
-              </label>
-              <label class="checkbox-item">
-                <input type="checkbox" class="form-checkbox">
-                <div class="checkbox-content">
-                  <span class="checkbox-title">Accountability</span>
-                  <span class="checkbox-desc">Takes ownership of work and commitments</span>
-                </div>
-              </label>
-              <label class="checkbox-item">
-                <input type="checkbox" class="form-checkbox">
-                <div class="checkbox-content">
-                  <span class="checkbox-title">Continuous Learning</span>
-                  <span class="checkbox-desc">Actively seeks to improve skills and knowledge</span>
-                </div>
-              </label>
+              </div>
+              <div class="form-group">
+                <label>Value Description</label>
+                <textarea class="form-control" rows="3" placeholder="Enter value description"></textarea>
+              </div>
             </div>
           </div>
 

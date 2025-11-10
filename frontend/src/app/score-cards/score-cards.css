@@ -521,6 +521,93 @@ textarea.form-control {
   line-height: 1.4;
 }
 
+/* Process Form Tabs */
+.process-tabs {
+  display: flex;
+  border-bottom: 2px solid #e5e5e5;
+  margin: 20px 0;
+  gap: 4px;
+}
+
+.process-tab {
+  flex: 1;
+  padding: 12px 20px;
+  border: none;
+  background-color: transparent;
+  color: #666;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+  border-bottom: 3px solid transparent;
+}
+
+.process-tab:hover {
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+.process-tab.active {
+  color: #1a1a1a;
+  font-weight: 600;
+  border-bottom-color: #8B2E3E;
+  background-color: transparent;
+}
+
+.tab-content {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Add Section */
+.add-section {
+  margin-top: 24px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px dashed #ccc;
+}
+
+.add-section .section-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.add-section .form-group {
+  margin-bottom: 16px;
+}
+
+.add-section .form-group:last-child {
+  margin-bottom: 0;
+}
+
+.add-section label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+.add-section textarea.form-control {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.modal-large {
+  max-width: 900px;
+}
+
 .form-actions {
   display: flex;
   justify-content: flex-end;

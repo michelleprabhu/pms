@@ -214,7 +214,7 @@
 
 .btn-back {
   padding: 10px 20px;
-  background-color: #6c757d;
+  background-color: #1a1a1a;
   color: white;
   border: none;
   border-radius: 4px;
@@ -227,7 +227,7 @@
 }
 
 .btn-back:hover {
-  background-color: #5a6268;
+  background-color: #000;
 }
 
 /* Info Card */
@@ -295,8 +295,8 @@
 }
 
 .tab.active {
-  color: #3498db;
-  border-bottom-color: #3498db;
+  color: #8B2E3E;
+  border-bottom-color: #8B2E3E;
   background-color: white;
 }
 
@@ -378,7 +378,7 @@
 .weight-cell {
   text-align: center;
   font-weight: 600;
-  color: #3498db;
+  color: #8B2E3E;
 }
 
 .comments-cell {
@@ -408,8 +408,8 @@
 
 .comments-cell textarea:focus {
   outline: none;
-  border-color: #3498db;
-  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+  border-color: #8B2E3E;
+  box-shadow: 0 0 0 2px rgba(139, 46, 62, 0.2);
 }
 
 .rating-cell {
@@ -428,8 +428,8 @@
 
 .rating-cell input:focus {
   outline: none;
-  border-color: #3498db;
-  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+  border-color: #8B2E3E;
+  box-shadow: 0 0 0 2px rgba(139, 46, 62, 0.2);
 }
 
 /* Action Buttons */
@@ -442,7 +442,7 @@
 
 .btn-primary {
   padding: 12px 30px;
-  background-color: #3498db;
+  background-color: #8B2E3E;
   color: white;
   border: none;
   border-radius: 4px;
@@ -453,12 +453,12 @@
 }
 
 .btn-primary:hover {
-  background-color: #2980b9;
+  background-color: #6d2431;
 }
 
 .btn-secondary {
   padding: 12px 30px;
-  background-color: #6c757d;
+  background-color: #1a1a1a;
   color: white;
   border: none;
   border-radius: 4px;
@@ -469,7 +469,7 @@
 }
 
 .btn-secondary:hover {
-  background-color: #5a6268;
+  background-color: #000;
 }
 
 /* Responsive table columns */

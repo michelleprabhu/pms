@@ -245,19 +245,17 @@
   font-size: 14px;
 }
 
-.data-table tbody tr:hover {
+.clickable-row {
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.clickable-row:hover {
   background-color: #f8f9fa;
 }
 
-.employee-link {
-  color: #3498db;
-  text-decoration: none;
-  cursor: pointer;
-  font-weight: 500;
-}
-
-.employee-link:hover {
-  text-decoration: underline;
+.data-table tbody tr:hover {
+  background-color: #f8f9fa;
 }
 
 .status-badge {

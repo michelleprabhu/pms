@@ -21,6 +21,7 @@ export class ScoreCards {
   isSidebarCollapsed = false;
   showGoalForm = false;
   showProcessForm = false;
+  processFormActiveTab: string = 'goals';
   
   scoreCards: ScoreCard[] = [
     // Q3 2024
@@ -155,6 +156,10 @@ export class ScoreCards {
   updateScoreCardStatus(scoreCard: ScoreCard) {
     console.log(`Updated status for ${scoreCard.employeeName} to ${scoreCard.status}`);
     // In a real app, you would save this to the backend
+  }
+
+  setProcessFormTab(tab: string) {
+    this.processFormActiveTab = tab;
   }
 }
 
