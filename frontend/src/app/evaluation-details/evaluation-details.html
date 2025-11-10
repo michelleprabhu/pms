@@ -2,30 +2,45 @@
   <!-- Sidebar -->
   <aside class="sidebar" [class.collapsed]="isSidebarCollapsed">
     <div class="sidebar-header">
-      <img *ngIf="!isSidebarCollapsed" src="assets/logo.png" alt="iDUELA Logo" class="sidebar-logo-expanded" />
-      <img *ngIf="isSidebarCollapsed" src="assets/logo.png" alt="iDUELA" class="sidebar-logo-collapsed" />
+      <img *ngIf="!isSidebarCollapsed" src="assets/logo.png" alt="iDUELA" class="logo" />
+      <img *ngIf="isSidebarCollapsed" src="assets/logo.png" alt="iDUELA" class="logo-small" />
     </div>
+    
     <nav class="sidebar-nav">
-      <a class="nav-item" (click)="navigateToDashboard()">
-        <i class="fas fa-home"></i>
-        <span *ngIf="!isSidebarCollapsed">Dashboard</span>
-      </a>
-      <a class="nav-item" (click)="navigateToReviewPeriods()">
-        <i class="fas fa-calendar-alt"></i>
-        <span *ngIf="!isSidebarCollapsed">Review Period</span>
-      </a>
-      <a class="nav-item" (click)="navigateToScoreCards()">
-        <i class="fas fa-clipboard-list"></i>
-        <span *ngIf="!isSidebarCollapsed">Score Cards</span>
-      </a>
-      <a class="nav-item active" (click)="navigateToEvaluation()">
-        <i class="fas fa-star"></i>
-        <span *ngIf="!isSidebarCollapsed">Evaluation</span>
-      </a>
-      <a class="nav-item">
-        <i class="fas fa-user-check"></i>
-        <span *ngIf="!isSidebarCollapsed">Eligibility Profile</span>
-      </a>
+      <div class="nav-section">
+        <div class="section-title" *ngIf="!isSidebarCollapsed">Home</div>
+        <div class="nav-item" (click)="navigateToDashboard()">
+          <span class="nav-icon"><i class="fas fa-chart-line"></i></span>
+          <span class="nav-text" *ngIf="!isSidebarCollapsed">Dashboard</span>
+        </div>
+        <div class="nav-item" (click)="navigateToScoreCards()">
+          <span class="nav-icon"><i class="fas fa-clipboard-check"></i></span>
+          <span class="nav-text" *ngIf="!isSidebarCollapsed">Score Cards</span>
+        </div>
+        <div class="nav-item active" (click)="navigateToEvaluation()">
+          <span class="nav-icon"><i class="fas fa-star"></i></span>
+          <span class="nav-text" *ngIf="!isSidebarCollapsed">Evaluation</span>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="section-title" *ngIf="!isSidebarCollapsed">Settings</div>
+        <div class="nav-item" (click)="navigateToReviewPeriods()">
+          <span class="nav-icon"><i class="fas fa-calendar-alt"></i></span>
+          <span class="nav-text" *ngIf="!isSidebarCollapsed">Review Periods</span>
+        </div>
+        <div class="nav-item">
+          <span class="nav-icon"><i class="fas fa-user-check"></i></span>
+          <span class="nav-text" *ngIf="!isSidebarCollapsed">Eligibility Profile</span>
+        </div>
+      </div>
+      
+      <div class="nav-spacer"></div>
+      
+      <div class="nav-item sign-out" (click)="signOut()">
+        <span class="nav-icon"><i class="fas fa-sign-out-alt"></i></span>
+        <span class="nav-text" *ngIf="!isSidebarCollapsed">Sign Out</span>
+      </div>
     </nav>
   </aside>
 
@@ -33,17 +48,13 @@
   <div class="main-content">
     <!-- Top Bar -->
     <header class="top-bar">
-      <div class="top-bar-left">
-        <button class="menu-toggle" (click)="toggleSidebar()">
-          <i class="fas fa-bars"></i>
-        </button>
-        <h1 class="page-title">Performance Management System</h1>
-      </div>
-      <div class="top-bar-right">
-        <div class="user-profile">
-          <i class="fas fa-user-circle"></i>
-          <span>HR Admin</span>
-        </div>
+      <button class="sidebar-toggle" (click)="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="page-name">Performance Management System</div>
+      <div class="user-info">
+        <span>HR Admin</span>
+        <i class="fas fa-user-circle"></i>
       </div>
     </header>
 
@@ -118,13 +129,13 @@
             <table class="eval-table">
               <thead>
                 <tr>
-                  <th style="width: 50px;">S.No</th>
-                  <th style="width: 200px;">Goal</th>
-                  <th style="width: 70px;">Weight (%)</th>
-                  <th style="width: 250px;">Employee Comments</th>
-                  <th style="width: 250px;">Manager Comments</th>
-                  <th style="width: 250px;">HR Comments</th>
-                  <th style="width: 100px;">HR Rating (1-5)</th>
+                  <th>S.No</th>
+                  <th>Goal</th>
+                  <th>Weight (%)</th>
+                  <th>Employee Comments</th>
+                  <th>Manager Comments</th>
+                  <th>HR Comments</th>
+                  <th>HR Rating (1-5)</th>
                 </tr>
               </thead>
               <tbody>
@@ -169,15 +180,15 @@
             <table class="eval-table">
               <thead>
                 <tr>
-                  <th style="width: 50px;">S.No</th>
-                  <th style="width: 150px;">Competency</th>
-                  <th style="width: 180px;">Description</th>
-                  <th style="width: 100px;">Min Proficiency</th>
-                  <th style="width: 100px;">Max Proficiency</th>
-                  <th style="width: 220px;">Employee Comments</th>
-                  <th style="width: 220px;">Manager Comments</th>
-                  <th style="width: 220px;">HR Comments</th>
-                  <th style="width: 100px;">HR Rating (1-5)</th>
+                  <th>S.No</th>
+                  <th>Competency</th>
+                  <th>Description</th>
+                  <th>Min Proficiency</th>
+                  <th>Max Proficiency</th>
+                  <th>Employee Comments</th>
+                  <th>Manager Comments</th>
+                  <th>HR Comments</th>
+                  <th>HR Rating (1-5)</th>
                 </tr>
               </thead>
               <tbody>
@@ -224,12 +235,12 @@
             <table class="eval-table">
               <thead>
                 <tr>
-                  <th style="width: 50px;">S.No</th>
-                  <th style="width: 200px;">Value</th>
-                  <th style="width: 280px;">Employee Comments</th>
-                  <th style="width: 280px;">Manager Comments</th>
-                  <th style="width: 280px;">HR Comments</th>
-                  <th style="width: 120px;">HR Rating (1-5)</th>
+                  <th>S.No</th>
+                  <th>Value</th>
+                  <th>Employee Comments</th>
+                  <th>Manager Comments</th>
+                  <th>HR Comments</th>
+                  <th>HR Rating (1-5)</th>
                 </tr>
               </thead>
               <tbody>

@@ -49,7 +49,7 @@ export class EvaluationDetailsComponent implements OnInit {
   employeeInfo = {
     name: 'John Doe',
     reviewPeriod: 'Q4 2024',
-    status: 'Active',
+    status: 'Completed',
     createdOn: '2024-10-01'
   };
 
@@ -132,6 +132,12 @@ export class EvaluationDetailsComponent implements OnInit {
     
     if (totalWeight === 0) return 'N/A';
     return (weightedSum / totalWeight).toFixed(2);
+  }
+
+  signOut() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.router.navigate(['/login']);
   }
 }
 

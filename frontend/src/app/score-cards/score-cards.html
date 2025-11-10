@@ -83,13 +83,22 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let scoreCard of scoreCards; let i = index" (click)="viewScoreCardDetails(scoreCard)" class="clickable-row">
-                <td>{{ i + 1 }}</td>
-                <td>{{ scoreCard.employeeName }}</td>
-                <td>{{ scoreCard.reviewPeriod }}</td>
-                <td>{{ scoreCard.createdOn }}</td>
-                <td>{{ scoreCard.createdBy }}</td>
-                <td><span class="status-text">{{ scoreCard.status }}</span></td>
+              <tr *ngFor="let scoreCard of scoreCards; let i = index" class="clickable-row">
+                <td (click)="viewScoreCardDetails(scoreCard)">{{ i + 1 }}</td>
+                <td (click)="viewScoreCardDetails(scoreCard)">{{ scoreCard.employeeName }}</td>
+                <td (click)="viewScoreCardDetails(scoreCard)">{{ scoreCard.reviewPeriod }}</td>
+                <td (click)="viewScoreCardDetails(scoreCard)">{{ scoreCard.createdOn }}</td>
+                <td (click)="viewScoreCardDetails(scoreCard)">{{ scoreCard.createdBy }}</td>
+                <td>
+                  <select 
+                    class="status-dropdown" 
+                    [(ngModel)]="scoreCard.status" 
+                    (click)="$event.stopPropagation()"
+                    (change)="updateScoreCardStatus(scoreCard)">
+                    <option value="Active">Active</option>
+                    <option value="Completed">Completed</option>
+                  </select>
+                </td>
               </tr>
             </tbody>
           </table>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
 interface ScoreCard {
@@ -12,7 +13,7 @@ interface ScoreCard {
 
 @Component({
   selector: 'app-score-cards',
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './score-cards.html',
   styleUrl: './score-cards.css',
 })
@@ -149,6 +150,11 @@ export class ScoreCards {
 
   closeStartProcessForm() {
     this.showProcessForm = false;
+  }
+
+  updateScoreCardStatus(scoreCard: ScoreCard) {
+    console.log(`Updated status for ${scoreCard.employeeName} to ${scoreCard.status}`);
+    // In a real app, you would save this to the backend
   }
 }
 
