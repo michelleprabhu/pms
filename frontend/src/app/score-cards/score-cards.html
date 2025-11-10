@@ -80,6 +80,7 @@
                 <th>Created On</th>
                 <th>Created By</th>
                 <th>Status</th>
+                <th>Approval</th>
               </tr>
             </thead>
             <tbody>
@@ -89,7 +90,7 @@
                 <td (click)="viewScoreCardDetails(scoreCard)">{{ scoreCard.reviewPeriod }}</td>
                 <td (click)="viewScoreCardDetails(scoreCard)">{{ scoreCard.createdOn }}</td>
                 <td (click)="viewScoreCardDetails(scoreCard)">{{ scoreCard.createdBy }}</td>
-                <td>
+                <td (click)="$event.stopPropagation()">
                   <select 
                     class="status-dropdown" 
                     [(ngModel)]="scoreCard.status" 
@@ -98,6 +99,22 @@
                     <option value="Active">Active</option>
                     <option value="Completed">Completed</option>
                   </select>
+                </td>
+                <td (click)="$event.stopPropagation()">
+                  <span *ngIf="scoreCard.approvalStatus === 'Approved'" class="approval-badge approved">
+                    Approved
+                  </span>
+                  <span *ngIf="scoreCard.approvalStatus === 'Rejected'" class="approval-badge rejected">
+                    Rejected
+                  </span>
+                  <div *ngIf="scoreCard.approvalStatus === 'Pending'" class="approval-actions">
+                    <button class="btn-approve" (click)="approveScoreCard(scoreCard); $event.stopPropagation()">
+                      <i class="fas fa-check"></i> Approve
+                    </button>
+                    <button class="btn-reject" (click)="rejectScoreCard(scoreCard); $event.stopPropagation()">
+                      <i class="fas fa-times"></i> Reject
+                    </button>
+                  </div>
                 </td>
               </tr>
             </tbody>

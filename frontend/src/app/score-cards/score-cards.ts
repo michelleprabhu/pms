@@ -9,6 +9,7 @@ interface ScoreCard {
   createdOn: string;
   createdBy: string;
   status: string;
+  approvalStatus: string;
 }
 
 @Component({
@@ -30,28 +31,32 @@ export class ScoreCards {
       reviewPeriod: 'Q3 2024',
       createdOn: 'Jul 15, 2024',
       createdBy: 'HR Admin',
-      status: 'Active'
+      status: 'Active',
+      approvalStatus: 'Approved'
     },
     {
       employeeName: 'Michael Chen',
       reviewPeriod: 'Q3 2024',
       createdOn: 'Jul 16, 2024',
       createdBy: 'HR Admin',
-      status: 'Active'
+      status: 'Active',
+      approvalStatus: 'Approved'
     },
     {
       employeeName: 'Emily Rodriguez',
       reviewPeriod: 'Q3 2024',
       createdOn: 'Jul 17, 2024',
       createdBy: 'Manager',
-      status: 'Active'
+      status: 'Active',
+      approvalStatus: 'Pending'
     },
     {
       employeeName: 'Christopher Lee',
       reviewPeriod: 'Q3 2024',
       createdOn: 'Jul 18, 2024',
       createdBy: 'Manager',
-      status: 'Active'
+      status: 'Active',
+      approvalStatus: 'Pending'
     },
     // Q4 2024
     {
@@ -59,21 +64,24 @@ export class ScoreCards {
       reviewPeriod: 'Q4 2024',
       createdOn: 'Oct 5, 2024',
       createdBy: 'HR Admin',
-      status: 'Active'
+      status: 'Active',
+      approvalStatus: 'Approved'
     },
     {
       employeeName: 'Jessica Williams',
       reviewPeriod: 'Q4 2024',
       createdOn: 'Oct 6, 2024',
       createdBy: 'Manager',
-      status: 'Active'
+      status: 'Active',
+      approvalStatus: 'Pending'
     },
     {
       employeeName: 'Kevin Martinez',
       reviewPeriod: 'Q4 2024',
       createdOn: 'Oct 8, 2024',
       createdBy: 'HR Admin',
-      status: 'Active'
+      status: 'Active',
+      approvalStatus: 'Approved'
     },
     // Annual 2024
     {
@@ -81,21 +89,24 @@ export class ScoreCards {
       reviewPeriod: 'Annual 2024',
       createdOn: 'Jan 10, 2024',
       createdBy: 'HR Admin',
-      status: 'Active'
+      status: 'Active',
+      approvalStatus: 'Approved'
     },
     {
       employeeName: 'Amanda Brown',
       reviewPeriod: 'Annual 2024',
       createdOn: 'Jan 12, 2024',
       createdBy: 'HR Admin',
-      status: 'Active'
+      status: 'Active',
+      approvalStatus: 'Approved'
     },
     {
       employeeName: 'Patricia Davis',
       reviewPeriod: 'Annual 2024',
       createdOn: 'Jan 15, 2024',
       createdBy: 'Manager',
-      status: 'Active'
+      status: 'Active',
+      approvalStatus: 'Pending'
     }
   ];
 
@@ -160,6 +171,18 @@ export class ScoreCards {
 
   setProcessFormTab(tab: string) {
     this.processFormActiveTab = tab;
+  }
+
+  approveScoreCard(scoreCard: ScoreCard) {
+    scoreCard.approvalStatus = 'Approved';
+    console.log(`Approved score card for ${scoreCard.employeeName}`);
+    // In a real app, you would save this to the backend
+  }
+
+  rejectScoreCard(scoreCard: ScoreCard) {
+    scoreCard.approvalStatus = 'Rejected';
+    console.log(`Rejected score card for ${scoreCard.employeeName}`);
+    // In a real app, you would save this to the backend
   }
 }
 
