@@ -1,0 +1,549 @@
+<div class="page-container">
+  <!-- Sidebar -->
+  <aside class="sidebar" [class.collapsed]="isSidebarCollapsed">
+    <div class="sidebar-header">
+      <img *ngIf="!isSidebarCollapsed" src="assets/logo.png" alt="iDUELA" class="logo" />
+      <img *ngIf="isSidebarCollapsed" src="assets/logo.png" alt="iDUELA" class="logo-small" />
+    </div>
+    
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <div class="section-title" *ngIf="!isSidebarCollapsed">Home</div>
+        <div class="nav-item" (click)="navigateToDashboard()">
+          <span class="nav-icon"><i class="fas fa-chart-line"></i></span>
+          <span class="nav-text" *ngIf="!isSidebarCollapsed">Dashboard</span>
+        </div>
+        <div class="nav-item active">
+          <span class="nav-icon"><i class="fas fa-clipboard-check"></i></span>
+          <span class="nav-text" *ngIf="!isSidebarCollapsed">Score Cards</span>
+        </div>
+        <div class="nav-item" (click)="navigateToEvaluation()">
+          <span class="nav-icon"><i class="fas fa-star"></i></span>
+          <span class="nav-text" *ngIf="!isSidebarCollapsed">Evaluation</span>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="section-title" *ngIf="!isSidebarCollapsed">Settings</div>
+        <div class="nav-item" (click)="navigateToReviewPeriod()">
+          <span class="nav-icon"><i class="fas fa-calendar-alt"></i></span>
+          <span class="nav-text" *ngIf="!isSidebarCollapsed">Review Periods</span>
+        </div>
+        <div class="nav-item">
+          <span class="nav-icon"><i class="fas fa-user-check"></i></span>
+          <span class="nav-text" *ngIf="!isSidebarCollapsed">Eligibility Profile</span>
+        </div>
+      </div>
+      
+      <div class="nav-spacer"></div>
+      
+      <div class="nav-item sign-out" (click)="signOut()">
+        <span class="nav-icon"><i class="fas fa-sign-out-alt"></i></span>
+        <span class="nav-text" *ngIf="!isSidebarCollapsed">Sign Out</span>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Top Bar -->
+    <header class="top-bar">
+      <button class="sidebar-toggle" (click)="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="page-name">Performance Management System</div>
+    </header>
+
+    <!-- Score Cards Content -->
+    <div class="content">
+      <div class="page-header">
+        <h1 class="page-title">Active Score Cards</h1>
+        <div class="header-actions">
+          <button class="btn-start-process" (click)="showStartProcessForm()">
+            <i class="fas fa-play"></i> Start Score Card Process
+          </button>
+          <button class="btn-add-goal" (click)="showAddGoalForm()">
+            <i class="fas fa-plus"></i> Add Goal
+          </button>
+        </div>
+      </div>
+
+      <!-- Score Cards Table -->
+      <div class="table-section">
+        <div class="table-container">
+          <table class="score-cards-table">
+            <thead>
+              <tr>
+                <th>S.No</th>
+                <th>Employee Name</th>
+                <th>Review Period</th>
+                <th>Created On</th>
+                <th>Created By</th>
+                <th>Status</th>
+                <th>Approval</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let scoreCard of scoreCards; let i = index" class="clickable-row">
+                <td (click)="viewScoreCardDetails(scoreCard)">{{ i + 1 }}</td>
+                <td (click)="viewScoreCardDetails(scoreCard)">{{ scoreCard.employeeName }}</td>
+                <td (click)="viewScoreCardDetails(scoreCard)">{{ scoreCard.reviewPeriod }}</td>
+                <td (click)="viewScoreCardDetails(scoreCard)">{{ scoreCard.createdOn }}</td>
+                <td (click)="viewScoreCardDetails(scoreCard)">{{ scoreCard.createdBy }}</td>
+                <td (click)="$event.stopPropagation()">
+                  <select 
+                    class="status-dropdown" 
+                    [(ngModel)]="scoreCard.status" 
+                    (click)="$event.stopPropagation()"
+                    (change)="updateScoreCardStatus(scoreCard)">
+                    <option value="Active">Active</option>
+                    <option value="Completed">Completed</option>
+                  </select>
+                </td>
+                <td (click)="$event.stopPropagation()">
+                  <span *ngIf="scoreCard.approvalStatus === 'Approved'" class="approval-badge approved">
+                    Approved
+                  </span>
+                  <span *ngIf="scoreCard.approvalStatus === 'Rejected'" class="approval-badge rejected">
+                    Rejected
+                  </span>
+                  <div *ngIf="scoreCard.approvalStatus === 'Pending'" class="approval-actions">
+                    <button class="btn-approve" (click)="approveScoreCard(scoreCard); $event.stopPropagation()">
+                      <i class="fas fa-check"></i> Approve
+                    </button>
+                    <button class="btn-reject" (click)="rejectScoreCard(scoreCard); $event.stopPropagation()">
+                      <i class="fas fa-times"></i> Reject
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Goal Modal -->
+  <div class="modal-overlay" *ngIf="showGoalForm" (click)="closeAddGoalForm()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2 class="modal-title">Add Goal Plan</h2>
+        <button class="btn-close" (click)="closeAddGoalForm()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+        <form class="goal-form">
+          <!-- Row 1 -->
+          <div class="form-row">
+            <div class="form-group">
+              <label>Plan Name <span class="required">*</span></label>
+              <input type="text" class="form-control" placeholder="Enter plan name">
+            </div>
+            <div class="form-group">
+              <label>Status <span class="required">*</span></label>
+              <select class="form-control">
+                <option value="">Select status</option>
+                <option value="Draft">Draft</option>
+                <option value="Active">Active</option>
+                <option value="Completed">Completed</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Row 2 -->
+          <div class="form-group">
+            <label>Description</label>
+            <textarea class="form-control" rows="3" placeholder="Enter description"></textarea>
+          </div>
+
+          <!-- Row 3 -->
+          <div class="form-row">
+            <div class="form-group">
+              <label>Review Period <span class="required">*</span></label>
+              <select class="form-control">
+                <option value="">Select review period</option>
+                <option value="Q1 2024">Q1 2024</option>
+                <option value="Q2 2024">Q2 2024</option>
+                <option value="Q3 2024">Q3 2024</option>
+                <option value="Q4 2024">Q4 2024</option>
+                <option value="Annual 2024">Annual 2024</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Goals Update By <span class="required">*</span></label>
+              <select class="form-control">
+                <option value="">Select from list</option>
+                <option value="HR">HR</option>
+                <option value="Manager">Manager</option>
+                <option value="Employee">Employee</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Row 4 -->
+          <div class="form-row">
+            <div class="form-group">
+              <label>Start Date <span class="required">*</span></label>
+              <input type="date" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>End Date <span class="required">*</span></label>
+              <input type="date" class="form-control">
+            </div>
+          </div>
+
+          <!-- Row 5 -->
+          <div class="form-row">
+            <div class="form-group">
+              <label>Performance Documents</label>
+              <select class="form-control">
+                <option value="">Select from list</option>
+                <option value="Doc1">Document 1</option>
+                <option value="Doc2">Document 2</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Eligibility Profiles</label>
+              <select class="form-control">
+                <option value="">Select from list</option>
+                <option value="Profile1">Profile 1</option>
+                <option value="Profile2">Profile 2</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Row 6 -->
+          <div class="form-row">
+            <div class="form-group">
+              <label>Minimum Goals</label>
+              <input type="number" class="form-control" placeholder="Enter minimum">
+            </div>
+            <div class="form-group">
+              <label>Maximum Goals</label>
+              <input type="number" class="form-control" placeholder="Enter maximum">
+            </div>
+          </div>
+
+          <!-- Row 7 -->
+          <div class="form-row">
+            <div class="form-group">
+              <label>Goal Weights</label>
+              <select class="form-control">
+                <option value="">Select from list</option>
+                <option value="Equal">Equal Weights</option>
+                <option value="Custom">Custom Weights</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Deadline Date</label>
+              <input type="date" class="form-control">
+            </div>
+          </div>
+
+          <!-- Checkbox -->
+          <div class="form-group">
+            <label class="checkbox-label">
+              <input type="checkbox" class="form-checkbox">
+              <span>The total of the goal weights equals 100%</span>
+            </label>
+          </div>
+
+          <!-- Goal Details Section -->
+          <div class="goal-details-section">
+            <h3 class="section-title">Goal Details</h3>
+            
+            <div class="form-group">
+              <label>Goal Name <span class="required">*</span></label>
+              <input type="text" class="form-control" placeholder="Enter goal name">
+            </div>
+
+            <div class="form-group">
+              <label>Weight <span class="required">*</span></label>
+              <input type="number" class="form-control" placeholder="Enter weight %">
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Users Authorized to Remove HR-Assigned Goals</label>
+                <select class="form-control">
+                  <option value="">Select from list</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Permit employees to modify default goals</label>
+                <select class="form-control">
+                  <option value="">Select from list</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Start Date</label>
+                <input type="date" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Target Completion Date</label>
+                <input type="date" class="form-control">
+              </div>
+            </div>
+          </div>
+
+          <!-- Form Actions -->
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" (click)="closeAddGoalForm()">Cancel</button>
+            <button type="button" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-success">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Start Score Card Process Modal -->
+  <div class="modal-overlay" *ngIf="showProcessForm" (click)="closeStartProcessForm()">
+    <div class="modal-container modal-large" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2 class="modal-title">Start Score Card Process</h2>
+        <button class="btn-close" (click)="closeStartProcessForm()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+        <form class="process-form">
+          <!-- Employee Selection -->
+          <div class="form-group">
+            <label>Select Employee <span class="required">*</span></label>
+            <select class="form-control">
+              <option value="">Choose an employee</option>
+              <option value="sarah">Sarah Johnson</option>
+              <option value="michael">Michael Chen</option>
+              <option value="emily">Emily Rodriguez</option>
+              <option value="david">David Thompson</option>
+              <option value="jessica">Jessica Williams</option>
+              <option value="robert">Robert Martinez</option>
+              <option value="amanda">Amanda Brown</option>
+              <option value="christopher">Christopher Lee</option>
+            </select>
+          </div>
+
+          <!-- Tabs -->
+          <div class="process-tabs">
+            <button 
+              type="button"
+              class="process-tab" 
+              [class.active]="processFormActiveTab === 'goals'" 
+              (click)="setProcessFormTab('goals')">
+              Goals
+            </button>
+            <button 
+              type="button"
+              class="process-tab" 
+              [class.active]="processFormActiveTab === 'competencies'" 
+              (click)="setProcessFormTab('competencies')">
+              Competencies
+            </button>
+            <button 
+              type="button"
+              class="process-tab" 
+              [class.active]="processFormActiveTab === 'values'" 
+              (click)="setProcessFormTab('values')">
+              Values
+            </button>
+          </div>
+
+          <!-- Goals Tab -->
+          <div class="tab-content" *ngIf="processFormActiveTab === 'goals'">
+            <div class="selection-section">
+              <h3 class="section-title">Assign Goals</h3>
+              <div class="checkbox-group">
+                <label class="checkbox-item">
+                  <input type="checkbox" class="form-checkbox">
+                  <div class="checkbox-content">
+                    <span class="checkbox-title">Increase Sales Revenue</span>
+                    <span class="checkbox-desc">Achieve 20% growth in quarterly sales (Weight: 30%)</span>
+                  </div>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" class="form-checkbox">
+                  <div class="checkbox-content">
+                    <span class="checkbox-title">Improve Customer Satisfaction</span>
+                    <span class="checkbox-desc">Increase CSAT score to 4.5/5 (Weight: 25%)</span>
+                  </div>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" class="form-checkbox">
+                  <div class="checkbox-content">
+                    <span class="checkbox-title">Complete Product Launch</span>
+                    <span class="checkbox-desc">Successfully launch new product line (Weight: 20%)</span>
+                  </div>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" class="form-checkbox">
+                  <div class="checkbox-content">
+                    <span class="checkbox-title">Team Development</span>
+                    <span class="checkbox-desc">Conduct training sessions for team members (Weight: 15%)</span>
+                  </div>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" class="form-checkbox">
+                  <div class="checkbox-content">
+                    <span class="checkbox-title">Process Improvement</span>
+                    <span class="checkbox-desc">Streamline workflow processes (Weight: 10%)</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Competencies Tab -->
+          <div class="tab-content" *ngIf="processFormActiveTab === 'competencies'">
+            <div class="selection-section">
+              <h3 class="section-title">Suggested Competencies</h3>
+              <div class="checkbox-group">
+                <label class="checkbox-item">
+                  <input type="checkbox" class="form-checkbox">
+                  <div class="checkbox-content">
+                    <span class="checkbox-title">Software Development</span>
+                    <span class="checkbox-desc">Proficiency in coding, debugging, and software design patterns</span>
+                  </div>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" class="form-checkbox">
+                  <div class="checkbox-content">
+                    <span class="checkbox-title">Code Review & Quality</span>
+                    <span class="checkbox-desc">Conduct thorough code reviews and maintain quality standards</span>
+                  </div>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" class="form-checkbox">
+                  <div class="checkbox-content">
+                    <span class="checkbox-title">System Design & Architecture</span>
+                    <span class="checkbox-desc">Design scalable and maintainable system architectures</span>
+                  </div>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" class="form-checkbox">
+                  <div class="checkbox-content">
+                    <span class="checkbox-title">DevOps & CI/CD</span>
+                    <span class="checkbox-desc">Knowledge of deployment pipelines and cloud platforms</span>
+                  </div>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" class="form-checkbox">
+                  <div class="checkbox-content">
+                    <span class="checkbox-title">Database Management</span>
+                    <span class="checkbox-desc">Proficiency in SQL/NoSQL databases and data modeling</span>
+                  </div>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" class="form-checkbox">
+                  <div class="checkbox-content">
+                    <span class="checkbox-title">API Development</span>
+                    <span class="checkbox-desc">Design and implement RESTful APIs and microservices</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Add Competency Section -->
+            <div class="add-section">
+              <h3 class="section-title">Add Competency</h3>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Competency Title</label>
+                  <input type="text" class="form-control" placeholder="Enter competency title">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Competency Description</label>
+                <textarea class="form-control" rows="3" placeholder="Enter competency description"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Values Tab -->
+          <div class="tab-content" *ngIf="processFormActiveTab === 'values'">
+            <div class="selection-section">
+              <h3 class="section-title">Suggested Values</h3>
+              <div class="checkbox-group">
+                <label class="checkbox-item">
+                  <input type="checkbox" class="form-checkbox">
+                  <div class="checkbox-content">
+                    <span class="checkbox-title">Integrity</span>
+                    <span class="checkbox-desc">Demonstrates honesty and strong moral principles</span>
+                  </div>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" class="form-checkbox">
+                  <div class="checkbox-content">
+                    <span class="checkbox-title">Innovation</span>
+                    <span class="checkbox-desc">Brings creative solutions and new ideas</span>
+                  </div>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" class="form-checkbox">
+                  <div class="checkbox-content">
+                    <span class="checkbox-title">Collaboration</span>
+                    <span class="checkbox-desc">Works well with team members and stakeholders</span>
+                  </div>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" class="form-checkbox">
+                  <div class="checkbox-content">
+                    <span class="checkbox-title">Customer Focus</span>
+                    <span class="checkbox-desc">Prioritizes customer needs and satisfaction</span>
+                  </div>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" class="form-checkbox">
+                  <div class="checkbox-content">
+                    <span class="checkbox-title">Accountability</span>
+                    <span class="checkbox-desc">Takes ownership of work and commitments</span>
+                  </div>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" class="form-checkbox">
+                  <div class="checkbox-content">
+                    <span class="checkbox-title">Continuous Learning</span>
+                    <span class="checkbox-desc">Actively seeks to improve skills and knowledge</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Add Value Section -->
+            <div class="add-section">
+              <h3 class="section-title">Add Value</h3>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Value Title</label>
+                  <input type="text" class="form-control" placeholder="Enter value title">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Value Description</label>
+                <textarea class="form-control" rows="3" placeholder="Enter value description"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Form Actions -->
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" (click)="closeStartProcessForm()">Cancel</button>
+            <button type="submit" class="btn btn-success">Start Process</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
