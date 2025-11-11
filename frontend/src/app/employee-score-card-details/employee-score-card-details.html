@@ -1,0 +1,198 @@
+<div class="page-container">
+  <!-- Sidebar -->
+  <aside class="sidebar" [class.collapsed]="isSidebarCollapsed">
+    <div class="sidebar-header">
+      <img *ngIf="!isSidebarCollapsed" src="assets/logo.png" alt="iDUELA" class="logo" />
+      <img *ngIf="isSidebarCollapsed" src="assets/logo.png" alt="iDUELA" class="logo-small" />
+    </div>
+    
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <div class="section-title" *ngIf="!isSidebarCollapsed">Menu</div>
+        <div class="nav-item" (click)="navigateToDashboard()">
+          <span class="nav-icon"><i class="fas fa-chart-line"></i></span>
+          <span class="nav-text" *ngIf="!isSidebarCollapsed">Dashboard</span>
+        </div>
+        <div class="nav-item active" (click)="navigateToScoreCards()">
+          <span class="nav-icon"><i class="fas fa-clipboard-check"></i></span>
+          <span class="nav-text" *ngIf="!isSidebarCollapsed">My Score Cards</span>
+        </div>
+      </div>
+      
+      <div class="nav-spacer"></div>
+      
+      <div class="nav-item sign-out" (click)="signOut()">
+        <span class="nav-icon"><i class="fas fa-sign-out-alt"></i></span>
+        <span class="nav-text" *ngIf="!isSidebarCollapsed">Sign Out</span>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Top Bar -->
+    <header class="top-bar">
+      <button class="sidebar-toggle" (click)="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="page-name">Performance Management System</div>
+      <div class="user-info">
+        <span>{{ employeeName }}</span>
+        <i class="fas fa-user-circle"></i>
+      </div>
+    </header>
+
+    <!-- Score Card Details Content -->
+    <div class="content">
+      <!-- Back Button -->
+      <button class="btn-back" (click)="navigateToScoreCards()">
+        <i class="fas fa-arrow-left"></i> Back to My Score Cards
+      </button>
+
+      <!-- Page Header -->
+      <h1 class="page-title">Score Card Details</h1>
+
+      <!-- Score Card Details Card -->
+      <div class="details-card">
+        <div class="detail-item">
+          <span class="detail-label">Review Period:</span>
+          <span class="detail-value">{{ reviewPeriod }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Assigned By:</span>
+          <span class="detail-value">{{ assignedBy }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Status:</span>
+          <span class="detail-value">{{ status }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Start Date:</span>
+          <span class="detail-value">{{ startDate }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">End Date:</span>
+          <span class="detail-value">{{ endDate }}</span>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tabs-container">
+        <div class="tabs-header">
+          <button 
+            class="tab-button" 
+            [class.active]="activeTab === 'goals'"
+            (click)="activeTab = 'goals'">
+            Goals
+          </button>
+          <button 
+            class="tab-button" 
+            [class.active]="activeTab === 'competencies'"
+            (click)="activeTab = 'competencies'">
+            Competencies
+          </button>
+          <button 
+            class="tab-button" 
+            [class.active]="activeTab === 'values'"
+            (click)="activeTab = 'values'">
+            Values
+          </button>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="tabs-content">
+          <!-- Goals Tab -->
+          <div *ngIf="activeTab === 'goals'" class="tab-panel">
+            <h2 class="tab-title">Goals</h2>
+            <div class="data-table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>S.No</th>
+                    <th>Goal</th>
+                    <th>Description</th>
+                    <th>Success Criteria</th>
+                    <th>Status</th>
+                    <th>Weight (%)</th>
+                    <th>Review Period</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let goal of goals; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ goal.name }}</td>
+                    <td>{{ goal.description }}</td>
+                    <td class="success-criteria-cell">{{ goal.successCriteria }}</td>
+                    <td>{{ goal.status }}</td>
+                    <td>{{ goal.weight }}</td>
+                    <td>{{ goal.reviewPeriod }}</td>
+                    <td>{{ goal.startDate }}</td>
+                    <td>{{ goal.endDate }}</td>
+                  </tr>
+                  <tr class="total-row">
+                    <td colspan="5"><strong>Total Weight</strong></td>
+                    <td><strong>{{ getTotalWeight() }}%</strong></td>
+                    <td colspan="3"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Competencies Tab -->
+          <div *ngIf="activeTab === 'competencies'" class="tab-panel">
+            <h2 class="tab-title">Competencies</h2>
+            <div class="data-table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>S.No</th>
+                    <th>Competency</th>
+                    <th>Description</th>
+                    <th>Min Proficiency Level</th>
+                    <th>Max Proficiency Level</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let competency of competencies; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ competency.name }}</td>
+                    <td>{{ competency.description }}</td>
+                    <td>{{ competency.minLevel }}</td>
+                    <td>{{ competency.maxLevel }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Values Tab -->
+          <div *ngIf="activeTab === 'values'" class="tab-panel">
+            <h2 class="tab-title">Values</h2>
+            <div class="data-table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>S.No</th>
+                    <th>Value</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let value of values; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ value.name }}</td>
+                    <td>{{ value.description }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

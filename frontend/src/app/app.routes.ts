@@ -8,6 +8,8 @@ import { ScoreCards } from './score-cards/score-cards';
 import { ScoreCardDetails } from './score-card-details/score-card-details';
 import { EvaluationComponent } from './evaluation/evaluation';
 import { EvaluationDetailsComponent } from './evaluation-details/evaluation-details';
+import { EmployeeScoreCardsComponent } from './employee-score-cards/employee-score-cards';
+import { EmployeeScoreCardDetailsComponent } from './employee-score-card-details/employee-score-card-details';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -20,6 +22,8 @@ export const routes: Routes = [
   { path: 'evaluation-details', component: EvaluationDetailsComponent },
   { path: 'manager-dashboard', component: ManagerDashboard },
   { path: 'employee-dashboard', component: EmployeeDashboard },
+  { path: 'employee-score-cards', component: EmployeeScoreCardsComponent },
+  { path: 'employee-score-card-details', component: EmployeeScoreCardDetailsComponent },
   { path: '**', redirectTo: '/login' }
 ];
 
