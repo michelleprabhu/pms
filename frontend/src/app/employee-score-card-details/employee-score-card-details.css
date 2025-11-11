@@ -295,6 +295,15 @@
   margin: 0 0 24px 0;
 }
 
+.subsection-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 16px 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #8B2E3E;
+}
+
 /* Data Table */
 .data-table-container {
   width: 100%;

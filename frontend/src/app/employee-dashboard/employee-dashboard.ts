@@ -18,8 +18,16 @@ export class EmployeeDashboard {
     this.isSidebarCollapsed = !this.isSidebarCollapsed;
   }
 
-  navigateToScoreCards() {
-    this.router.navigate(['/employee-score-cards']);
+  navigateToDashboard() {
+    this.router.navigate(['/employee-dashboard']);
+  }
+
+  navigateToSelfEvaluation() {
+    this.router.navigate(['/employee-self-evaluation']);
+  }
+
+  navigateToRatings() {
+    this.router.navigate(['/employee-ratings']);
   }
 
   signOut() {

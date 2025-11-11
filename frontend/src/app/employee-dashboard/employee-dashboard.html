@@ -8,14 +8,18 @@
     
     <nav class="sidebar-nav">
       <div class="nav-section">
-        <div class="section-title" *ngIf="!isSidebarCollapsed">Menu</div>
-        <div class="nav-item active">
+        <div class="section-title" *ngIf="!isSidebarCollapsed">HOME</div>
+        <div class="nav-item active" (click)="navigateToDashboard()">
           <span class="nav-icon"><i class="fas fa-chart-line"></i></span>
           <span class="nav-text" *ngIf="!isSidebarCollapsed">Dashboard</span>
         </div>
-        <div class="nav-item" (click)="navigateToScoreCards()">
+        <div class="nav-item" (click)="navigateToSelfEvaluation()">
           <span class="nav-icon"><i class="fas fa-clipboard-check"></i></span>
-          <span class="nav-text" *ngIf="!isSidebarCollapsed">My Score Cards</span>
+          <span class="nav-text" *ngIf="!isSidebarCollapsed">Self Evaluation</span>
+        </div>
+        <div class="nav-item" (click)="navigateToRatings()">
+          <span class="nav-icon"><i class="fas fa-star"></i></span>
+          <span class="nav-text" *ngIf="!isSidebarCollapsed">Ratings</span>
         </div>
       </div>
       
@@ -44,59 +48,93 @@
 
     <!-- Dashboard Content -->
     <div class="dashboard-content">
-      <h1 class="dashboard-title">Welcome, {{ employeeName }}</h1>
-      
       <!-- Metrics Cards -->
       <div class="metrics-grid">
         <div class="metric-card">
-          <div class="metric-icon" style="background-color: #8B2E3E;">
-            <i class="fas fa-bullseye"></i>
+          <div class="metric-header">
+            <div class="metric-title">Active Goals</div>
+            <div class="metric-trend positive">
+              <i class="fas fa-arrow-up"></i> +8.2%
+            </div>
           </div>
-          <div class="metric-content">
-            <div class="metric-value">7</div>
-            <div class="metric-label">Active Goals</div>
-            <div class="metric-description">Currently in progress</div>
+          <div class="metric-value">7</div>
+          <div class="metric-footer">
+            <i class="fas fa-arrow-trend-up"></i>
+            <span>Strong goal engagement</span>
           </div>
+          <div class="metric-description">Goals actively being tracked</div>
         </div>
 
         <div class="metric-card">
-          <div class="metric-icon" style="background-color: #2c5282;">
-            <i class="fas fa-star"></i>
+          <div class="metric-header">
+            <div class="metric-title">Pending Reviews</div>
+            <div class="metric-trend negative">
+              <i class="fas fa-arrow-down"></i> -15%
+            </div>
           </div>
-          <div class="metric-content">
-            <div class="metric-value">4.2 / 5.0</div>
-            <div class="metric-label">Overall Rating</div>
-            <div class="metric-description">Your average performance score</div>
+          <div class="metric-value">3</div>
+          <div class="metric-footer">
+            <i class="fas fa-arrow-trend-down"></i>
+            <span>Awaiting manager feedback</span>
           </div>
+          <div class="metric-description">Reviews pending completion</div>
         </div>
 
         <div class="metric-card">
-          <div class="metric-icon" style="background-color: #38a169;">
-            <i class="fas fa-check-circle"></i>
+          <div class="metric-header">
+            <div class="metric-title">Completed Goals</div>
+            <div class="metric-trend positive">
+              <i class="fas fa-arrow-up"></i> +3.5%
+            </div>
           </div>
-          <div class="metric-content">
-            <div class="metric-value">85%</div>
-            <div class="metric-label">Goal Completion</div>
-            <div class="metric-description">5 of 7 goals completed this quarter</div>
+          <div class="metric-value">12</div>
+          <div class="metric-footer">
+            <i class="fas fa-arrow-trend-up"></i>
+            <span>High achievement rate</span>
           </div>
+          <div class="metric-description">Goals successfully completed</div>
         </div>
 
         <div class="metric-card">
-          <div class="metric-icon" style="background-color: #d97706;">
-            <i class="fas fa-tasks"></i>
+          <div class="metric-header">
+            <div class="metric-title">Performance Rate</div>
+            <div class="metric-trend positive">
+              <i class="fas fa-arrow-up"></i> +6.3%
+            </div>
           </div>
-          <div class="metric-content">
-            <div class="metric-value">3</div>
-            <div class="metric-label">Pending Reviews</div>
-            <div class="metric-description">Awaiting manager feedback</div>
+          <div class="metric-value">87%</div>
+          <div class="metric-footer">
+            <i class="fas fa-arrow-trend-up"></i>
+            <span>Above target performance</span>
           </div>
+          <div class="metric-description">Average goal completion rate</div>
         </div>
       </div>
 
       <!-- Chart Section -->
       <div class="chart-section">
-        <h2 class="section-title">Performance Trend</h2>
+        <div class="chart-header">
+          <div>
+            <h2 class="section-title">Performance Trends</h2>
+            <p class="section-subtitle">Goal completion and employee engagement over time</p>
+          </div>
+          <div class="chart-filters">
+            <button class="filter-btn active">Last 6 months</button>
+            <button class="filter-btn">Last 30 days</button>
+            <button class="filter-btn">Last 7 days</button>
+          </div>
+        </div>
         <div class="chart-container">
+          <div class="chart-legend">
+            <div class="legend-item">
+              <span class="legend-dot goal-completion"></span>
+              <span>Goal Completion</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-dot engagement"></span>
+              <span>Engagement</span>
+            </div>
+          </div>
           <svg viewBox="0 0 800 300" class="performance-chart">
             <!-- Grid lines -->
             <line x1="50" y1="50" x2="50" y2="250" stroke="#e5e5e5" stroke-width="2"/>
@@ -106,39 +144,75 @@
             <line x1="50" y1="150" x2="750" y2="150" stroke="#e5e5e5" stroke-width="1" stroke-dasharray="5,5"/>
             <line x1="50" y1="200" x2="750" y2="200" stroke="#e5e5e5" stroke-width="1" stroke-dasharray="5,5"/>
 
-            <!-- Performance Line -->
+            <!-- Goal Completion Area -->
+            <defs>
+              <linearGradient id="goalGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:#8B2E3E;stop-opacity:0.3" />
+                <stop offset="100%" style="stop-color:#8B2E3E;stop-opacity:0" />
+              </linearGradient>
+            </defs>
             <path
-              d="M 100,180 L 200,150 L 300,120 L 400,130 L 500,100 L 600,110 L 700,90"
+              d="M 100,200 L 150,180 L 250,160 L 350,170 L 450,140 L 550,145 L 650,120 L 700,115 L 700,250 L 100,250 Z"
+              fill="url(#goalGradient)">
+            </path>
+
+            <!-- Goal Completion Line -->
+            <path
+              d="M 100,200 L 150,180 L 250,160 L 350,170 L 450,140 L 550,145 L 650,120 L 700,115"
               stroke="#8B2E3E"
               stroke-width="3"
               fill="none"
               class="chart-line">
             </path>
 
+            <!-- Engagement Area -->
+            <defs>
+              <linearGradient id="engagementGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:#2c5282;stop-opacity:0.3" />
+                <stop offset="100%" style="stop-color:#2c5282;stop-opacity:0" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M 100,220 L 150,210 L 250,230 L 350,210 L 450,200 L 550,190 L 650,180 L 700,170 L 700,250 L 100,250 Z"
+              fill="url(#engagementGradient)">
+            </path>
+
+            <!-- Engagement Line -->
+            <path
+              d="M 100,220 L 150,210 L 250,230 L 350,210 L 450,200 L 550,190 L 650,180 L 700,170"
+              stroke="#2c5282"
+              stroke-width="3"
+              fill="none"
+              class="chart-line">
+            </path>
+
             <!-- Data Points -->
-            <circle cx="100" cy="180" r="5" fill="#8B2E3E" class="chart-point"/>
-            <circle cx="200" cy="150" r="5" fill="#8B2E3E" class="chart-point"/>
-            <circle cx="300" cy="120" r="5" fill="#8B2E3E" class="chart-point"/>
-            <circle cx="400" cy="130" r="5" fill="#8B2E3E" class="chart-point"/>
-            <circle cx="500" cy="100" r="5" fill="#8B2E3E" class="chart-point"/>
-            <circle cx="600" cy="110" r="5" fill="#8B2E3E" class="chart-point"/>
-            <circle cx="700" cy="90" r="5" fill="#8B2E3E" class="chart-point"/>
+            <circle cx="100" cy="200" r="4" fill="#8B2E3E" class="chart-point"/>
+            <circle cx="150" cy="180" r="4" fill="#8B2E3E" class="chart-point"/>
+            <circle cx="250" cy="160" r="4" fill="#8B2E3E" class="chart-point"/>
+            <circle cx="350" cy="170" r="4" fill="#8B2E3E" class="chart-point"/>
+            <circle cx="450" cy="140" r="4" fill="#8B2E3E" class="chart-point"/>
+            <circle cx="550" cy="145" r="4" fill="#8B2E3E" class="chart-point"/>
+            <circle cx="650" cy="120" r="4" fill="#8B2E3E" class="chart-point"/>
+            <circle cx="700" cy="115" r="4" fill="#8B2E3E" class="chart-point"/>
 
-            <!-- Labels -->
-            <text x="100" y="270" text-anchor="middle" font-size="12" fill="#666">Q1</text>
-            <text x="200" y="270" text-anchor="middle" font-size="12" fill="#666">Q2</text>
-            <text x="300" y="270" text-anchor="middle" font-size="12" fill="#666">Q3</text>
-            <text x="400" y="270" text-anchor="middle" font-size="12" fill="#666">Q4</text>
-            <text x="500" y="270" text-anchor="middle" font-size="12" fill="#666">Q1</text>
-            <text x="600" y="270" text-anchor="middle" font-size="12" fill="#666">Q2</text>
-            <text x="700" y="270" text-anchor="middle" font-size="12" fill="#666">Q3</text>
+            <circle cx="100" cy="220" r="4" fill="#2c5282" class="chart-point"/>
+            <circle cx="150" cy="210" r="4" fill="#2c5282" class="chart-point"/>
+            <circle cx="250" cy="230" r="4" fill="#2c5282" class="chart-point"/>
+            <circle cx="350" cy="210" r="4" fill="#2c5282" class="chart-point"/>
+            <circle cx="450" cy="200" r="4" fill="#2c5282" class="chart-point"/>
+            <circle cx="550" cy="190" r="4" fill="#2c5282" class="chart-point"/>
+            <circle cx="650" cy="180" r="4" fill="#2c5282" class="chart-point"/>
+            <circle cx="700" cy="170" r="4" fill="#2c5282" class="chart-point"/>
 
-            <!-- Y-axis labels -->
-            <text x="40" y="55" text-anchor="end" font-size="12" fill="#666">5.0</text>
-            <text x="40" y="105" text-anchor="end" font-size="12" fill="#666">4.0</text>
-            <text x="40" y="155" text-anchor="end" font-size="12" fill="#666">3.0</text>
-            <text x="40" y="205" text-anchor="end" font-size="12" fill="#666">2.0</text>
-            <text x="40" y="255" text-anchor="end" font-size="12" fill="#666">1.0</text>
+            <!-- X-axis labels -->
+            <text x="100" y="270" text-anchor="middle" font-size="12" fill="#666">Jan</text>
+            <text x="200" y="270" text-anchor="middle" font-size="12" fill="#666">Feb</text>
+            <text x="300" y="270" text-anchor="middle" font-size="12" fill="#666">Mar</text>
+            <text x="400" y="270" text-anchor="middle" font-size="12" fill="#666">Apr</text>
+            <text x="500" y="270" text-anchor="middle" font-size="12" fill="#666">May</text>
+            <text x="600" y="270" text-anchor="middle" font-size="12" fill="#666">Jun</text>
+            <text x="700" y="270" text-anchor="middle" font-size="12" fill="#666">Jul</text>
           </svg>
         </div>
       </div>

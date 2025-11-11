@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 interface Goal {
   name: string;
+  type: string;
   description: string;
   successCriteria: string;
   status: string;
@@ -45,6 +46,7 @@ export class EmployeeScoreCardDetailsComponent implements OnInit {
   goals: Goal[] = [
     {
       name: 'Increase Sales Revenue',
+      type: 'Personal Goal',
       description: 'Achieve 20% growth in quarterly sales',
       successCriteria: 'Revenue increases by $500K and meets or exceeds 20% growth target with documented customer acquisitions',
       status: 'In Progress',
@@ -55,6 +57,7 @@ export class EmployeeScoreCardDetailsComponent implements OnInit {
     },
     {
       name: 'Improve Customer Satisfaction',
+      type: 'Personal Goal',
       description: 'Increase CSAT score to 4.5/5',
       successCriteria: 'CSAT survey results show consistent scores of 4.5 or higher across all customer touchpoints for 3 consecutive months',
       status: 'In Progress',
@@ -65,6 +68,7 @@ export class EmployeeScoreCardDetailsComponent implements OnInit {
     },
     {
       name: 'Complete Product Launch',
+      type: 'Personal Goal',
       description: 'Successfully launch new product line',
       successCriteria: 'Product is live in production, all features are functional, user documentation is published, and 100+ active users within first month',
       status: 'Not Started',
@@ -75,6 +79,7 @@ export class EmployeeScoreCardDetailsComponent implements OnInit {
     },
     {
       name: 'Team Development',
+      type: 'Development Goal',
       description: 'Conduct training sessions for team members',
       successCriteria: 'Complete 8 training sessions with 90%+ attendance and positive feedback scores above 4/5 from participants',
       status: 'In Progress',
@@ -85,6 +90,7 @@ export class EmployeeScoreCardDetailsComponent implements OnInit {
     },
     {
       name: 'Process Improvement',
+      type: 'Development Goal',
       description: 'Streamline workflow processes',
       successCriteria: 'Process efficiency improved by 25%, documented procedures created, and team adoption rate of 80% or higher',
       status: 'Not Started',
@@ -208,6 +214,10 @@ export class EmployeeScoreCardDetailsComponent implements OnInit {
 
   getTotalWeight(): number {
     return this.goals.reduce((total, goal) => total + goal.weight, 0);
+  }
+
+  getGoalsByType(type: string): Goal[] {
+    return this.goals.filter(goal => goal.type === type);
   }
 
   toggleSidebar() {

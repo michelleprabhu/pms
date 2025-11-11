@@ -104,6 +104,9 @@
           <!-- Goals Tab -->
           <div *ngIf="activeTab === 'goals'" class="tab-panel">
             <h2 class="tab-title">Goals</h2>
+            
+            <!-- Personal Goals -->
+            <h3 class="subsection-title">Personal Goals</h3>
             <div class="data-table-container">
               <table class="data-table">
                 <thead>
@@ -120,7 +123,40 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let goal of goals; let i = index">
+                  <tr *ngFor="let goal of getGoalsByType('Personal Goal'); let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ goal.name }}</td>
+                    <td>{{ goal.description }}</td>
+                    <td class="success-criteria-cell">{{ goal.successCriteria }}</td>
+                    <td>{{ goal.status }}</td>
+                    <td>{{ goal.weight }}</td>
+                    <td>{{ goal.reviewPeriod }}</td>
+                    <td>{{ goal.startDate }}</td>
+                    <td>{{ goal.endDate }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Development Goals -->
+            <h3 class="subsection-title" style="margin-top: 24px;">Development Goals</h3>
+            <div class="data-table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>S.No</th>
+                    <th>Goal</th>
+                    <th>Description</th>
+                    <th>Success Criteria</th>
+                    <th>Status</th>
+                    <th>Weight (%)</th>
+                    <th>Review Period</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let goal of getGoalsByType('Development Goal'); let i = index">
                     <td>{{ i + 1 }}</td>
                     <td>{{ goal.name }}</td>
                     <td>{{ goal.description }}</td>
