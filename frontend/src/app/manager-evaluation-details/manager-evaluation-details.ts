@@ -96,22 +96,6 @@ export class ManagerEvaluationDetailsComponent implements OnInit {
     this.isSidebarCollapsed = !this.isSidebarCollapsed;
   }
 
-  navigateToDashboard() {
-    this.router.navigate(['/hr-dashboard']);
-  }
-
-  navigateToReviewPeriods() {
-    this.router.navigate(['/review-period']);
-  }
-
-  navigateToScoreCards() {
-    this.router.navigate(['/score-cards']);
-  }
-
-  navigateToEvaluation() {
-    this.router.navigate(['/evaluation']);
-  }
-
   setActiveTab(tab: string) {
     this.activeTab = tab;
   }
