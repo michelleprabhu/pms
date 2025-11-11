@@ -35,7 +35,11 @@ export class ManagerEvaluationComponent {
   }
 
   navigateToEvaluation() {
-    this.router.navigate(['/manager-evaluation']);
+    this.router.navigate(['/manager-evaluation-periods']);
+  }
+
+  navigateBackToPeriods() {
+    this.router.navigate(['/manager-evaluation-periods']);
   }
 
   viewEvaluationDetails(evaluationId: number) {

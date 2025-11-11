@@ -39,7 +39,11 @@ export class EvaluationComponent {
   }
 
   navigateToEvaluation() {
-    this.router.navigate(['/evaluation']);
+    this.router.navigate(['/evaluation-periods']);
+  }
+
+  navigateBackToPeriods() {
+    this.router.navigate(['/evaluation-periods']);
   }
 
   viewEvaluationDetails(evaluationId: number) {

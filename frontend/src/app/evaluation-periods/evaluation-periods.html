@@ -60,38 +60,66 @@
 
     <!-- Page Content -->
     <div class="page-content">
-      <button class="btn-back" (click)="navigateBackToPeriods()">
-        <i class="fas fa-arrow-left"></i> Back to Review Periods
-      </button>
+      <h1 class="page-title">Employee Evaluations - Select Review Period</h1>
 
-      <div class="page-header">
-        <h2>Employee Evaluations</h2>
+      <!-- Active Review Periods -->
+      <div class="review-periods-section">
+        <h2 class="section-heading">Active Review Periods</h2>
+        <div class="periods-grid">
+          <div class="period-card" *ngFor="let period of activeReviewPeriods" (click)="viewPeriodEvaluations(period.id)">
+            <div class="period-header">
+              <h3 class="period-name">{{ period.name }}</h3>
+              <span class="status-badge active">{{ period.status }}</span>
+            </div>
+            <div class="period-dates">
+              <i class="fas fa-calendar"></i>
+              <span>{{ period.startDate }} - {{ period.endDate }}</span>
+            </div>
+            <div class="period-stats">
+              <div class="stat-item">
+                <i class="fas fa-users"></i>
+                <span>{{ period.employeeCount }} Employees</span>
+              </div>
+            </div>
+            <button class="btn-view-employees">
+              View Employees <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
       </div>
 
-      <div class="table-section">
+      <!-- Completed Review Periods -->
+      <div class="review-periods-section">
+        <h2 class="section-heading">Completed Review Periods</h2>
         <div class="table-container">
-          <table class="data-table">
-          <thead>
-            <tr>
-              <th>S.No</th>
-              <th>Employee Name</th>
-              <th>Review Period</th>
-              <th>Created On</th>
-              <th>Created By</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let evaluation of evaluations; let i = index" class="clickable-row" (click)="viewEvaluationDetails(evaluation.id)">
-              <td>{{ i + 1 }}</td>
-              <td>{{ evaluation.employeeName }}</td>
-              <td>{{ evaluation.reviewPeriod }}</td>
-              <td>{{ evaluation.createdOn }}</td>
-              <td>{{ evaluation.createdBy }}</td>
-              <td><span class="status-badge">{{ evaluation.status }}</span></td>
-            </tr>
-          </tbody>
-        </table>
+          <table class="periods-table">
+            <thead>
+              <tr>
+                <th>S.No</th>
+                <th>Review Period</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Employees</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let period of completedReviewPeriods; let i = index" class="clickable-row" (click)="viewPeriodEvaluations(period.id)">
+                <td>{{ i + 1 }}</td>
+                <td class="period-name">{{ period.name }}</td>
+                <td>{{ period.startDate }}</td>
+                <td>{{ period.endDate }}</td>
+                <td>{{ period.employeeCount }}</td>
+                <td><span class="status-badge completed">{{ period.status }}</span></td>
+                <td>
+                  <button class="btn-view-small" (click)="viewPeriodEvaluations(period.id); $event.stopPropagation()">
+                    <i class="fas fa-eye"></i> View
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

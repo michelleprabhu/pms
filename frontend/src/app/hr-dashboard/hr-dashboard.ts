@@ -26,7 +26,7 @@ export class HrDashboard {
   }
 
   navigateToEvaluation() {
-    this.router.navigate(['/evaluation']);
+    this.router.navigate(['/evaluation-periods']);
   }
 
   signOut() {

@@ -48,12 +48,17 @@
 
     <!-- Page Content -->
     <div class="page-content">
+      <button class="btn-back" (click)="navigateBackToPeriods()">
+        <i class="fas fa-arrow-left"></i> Back to Review Periods
+      </button>
+
       <div class="page-header">
-        <h2>Employee Evaluations</h2>
+        <h2>Team Member Evaluations</h2>
       </div>
 
-      <div class="table-container">
-        <table class="data-table">
+      <div class="table-section">
+        <div class="table-container">
+          <table class="data-table">
           <thead>
             <tr>
               <th>S.No</th>
@@ -75,6 +80,7 @@
             </tr>
           </tbody>
         </table>
+        </div>
       </div>
     </div>
   </div>

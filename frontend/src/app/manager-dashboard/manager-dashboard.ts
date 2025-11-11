@@ -30,7 +30,7 @@ export class ManagerDashboard {
   }
 
   navigateToEvaluation() {
-    this.router.navigate(['/manager-evaluation']);
+    this.router.navigate(['/manager-evaluation-periods']);
   }
 
   signOut() {

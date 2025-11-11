@@ -99,7 +99,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #666;
 }
 
 .nav-text {
@@ -126,13 +125,12 @@
 }
 
 .sign-out {
-  margin-top: auto;
-  color: #999;
+  margin: 0 16px 16px 16px;
+  color: #666;
 }
 
 .sign-out:hover {
-  background-color: #fee;
-  color: #c33;
+  background-color: #fafafa;
 }
 
 /* Main Content */
@@ -141,7 +139,6 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  margin-left: 0;
 }
 
 /* Top Bar */
@@ -198,47 +195,149 @@
   padding: 32px;
 }
 
-.btn-back {
-  padding: 10px 20px;
-  background-color: #1a1a1a;
-  color: white;
-  border: none;
-  border-radius: 4px;
+.page-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 32px 0;
+}
+
+/* Review Periods Section */
+.review-periods-section {
+  margin-bottom: 40px;
+}
+
+.section-heading {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 20px 0;
+}
+
+/* Periods Grid for Active */
+.periods-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 24px;
+}
+
+.period-card {
+  background: white;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 24px;
   cursor: pointer;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: background-color 0.3s;
-  margin-bottom: 20px;
+  transition: all 0.3s ease;
 }
 
-.btn-back:hover {
-  background-color: #000;
+.period-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: #8B2E3E;
 }
 
-.page-header {
+.period-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
-.page-header h2 {
+.period-name {
   font-size: 20px;
   font-weight: 600;
   color: #1a1a1a;
   margin: 0;
 }
 
-.table-section {
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  padding: 25px;
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
 }
 
-/* Table Styles */
+.status-badge.active {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status-badge.completed {
+  background-color: #cce5ff;
+  color: #004085;
+}
+
+.period-dates {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.period-dates i {
+  color: #8B2E3E;
+}
+
+.period-progress {
+  margin-bottom: 20px;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.progress-label {
+  font-size: 13px;
+  color: #666;
+}
+
+.progress-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: #8B2E3E;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background-color: #e5e5e5;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #8B2E3E;
+  transition: width 0.3s ease;
+}
+
+.btn-evaluate {
+  width: 100%;
+  padding: 12px;
+  background-color: #8B2E3E;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-evaluate:hover {
+  background-color: #6d2431;
+}
+
+/* Table for Completed */
 .table-container {
   background-color: white;
   border-radius: 8px;
@@ -246,47 +345,58 @@
   overflow: hidden;
 }
 
-.data-table {
+.periods-table {
   width: 100%;
   border-collapse: collapse;
 }
 
-.data-table thead {
-  background-color: #f8f9fa;
+.periods-table thead {
+  background-color: #fafafa;
 }
 
-.data-table th {
-  padding: 15px;
+.periods-table th {
   text-align: left;
+  padding: 14px 16px;
+  font-size: 13px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.periods-table td {
+  padding: 14px 16px;
   font-size: 14px;
-  border-bottom: 2px solid #e9ecef;
+  color: #333;
+  border-bottom: 1px solid #f0f0f0;
 }
 
-.data-table td {
-  padding: 15px;
-  border-bottom: 1px solid #e9ecef;
-  color: #495057;
-  font-size: 14px;
+.periods-table tbody tr:last-child td {
+  border-bottom: none;
 }
 
-.clickable-row {
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.clickable-row:hover {
+.periods-table tbody tr:hover {
   background-color: #f8f9fa;
 }
 
-.data-table tbody tr:hover {
-  background-color: #f8f9fa;
-}
-
-.status-badge {
-  padding: 5px 12px;
+.btn-view {
+  padding: 6px 16px;
+  background-color: white;
+  color: #8B2E3E;
+  border: 1px solid #8B2E3E;
   border-radius: 4px;
   font-size: 13px;
   font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
+
+.btn-view:hover {
+  background-color: #8B2E3E;
+  color: white;
+}
+
