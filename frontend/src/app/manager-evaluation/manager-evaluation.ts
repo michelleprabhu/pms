@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-evaluation',
+  selector: 'app-manager-evaluation',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './evaluation.html',
-  styleUrls: ['./evaluation.css']
+  templateUrl: './manager-evaluation.html',
+  styleUrls: ['./manager-evaluation.css']
 })
-export class EvaluationComponent {
+export class ManagerEvaluationComponent {
   isSidebarCollapsed = false;
 
   evaluations = [
@@ -27,23 +27,19 @@ export class EvaluationComponent {
   }
 
   navigateToDashboard() {
-    this.router.navigate(['/hr-dashboard']);
-  }
-
-  navigateToReviewPeriods() {
-    this.router.navigate(['/review-period']);
+    this.router.navigate(['/manager-dashboard']);
   }
 
   navigateToScoreCards() {
-    this.router.navigate(['/score-cards']);
+    this.router.navigate(['/manager-score-cards']);
   }
 
   navigateToEvaluation() {
-    this.router.navigate(['/evaluation']);
+    this.router.navigate(['/manager-evaluation']);
   }
 
   viewEvaluationDetails(evaluationId: number) {
-    this.router.navigate(['/evaluation-details'], { queryParams: { id: evaluationId } });
+    this.router.navigate(['/manager-evaluation-details'], { queryParams: { id: evaluationId } });
   }
 
   signOut() {

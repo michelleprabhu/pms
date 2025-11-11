@@ -41,13 +41,13 @@ interface Value {
 }
 
 @Component({
-  selector: 'app-evaluation-details',
+  selector: 'app-manager-evaluation-details',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './evaluation-details.html',
-  styleUrls: ['./evaluation-details.css']
+  templateUrl: './manager-evaluation-details.html',
+  styleUrls: ['./manager-evaluation-details.css']
 })
-export class EvaluationDetailsComponent implements OnInit {
+export class ManagerEvaluationDetailsComponent implements OnInit {
   isSidebarCollapsed = false;
   activeTab: string = 'goals';
   employeeId: number = 1;
@@ -116,8 +116,8 @@ export class EvaluationDetailsComponent implements OnInit {
     this.activeTab = tab;
   }
 
-  calculateAverageRating(items: (Goal | Competency | Value)[]): string {
-    const ratings = items.filter(item => item.hrRating !== null).map(item => item.hrRating!);
+  calculateAverageRating(items: (Competency | Value)[]): string {
+    const ratings = items.filter(item => item.managerRating !== null).map(item => item.managerRating!);
     if (ratings.length === 0) return 'N/A';
     const average = ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length;
     return average.toFixed(2);
@@ -129,15 +129,37 @@ export class EvaluationDetailsComponent implements OnInit {
 
   getWeightedAverageRating(): string {
     const weightedSum = this.goals
-      .filter(goal => goal.hrRating !== null)
-      .reduce((sum, goal) => sum + (goal.hrRating! * goal.weight), 0);
+      .filter(goal => goal.managerRating !== null)
+      .reduce((sum, goal) => sum + (goal.managerRating! * goal.weight), 0);
     
     const totalWeight = this.goals
-      .filter(goal => goal.hrRating !== null)
+      .filter(goal => goal.managerRating !== null)
       .reduce((sum, goal) => sum + goal.weight, 0);
     
     if (totalWeight === 0) return 'N/A';
     return (weightedSum / totalWeight).toFixed(2);
+  }
+
+  navigateToDashboard() {
+    this.router.navigate(['/manager-dashboard']);
+  }
+
+  navigateToScoreCards() {
+    this.router.navigate(['/manager-score-cards']);
+  }
+
+  navigateToEvaluation() {
+    this.router.navigate(['/manager-evaluation']);
+  }
+
+  saveEvaluation() {
+    console.log('Saving manager evaluation:', {
+      employeeId: this.employeeId,
+      goals: this.goals,
+      competencies: this.competencies,
+      values: this.values
+    });
+    alert('Manager evaluation saved!');
   }
 
   signOut() {

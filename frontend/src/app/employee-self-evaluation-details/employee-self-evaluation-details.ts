@@ -76,7 +76,57 @@ export class EmployeeSelfEvaluationDetailsComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.reviewPeriodId = +params['id'] || 1;
+      
+      // Check if this is a completed review period and pre-fill data
+      if (this.reviewPeriodId > 2) { // IDs > 2 are completed periods
+        this.reviewPeriodInfo.status = 'Completed';
+        this.preFillCompletedData();
+      }
     });
+  }
+
+  preFillCompletedData() {
+    // Pre-fill goals
+    this.goals = [
+      { id: 1, name: 'Complete Q4 Sales Target', type: 'Personal Goal', weight: 30, 
+        employeeComments: 'Achieved 95% of target. Market conditions were challenging.', employeeRating: 4 },
+      { id: 2, name: 'Develop New Client Relationships', type: 'Personal Goal', weight: 25,
+        employeeComments: 'Successfully onboarded 5 new clients this quarter.', employeeRating: 5 },
+      { id: 3, name: 'Improve Team Collaboration', type: 'Development Goal', weight: 20,
+        employeeComments: 'Led 3 cross-functional projects successfully.', employeeRating: 4.5 },
+      { id: 4, name: 'Complete Product Training', type: 'Development Goal', weight: 15,
+        employeeComments: 'Completed all required training modules ahead of schedule.', employeeRating: 5 },
+      { id: 5, name: 'Reduce Customer Complaints', type: 'Personal Goal', weight: 10,
+        employeeComments: 'Reduced complaints by 30% through better service protocols.', employeeRating: 4 }
+    ];
+
+    // Pre-fill competencies
+    this.competencies = [
+      { id: 1, name: 'Communication', description: 'Effective verbal and written communication', 
+        minProficiency: 'Basic', maxProficiency: 'Expert',
+        employeeComments: 'Improved presentation skills through workshops.', employeeRating: 4 },
+      { id: 2, name: 'Leadership', description: 'Ability to guide and motivate team members',
+        minProficiency: 'Intermediate', maxProficiency: 'Expert',
+        employeeComments: 'Led team through challenging project deadlines.', employeeRating: 4.5 },
+      { id: 3, name: 'Problem Solving', description: 'Analytical thinking and solution development',
+        minProficiency: 'Basic', maxProficiency: 'Advanced',
+        employeeComments: 'Resolved multiple complex client issues independently.', employeeRating: 5 },
+      { id: 4, name: 'Technical Skills', description: 'Proficiency in relevant tools and technologies',
+        minProficiency: 'Intermediate', maxProficiency: 'Expert',
+        employeeComments: 'Learned new CRM system and trained others.', employeeRating: 4 }
+    ];
+
+    // Pre-fill values
+    this.values = [
+      { id: 1, name: 'Integrity',
+        employeeComments: 'Maintained ethical standards in all client interactions.', employeeRating: 5 },
+      { id: 2, name: 'Innovation',
+        employeeComments: 'Proposed new process improvements adopted by team.', employeeRating: 4 },
+      { id: 3, name: 'Customer Focus',
+        employeeComments: 'Always prioritizes customer needs and satisfaction.', employeeRating: 4.5 },
+      { id: 4, name: 'Accountability',
+        employeeComments: 'Takes ownership of responsibilities and outcomes.', employeeRating: 4 }
+    ];
   }
 
   toggleSidebar() {
