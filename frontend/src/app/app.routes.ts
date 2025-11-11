@@ -13,6 +13,7 @@ import { EmployeeScoreCardDetailsComponent } from './employee-score-card-details
 import { EmployeeSelfEvaluationComponent } from './employee-self-evaluation/employee-self-evaluation';
 import { EmployeeSelfEvaluationDetailsComponent } from './employee-self-evaluation-details/employee-self-evaluation-details';
 import { EmployeeRatingsComponent } from './employee-ratings/employee-ratings';
+import { EmployeeRatingsDetailsComponent } from './employee-ratings-details/employee-ratings-details';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -30,6 +31,7 @@ export const routes: Routes = [
   { path: 'employee-self-evaluation', component: EmployeeSelfEvaluationComponent },
   { path: 'employee-self-evaluation-details', component: EmployeeSelfEvaluationDetailsComponent },
   { path: 'employee-ratings', component: EmployeeRatingsComponent },
+  { path: 'employee-ratings-details', component: EmployeeRatingsDetailsComponent },
   { path: '**', redirectTo: '/login' }
 ];
 

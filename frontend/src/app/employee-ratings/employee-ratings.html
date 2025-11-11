@@ -48,242 +48,47 @@
 
     <!-- Page Content -->
     <div class="page-content">
-      <div class="page-header">
-        <h2>Performance Ratings - {{ reviewPeriodInfo.name }}</h2>
-      </div>
+      <h1 class="page-title">Performance Ratings</h1>
 
-      <!-- Review Period Info Card -->
-      <div class="info-card">
-        <div class="detail-item">
-          <span class="detail-label">Review Period:</span>
-          <span class="detail-value">{{ reviewPeriodInfo.name }}</span>
-        </div>
-        <div class="detail-item">
-          <span class="detail-label">Start Date:</span>
-          <span class="detail-value">{{ reviewPeriodInfo.startDate }}</span>
-        </div>
-        <div class="detail-item">
-          <span class="detail-label">End Date:</span>
-          <span class="detail-value">{{ reviewPeriodInfo.endDate }}</span>
-        </div>
-        <div class="detail-item">
-          <span class="detail-label">Status:</span>
-          <span class="detail-value">{{ reviewPeriodInfo.status }}</span>
-        </div>
-      </div>
-
-      <!-- Tabs -->
-      <div class="tabs-container">
-        <div class="tabs">
-          <button 
-            class="tab" 
-            [class.active]="activeTab === 'goals'" 
-            (click)="setActiveTab('goals')">
-            Goals
-          </button>
-          <button 
-            class="tab" 
-            [class.active]="activeTab === 'competencies'" 
-            (click)="setActiveTab('competencies')">
-            Competencies
-          </button>
-          <button 
-            class="tab" 
-            [class.active]="activeTab === 'values'" 
-            (click)="setActiveTab('values')">
-            Values
-          </button>
-        </div>
-
-        <!-- Goals Tab -->
-        <div class="tab-content" *ngIf="activeTab === 'goals'">
-          <div class="rating-summary">
-            <div class="summary-item">
-              <span class="summary-label">Your Weighted Avg:</span>
-              <span class="summary-value self">{{ getWeightedAverageRating('employee') }}</span>
-            </div>
-            <div class="summary-item">
-              <span class="summary-label">Manager Weighted Avg:</span>
-              <span class="summary-value manager">{{ getWeightedAverageRating('manager') }}</span>
-            </div>
-            <div class="summary-item">
-              <span class="summary-label">HR Weighted Avg:</span>
-              <span class="summary-value hr">{{ getWeightedAverageRating('hr') }}</span>
-            </div>
-          </div>
-
-          <!-- Personal Goals -->
-          <div class="goal-section">
-            <h3 class="subsection-title">Personal Goals</h3>
-            <div class="eval-table-container">
-              <table class="eval-table">
-                <thead>
-                  <tr>
-                    <th>S.No</th>
-                    <th>Goal</th>
-                    <th>Weight</th>
-                    <th>Your Comments</th>
-                    <th>Your Rating</th>
-                    <th>Manager Comments</th>
-                    <th>Manager Rating</th>
-                    <th>HR Comments</th>
-                    <th>HR Rating</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let goal of getGoalsByType('Personal Goal'); let i = index">
-                    <td>{{ i + 1 }}</td>
-                    <td class="goal-name">{{ goal.name }}</td>
-                    <td class="weight-cell">{{ goal.weight }}%</td>
-                    <td class="comments-cell readonly">{{ goal.employeeComments }}</td>
-                    <td class="rating-cell readonly">{{ goal.employeeRating }}</td>
-                    <td class="comments-cell readonly">{{ goal.managerComments }}</td>
-                    <td class="rating-cell readonly">{{ goal.managerRating }}</td>
-                    <td class="comments-cell readonly">{{ goal.hrComments }}</td>
-                    <td class="rating-cell readonly">{{ goal.hrRating }}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <!-- Development Goals -->
-          <div class="goal-section">
-            <h3 class="subsection-title">Development Goals</h3>
-            <div class="eval-table-container">
-              <table class="eval-table">
-                <thead>
-                  <tr>
-                    <th>S.No</th>
-                    <th>Goal</th>
-                    <th>Weight</th>
-                    <th>Your Comments</th>
-                    <th>Your Rating</th>
-                    <th>Manager Comments</th>
-                    <th>Manager Rating</th>
-                    <th>HR Comments</th>
-                    <th>HR Rating</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let goal of getGoalsByType('Development Goal'); let i = index">
-                    <td>{{ i + 1 }}</td>
-                    <td class="goal-name">{{ goal.name }}</td>
-                    <td class="weight-cell">{{ goal.weight }}%</td>
-                    <td class="comments-cell readonly">{{ goal.employeeComments }}</td>
-                    <td class="rating-cell readonly">{{ goal.employeeRating }}</td>
-                    <td class="comments-cell readonly">{{ goal.managerComments }}</td>
-                    <td class="rating-cell readonly">{{ goal.managerRating }}</td>
-                    <td class="comments-cell readonly">{{ goal.hrComments }}</td>
-                    <td class="rating-cell readonly">{{ goal.hrRating }}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-
-        <!-- Competencies Tab -->
-        <div class="tab-content" *ngIf="activeTab === 'competencies'">
-          <div class="rating-summary">
-            <div class="summary-item">
-              <span class="summary-label">Your Average:</span>
-              <span class="summary-value self">{{ calculateAverageRating(competencies, 'employee') }}</span>
-            </div>
-            <div class="summary-item">
-              <span class="summary-label">Manager Average:</span>
-              <span class="summary-value manager">{{ calculateAverageRating(competencies, 'manager') }}</span>
-            </div>
-            <div class="summary-item">
-              <span class="summary-label">HR Average:</span>
-              <span class="summary-value hr">{{ calculateAverageRating(competencies, 'hr') }}</span>
-            </div>
-          </div>
-
-          <div class="eval-table-container">
-            <table class="eval-table">
-              <thead>
-                <tr>
-                  <th>S.No</th>
-                  <th>Competency</th>
-                  <th>Description</th>
-                  <th>Min Prof.</th>
-                  <th>Max Prof.</th>
-                  <th>Your Comments</th>
-                  <th>Your Rating</th>
-                  <th>Manager Comments</th>
-                  <th>Manager Rating</th>
-                  <th>HR Comments</th>
-                  <th>HR Rating</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let competency of competencies; let i = index">
-                  <td>{{ i + 1 }}</td>
-                  <td class="goal-name">{{ competency.name }}</td>
-                  <td>{{ competency.description }}</td>
-                  <td>{{ competency.minProficiency }}</td>
-                  <td>{{ competency.maxProficiency }}</td>
-                  <td class="comments-cell readonly">{{ competency.employeeComments }}</td>
-                  <td class="rating-cell readonly">{{ competency.employeeRating }}</td>
-                  <td class="comments-cell readonly">{{ competency.managerComments }}</td>
-                  <td class="rating-cell readonly">{{ competency.managerRating }}</td>
-                  <td class="comments-cell readonly">{{ competency.hrComments }}</td>
-                  <td class="rating-cell readonly">{{ competency.hrRating }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- Values Tab -->
-        <div class="tab-content" *ngIf="activeTab === 'values'">
-          <div class="rating-summary">
-            <div class="summary-item">
-              <span class="summary-label">Your Average:</span>
-              <span class="summary-value self">{{ calculateAverageRating(values, 'employee') }}</span>
-            </div>
-            <div class="summary-item">
-              <span class="summary-label">Manager Average:</span>
-              <span class="summary-value manager">{{ calculateAverageRating(values, 'manager') }}</span>
-            </div>
-            <div class="summary-item">
-              <span class="summary-label">HR Average:</span>
-              <span class="summary-value hr">{{ calculateAverageRating(values, 'hr') }}</span>
-            </div>
-          </div>
-
-          <div class="eval-table-container">
-            <table class="eval-table">
-              <thead>
-                <tr>
-                  <th>S.No</th>
-                  <th>Value</th>
-                  <th>Your Comments</th>
-                  <th>Your Rating</th>
-                  <th>Manager Comments</th>
-                  <th>Manager Rating</th>
-                  <th>HR Comments</th>
-                  <th>HR Rating</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let value of values; let i = index">
-                  <td>{{ i + 1 }}</td>
-                  <td class="goal-name">{{ value.name }}</td>
-                  <td class="comments-cell readonly">{{ value.employeeComments }}</td>
-                  <td class="rating-cell readonly">{{ value.employeeRating }}</td>
-                  <td class="comments-cell readonly">{{ value.managerComments }}</td>
-                  <td class="rating-cell readonly">{{ value.managerRating }}</td>
-                  <td class="comments-cell readonly">{{ value.hrComments }}</td>
-                  <td class="rating-cell readonly">{{ value.hrRating }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+      <!-- Completed Review Periods -->
+      <div class="review-periods-section">
+        <h2 class="section-heading">Completed Review Periods</h2>
+        <div class="table-container">
+          <table class="periods-table">
+            <thead>
+              <tr>
+                <th>S.No</th>
+                <th>Review Period</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Overall Rating</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let period of completedReviewPeriods; let i = index" 
+                  class="clickable-row" 
+                  (click)="viewRatingDetails(period.id)">
+                <td>{{ i + 1 }}</td>
+                <td class="period-name">{{ period.name }}</td>
+                <td>{{ period.startDate }}</td>
+                <td>{{ period.endDate }}</td>
+                <td>
+                  <div class="rating-display">
+                    <span class="rating-value">{{ period.overallRating.toFixed(1) }}</span>
+                    <span class="rating-max">/ 5.0</span>
+                    <div class="rating-stars">
+                      <i *ngFor="let star of [1,2,3,4,5]" 
+                         class="fas fa-star"
+                         [class.filled]="star <= period.overallRating"
+                         [class.half]="star > period.overallRating && star - 0.5 <= period.overallRating"></i>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </div>
 </div>
-
