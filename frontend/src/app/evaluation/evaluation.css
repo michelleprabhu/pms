@@ -286,7 +286,36 @@
 
 .status-badge {
   padding: 5px 12px;
-  border-radius: 4px;
-  font-size: 13px;
-  font-weight: 500;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status-badge.evaluation-complete {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+/* Score Columns */
+.score-column {
+  text-align: center !important;
+}
+
+.score-cell {
+  text-align: center;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.emp-score {
+  color: #16a34a; /* Green */
+}
+
+.mgr-score {
+  color: #2563eb; /* Blue */
+}
+
+.hr-score {
+  color: #8B2E3E; /* Maroon */
 }

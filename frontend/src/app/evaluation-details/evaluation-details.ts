@@ -55,8 +55,7 @@ export class EvaluationDetailsComponent implements OnInit {
   employeeInfo = {
     name: 'John Doe',
     reviewPeriod: 'Q4 2024',
-    status: 'Completed',
-    createdOn: '2024-10-01'
+    status: 'Evaluation Complete'
   };
 
   goals: Goal[] = [
@@ -102,6 +101,10 @@ export class EvaluationDetailsComponent implements OnInit {
 
   navigateToReviewPeriods() {
     this.router.navigate(['/review-period']);
+  }
+
+  navigateToPlanning() {
+    this.router.navigate(['/planning']);
   }
 
   navigateToScoreCards() {

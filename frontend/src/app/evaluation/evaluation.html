@@ -13,6 +13,10 @@
           <span class="nav-icon"><i class="fas fa-chart-line"></i></span>
           <span class="nav-text" *ngIf="!isSidebarCollapsed">Dashboard</span>
         </div>
+        <div class="nav-item" (click)="navigateToPlanning()">
+          <span class="nav-icon"><i class="fas fa-tasks"></i></span>
+          <span class="nav-text" *ngIf="!isSidebarCollapsed">Planning</span>
+        </div>
         <div class="nav-item" (click)="navigateToScoreCards()">
           <span class="nav-icon"><i class="fas fa-clipboard-check"></i></span>
           <span class="nav-text" *ngIf="!isSidebarCollapsed">Score Cards</span>
@@ -76,8 +80,9 @@
               <th>S.No</th>
               <th>Employee Name</th>
               <th>Review Period</th>
-              <th>Created On</th>
-              <th>Created By</th>
+              <th class="score-column">Emp Score</th>
+              <th class="score-column">Mgr Score</th>
+              <th class="score-column">HR Score</th>
               <th>Status</th>
             </tr>
           </thead>
@@ -86,9 +91,10 @@
               <td>{{ i + 1 }}</td>
               <td>{{ evaluation.employeeName }}</td>
               <td>{{ evaluation.reviewPeriod }}</td>
-              <td>{{ evaluation.createdOn }}</td>
-              <td>{{ evaluation.createdBy }}</td>
-              <td><span class="status-badge">{{ evaluation.status }}</span></td>
+              <td class="score-cell emp-score">{{ evaluation.employeeScore }}</td>
+              <td class="score-cell mgr-score">{{ evaluation.managerScore }}</td>
+              <td class="score-cell hr-score">{{ evaluation.hrScore }}</td>
+              <td><span class="status-badge evaluation-complete">{{ evaluation.status }}</span></td>
             </tr>
           </tbody>
         </table>
