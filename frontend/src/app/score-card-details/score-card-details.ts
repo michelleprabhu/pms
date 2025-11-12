@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { CommonModule, DatePipe } from '@angular/common';
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 interface ScoreCard {
   employeeName: string;
   reviewPeriod: string;
-  createdOn: string;
-  createdBy: string;
   status: string;
 }
 
 interface Goal {
+  id: number;
   name: string;
   description: string;
   successCriteria: string;
@@ -19,6 +19,14 @@ interface Goal {
   reviewPeriod: string;
   startDate: string;
   endDate: string;
+  addedBy: 'HR' | 'Manager' | 'Employee';
+}
+
+interface PlanningComment {
+  id: number;
+  role: 'HR' | 'Manager' | 'Employee';
+  text: string;
+  timestamp: Date;
 }
 
 interface Competency {
@@ -35,7 +43,7 @@ interface Value {
 
 @Component({
   selector: 'app-score-card-details',
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule, DatePipe],
   templateUrl: './score-card-details.html',
   styleUrl: './score-card-details.css',
 })
@@ -43,57 +51,84 @@ export class ScoreCardDetails implements OnInit {
   isSidebarCollapsed = false;
   activeTab: string = 'goals';
   scoreCard: ScoreCard | null = null;
+  scoreCardId: number = 0;
+  newComment: string = '';
   
   goals: Goal[] = [
     {
+      id: 1,
       name: 'Increase Sales Revenue',
       description: 'Achieve 20% growth in quarterly sales',
       successCriteria: 'Revenue increases by $500K and meets or exceeds 20% growth target with documented customer acquisitions',
       status: 'In Progress',
       weight: 30,
-      reviewPeriod: 'Q3 2024',
-      startDate: 'Jul 1, 2024',
-      endDate: 'Sep 30, 2024'
+      reviewPeriod: 'Q1 2025',
+      startDate: 'Jan 1, 2025',
+      endDate: 'Mar 31, 2025',
+      addedBy: 'HR'
     },
     {
+      id: 2,
       name: 'Improve Customer Satisfaction',
       description: 'Increase CSAT score to 4.5/5',
       successCriteria: 'CSAT survey results show consistent scores of 4.5 or higher across all customer touchpoints for 3 consecutive months',
       status: 'In Progress',
       weight: 25,
-      reviewPeriod: 'Q3 2024',
-      startDate: 'Jul 1, 2024',
-      endDate: 'Sep 30, 2024'
+      reviewPeriod: 'Q1 2025',
+      startDate: 'Jan 1, 2025',
+      endDate: 'Mar 31, 2025',
+      addedBy: 'HR'
     },
     {
+      id: 3,
       name: 'Complete Product Launch',
       description: 'Successfully launch new product line',
       successCriteria: 'Product is live in production, all features are functional, user documentation is published, and 100+ active users within first month',
       status: 'Not Started',
       weight: 20,
-      reviewPeriod: 'Q3 2024',
-      startDate: 'Aug 1, 2024',
-      endDate: 'Sep 30, 2024'
+      reviewPeriod: 'Q1 2025',
+      startDate: 'Feb 1, 2025',
+      endDate: 'Mar 31, 2025',
+      addedBy: 'HR'
     },
     {
+      id: 4,
       name: 'Team Development',
       description: 'Conduct training sessions for team members',
       successCriteria: 'Complete 8 training sessions with 90%+ attendance and positive feedback scores above 4/5 from participants',
       status: 'In Progress',
       weight: 15,
-      reviewPeriod: 'Q3 2024',
-      startDate: 'Jul 15, 2024',
-      endDate: 'Sep 15, 2024'
+      reviewPeriod: 'Q1 2025',
+      startDate: 'Jan 15, 2025',
+      endDate: 'Mar 15, 2025',
+      addedBy: 'Manager'
     },
     {
+      id: 5,
       name: 'Process Improvement',
       description: 'Streamline workflow processes',
       successCriteria: 'Process efficiency improved by 25%, documented procedures created, and team adoption rate of 80% or higher',
       status: 'Completed',
       weight: 10,
-      reviewPeriod: 'Q3 2024',
-      startDate: 'Jul 1, 2024',
-      endDate: 'Aug 31, 2024'
+      reviewPeriod: 'Q1 2025',
+      startDate: 'Jan 1, 2025',
+      endDate: 'Feb 28, 2025',
+      addedBy: 'Employee'
+    }
+  ];
+
+  planningComments: PlanningComment[] = [
+    {
+      id: 1,
+      role: 'HR',
+      text: 'Initial goals have been set. Please review and provide feedback.',
+      timestamp: new Date('2025-01-05T10:00:00')
+    },
+    {
+      id: 2,
+      role: 'Manager',
+      text: 'Added team development goal. Employee can add their own goals as well.',
+      timestamp: new Date('2025-01-06T14:30:00')
     }
   ];
 
@@ -199,22 +234,109 @@ export class ScoreCardDetails implements OnInit {
     }
   ];
 
-  constructor(private router: Router) {
-    const navigation = this.router.getCurrentNavigation();
-    if (navigation?.extras?.state) {
-      this.scoreCard = navigation.extras.state['scoreCard'];
-    }
+  constructor(private router: Router, private route: ActivatedRoute) {
+    // Set default score card if none provided
+    this.scoreCard = {
+      employeeName: 'John Doe',
+      reviewPeriod: 'Q1 2025',
+      status: 'Plan Started'
+    };
   }
 
   ngOnInit() {
-    // If no score card data, redirect back to score cards list
-    if (!this.scoreCard) {
-      this.navigateToScoreCards();
-    }
+    this.route.queryParams.subscribe(params => {
+      this.scoreCardId = +params['id'] || 1;
+      // In a real app, fetch score card data based on this.scoreCardId
+      // For now, we'll use mock data
+      if (this.scoreCardId === 1) {
+        this.scoreCard = {
+          employeeName: 'John Doe',
+          reviewPeriod: 'Q1 2025',
+          status: 'Plan Started'
+        };
+      } else {
+        // For completed score cards, mark all goals as completed
+        this.goals.forEach(goal => {
+          goal.status = 'Completed';
+        });
+        this.scoreCard = {
+          employeeName: 'John Doe',
+          reviewPeriod: 'Q4 2024',
+          status: 'Evaluation Complete'
+        };
+      }
+    });
   }
 
   getTotalWeight(): number {
     return this.goals.reduce((total, goal) => total + goal.weight, 0);
+  }
+
+  isPlanningPhase(): boolean {
+    if (!this.scoreCard) return false;
+    const planningStatuses = ['Plan Started', 'Planning in Progress', 'Pending Employee Acceptance'];
+    return planningStatuses.includes(this.scoreCard.status);
+  }
+
+  getGoalsByRole(role: 'HR' | 'Manager' | 'Employee'): Goal[] {
+    return this.goals.filter(goal => goal.addedBy === role);
+  }
+
+  getGoalsWeightByRole(role: 'HR' | 'Manager' | 'Employee'): number {
+    return this.getGoalsByRole(role).reduce((total, goal) => total + goal.weight, 0);
+  }
+
+  canSendForAcceptance(): boolean {
+    return this.getTotalWeight() === 100;
+  }
+
+  sendForEmployeeAcceptance() {
+    if (this.canSendForAcceptance()) {
+      if (this.scoreCard) {
+        this.scoreCard.status = 'Pending Employee Acceptance';
+        console.log('Sent for employee acceptance');
+        // In a real app, save to backend
+      }
+    }
+  }
+
+  addComment() {
+    if (this.newComment.trim()) {
+      this.planningComments.push({
+        id: this.planningComments.length + 1,
+        role: 'HR', // In a real app, get from current user
+        text: this.newComment.trim(),
+        timestamp: new Date()
+      });
+      this.newComment = '';
+      // In a real app, save to backend
+    }
+  }
+
+  getRoleBadgeClass(role: string): string {
+    switch (role) {
+      case 'HR':
+        return 'badge-hr';
+      case 'Manager':
+        return 'badge-manager';
+      case 'Employee':
+        return 'badge-employee';
+      default:
+        return '';
+    }
+  }
+
+  getGoalRowClass(addedBy: string): string {
+    switch (addedBy) {
+      case 'HR':
+        return 'goal-row-hr';
+      case 'Manager':
+        return 'goal-row-manager';
+      case 'Employee':
+        return 'goal-row-employee';
+      default:
+        return '';
+    }
   }
 
   toggleSidebar() {
@@ -223,6 +345,10 @@ export class ScoreCardDetails implements OnInit {
 
   navigateToDashboard() {
     this.router.navigate(['/hr-dashboard']);
+  }
+
+  navigateToPlanning() {
+    this.router.navigate(['/planning']);
   }
 
   navigateToScoreCards() {
@@ -234,7 +360,7 @@ export class ScoreCardDetails implements OnInit {
   }
 
   navigateToEvaluation() {
-    this.router.navigate(['/evaluation']);
+    this.router.navigate(['/evaluation-periods']);
   }
 
   signOut() {

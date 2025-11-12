@@ -83,14 +83,9 @@
                 <td (click)="viewScoreCardDetails(scoreCard)">{{ scoreCard.employeeName }}</td>
                 <td (click)="viewScoreCardDetails(scoreCard)">{{ scoreCard.reviewPeriod }}</td>
                 <td (click)="$event.stopPropagation()">
-                  <select 
-                    class="status-dropdown" 
-                    [(ngModel)]="scoreCard.status" 
-                    (click)="$event.stopPropagation()"
-                    (change)="updateScoreCardStatus(scoreCard)">
-                    <option value="Active">Active</option>
-                    <option value="Completed">Completed</option>
-                  </select>
+                  <span class="status-badge" [ngClass]="getStatusClass(scoreCard.status)">
+                    {{ scoreCard.status }}
+                  </span>
                 </td>
                 <td (click)="$event.stopPropagation()">
                   <span *ngIf="scoreCard.approvalStatus === 'Approved'" class="approval-badge approved">

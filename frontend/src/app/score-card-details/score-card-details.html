@@ -13,6 +13,10 @@
           <span class="nav-icon"><i class="fas fa-chart-line"></i></span>
           <span class="nav-text" *ngIf="!isSidebarCollapsed">Dashboard</span>
         </div>
+        <div class="nav-item" (click)="navigateToPlanning()">
+          <span class="nav-icon"><i class="fas fa-tasks"></i></span>
+          <span class="nav-text" *ngIf="!isSidebarCollapsed">Planning</span>
+        </div>
         <div class="nav-item active" (click)="navigateToScoreCards()">
           <span class="nav-icon"><i class="fas fa-clipboard-check"></i></span>
           <span class="nav-text" *ngIf="!isSidebarCollapsed">Score Cards</span>
@@ -78,10 +82,6 @@
           <span class="detail-label">Status:</span>
           <span class="detail-value">{{ scoreCard?.status }}</span>
         </div>
-        <div class="detail-item">
-          <span class="detail-label">Created On:</span>
-          <span class="detail-value">{{ scoreCard?.createdOn }}</span>
-        </div>
       </div>
 
       <!-- Tabs -->
@@ -112,6 +112,44 @@
           <!-- Goals Tab -->
           <div *ngIf="activeTab === 'goals'" class="tab-panel">
             <h2 class="tab-title">Goals</h2>
+
+            <!-- Planning Progress Card (only shown during planning phase) -->
+            <div *ngIf="isPlanningPhase()" class="planning-progress-card">
+              <h3 class="progress-card-title">Planning Progress</h3>
+              <div class="progress-stats">
+                <div class="progress-stat">
+                  <span class="stat-label badge-hr">HR:</span>
+                  <span class="stat-value">{{ getGoalsByRole('HR').length }} goals ({{ getGoalsWeightByRole('HR') }}% weight)</span>
+                </div>
+                <div class="progress-stat">
+                  <span class="stat-label badge-manager">Manager:</span>
+                  <span class="stat-value">{{ getGoalsByRole('Manager').length }} goals ({{ getGoalsWeightByRole('Manager') }}% weight)</span>
+                </div>
+                <div class="progress-stat">
+                  <span class="stat-label badge-employee">Employee:</span>
+                  <span class="stat-value">{{ getGoalsByRole('Employee').length }} goals ({{ getGoalsWeightByRole('Employee') }}% weight)</span>
+                </div>
+                <div class="progress-stat total-weight">
+                  <span class="stat-label"><strong>Total Weight:</strong></span>
+                  <span class="stat-value"><strong>{{ getTotalWeight() }}%</strong></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Buttons (only shown during planning phase) -->
+            <div *ngIf="isPlanningPhase()" class="planning-actions">
+              <button class="btn-secondary" (click)="navigateToPlanning()">
+                <i class="fas fa-plus"></i> Add Goal
+              </button>
+              <button 
+                class="btn-primary" 
+                [disabled]="!canSendForAcceptance()"
+                [title]="canSendForAcceptance() ? '' : 'Total weight must equal 100%'"
+                (click)="sendForEmployeeAcceptance()">
+                <i class="fas fa-paper-plane"></i> Send for Employee Acceptance
+              </button>
+            </div>
+
             <div class="data-table-container">
               <table class="data-table">
                 <thead>
@@ -122,30 +160,62 @@
                     <th>Success Criteria</th>
                     <th>Status</th>
                     <th>Weight (%)</th>
+                    <th>Added By</th>
                     <th>Review Period</th>
                     <th>Start Date</th>
                     <th>End Date</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let goal of goals; let i = index">
+                  <tr *ngFor="let goal of goals; let i = index" [ngClass]="getGoalRowClass(goal.addedBy)">
                     <td>{{ i + 1 }}</td>
                     <td>{{ goal.name }}</td>
                     <td>{{ goal.description }}</td>
                     <td class="success-criteria-cell">{{ goal.successCriteria }}</td>
                     <td>{{ goal.status }}</td>
                     <td>{{ goal.weight }}</td>
+                    <td>
+                      <span class="added-by-badge" [ngClass]="getRoleBadgeClass(goal.addedBy)">
+                        {{ goal.addedBy }}
+                      </span>
+                    </td>
                     <td>{{ goal.reviewPeriod }}</td>
                     <td>{{ goal.startDate }}</td>
                     <td>{{ goal.endDate }}</td>
                   </tr>
                   <tr class="total-row">
-                    <td colspan="5"><strong>Total Weight</strong></td>
+                    <td colspan="6"><strong>Total Weight</strong></td>
                     <td><strong>{{ getTotalWeight() }}%</strong></td>
                     <td colspan="3"></td>
                   </tr>
                 </tbody>
               </table>
+            </div>
+
+            <!-- Planning Discussion Section (only shown during planning phase) -->
+            <div *ngIf="isPlanningPhase()" class="planning-discussion">
+              <h3 class="discussion-title">Planning Discussion</h3>
+              <div class="comments-list">
+                <div *ngFor="let comment of planningComments" class="comment-item">
+                  <div class="comment-header">
+                    <span class="comment-badge" [ngClass]="getRoleBadgeClass(comment.role)">
+                      {{ comment.role }}
+                    </span>
+                    <span class="comment-timestamp">{{ comment.timestamp | date:'short' }}</span>
+                  </div>
+                  <div class="comment-text">{{ comment.text }}</div>
+                </div>
+              </div>
+              <div class="add-comment-section">
+                <textarea 
+                  [(ngModel)]="newComment" 
+                  class="comment-input" 
+                  placeholder="Add a comment to the discussion...">
+                </textarea>
+                <button class="btn-primary" (click)="addComment()">
+                  <i class="fas fa-comment"></i> Add Comment
+                </button>
+              </div>
             </div>
           </div>
 

@@ -94,6 +94,9 @@ export class PlanningEmployeeDetailComponent implements OnInit {
   }
 
   viewScoreCardDetails(scoreCardId: number) {
+    // Navigate to score card details with the score card ID
+    // For active score card (id=1), show planning phase with HR-added goals
+    // For completed score cards (id>1), show completed goals
     this.router.navigate(['/score-card-details'], { queryParams: { id: scoreCardId } });
   }
 

@@ -308,6 +308,56 @@
   align-items: center;
 }
 
+/* Status Badges */
+.status-badge {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status-plan-started {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.status-planning-progress {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.status-pending-acceptance {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.status-plan-finalized {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.status-evaluation-started {
+  background-color: #e9d5ff;
+  color: #6b21a8;
+}
+
+.status-pending-manager {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.status-pending-hr {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.status-evaluation-complete {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
 .btn-approve {
   padding: 6px 12px;
   background-color: #28a745;
