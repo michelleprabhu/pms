@@ -632,3 +632,80 @@
   box-shadow: 0 0 0 2px rgba(139, 46, 62, 0.2);
 }
 
+/* Accept/Reject Buttons in Table */
+.action-column {
+  text-align: center;
+  width: 150px;
+}
+
+.action-cell {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.action-buttons-inline {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-accept {
+  padding: 6px 14px;
+  background-color: #16a34a;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: background-color 0.3s;
+}
+
+.btn-accept:hover {
+  background-color: #15803d;
+}
+
+.btn-reject {
+  padding: 6px 14px;
+  background-color: #dc2626;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: background-color 0.3s;
+}
+
+.btn-reject:hover {
+  background-color: #b91c1c;
+}
+
+.no-goals-row {
+  background-color: #f8f9fa;
+}
+
+.no-goals-message {
+  text-align: center;
+  padding: 40px 20px;
+  color: #999;
+}
+
+.no-goals-message i {
+  font-size: 48px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.no-goals-message p {
+  font-size: 14px;
+  margin: 0;
+}
+

@@ -252,6 +252,14 @@ export class ScoreCardDetails implements OnInit {
         this.scoreCard = {
           employeeName: 'John Doe',
           reviewPeriod: 'Q1 2025',
+          status: 'Pending Employee Acceptance'
+        };
+      } else if (this.scoreCardId === 3) {
+        // Blank score card with no goals
+        this.goals = [];
+        this.scoreCard = {
+          employeeName: 'John Doe',
+          reviewPeriod: 'Q1 2025',
           status: 'Plan Started'
         };
       } else {
@@ -361,6 +369,26 @@ export class ScoreCardDetails implements OnInit {
 
   navigateToEvaluation() {
     this.router.navigate(['/evaluation-periods']);
+  }
+
+  acceptScoreCard() {
+    if (this.scoreCard) {
+      this.scoreCard.status = 'Plan Finalized';
+      console.log('Score card accepted');
+      // In a real app, save to backend
+    }
+  }
+
+  rejectScoreCard() {
+    if (this.scoreCard) {
+      this.scoreCard.status = 'Plan Started';
+      console.log('Score card rejected');
+      // In a real app, save to backend
+    }
+  }
+
+  showAcceptRejectButtons(): boolean {
+    return this.scoreCardId === 1 && this.scoreCard?.status === 'Pending Employee Acceptance';
   }
 
   signOut() {
