@@ -20,9 +20,6 @@ interface ScoreCard {
 })
 export class ScoreCards {
   isSidebarCollapsed = false;
-  showGoalForm = false;
-  showProcessForm = false;
-  processFormActiveTab: string = 'goals';
   
   scoreCards: ScoreCard[] = [
     // Q3 2024
@@ -124,8 +121,16 @@ export class ScoreCards {
     this.router.navigate(['/review-period']);
   }
 
+  navigateToPlanning() {
+    this.router.navigate(['/planning']);
+  }
+
   navigateToEvaluation() {
-    this.router.navigate(['/evaluation']);
+    this.router.navigate(['/evaluation-periods']);
+  }
+
+  navigateToScoreCards() {
+    this.router.navigate(['/score-cards']);
   }
 
   signOut() {
@@ -148,29 +153,9 @@ export class ScoreCards {
     });
   }
 
-  showAddGoalForm() {
-    this.showGoalForm = true;
-  }
-
-  closeAddGoalForm() {
-    this.showGoalForm = false;
-  }
-
-  showStartProcessForm() {
-    this.showProcessForm = true;
-  }
-
-  closeStartProcessForm() {
-    this.showProcessForm = false;
-  }
-
   updateScoreCardStatus(scoreCard: ScoreCard) {
     console.log(`Updated status for ${scoreCard.employeeName} to ${scoreCard.status}`);
     // In a real app, you would save this to the backend
-  }
-
-  setProcessFormTab(tab: string) {
-    this.processFormActiveTab = tab;
   }
 
   approveScoreCard(scoreCard: ScoreCard) {
