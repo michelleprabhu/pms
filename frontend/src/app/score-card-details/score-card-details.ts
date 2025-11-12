@@ -246,20 +246,30 @@ export class ScoreCardDetails implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.scoreCardId = +params['id'] || 1;
+      const reviewPeriod = params['reviewPeriod'] || 'Q1 2025';
+      
       // In a real app, fetch score card data based on this.scoreCardId
       // For now, we'll use mock data
       if (this.scoreCardId === 1) {
         this.scoreCard = {
           employeeName: 'John Doe',
-          reviewPeriod: 'Q1 2025',
+          reviewPeriod: reviewPeriod,
           status: 'Pending Employee Acceptance'
+        };
+      } else if (this.scoreCardId === 2) {
+        // Jane Smith - blank score card
+        this.goals = [];
+        this.scoreCard = {
+          employeeName: 'Jane Smith',
+          reviewPeriod: reviewPeriod,
+          status: 'Plan Not Started'
         };
       } else if (this.scoreCardId === 3) {
         // Blank score card with no goals
         this.goals = [];
         this.scoreCard = {
           employeeName: 'John Doe',
-          reviewPeriod: 'Q1 2025',
+          reviewPeriod: reviewPeriod,
           status: 'Plan Started'
         };
       } else {
@@ -269,7 +279,7 @@ export class ScoreCardDetails implements OnInit {
         });
         this.scoreCard = {
           employeeName: 'John Doe',
-          reviewPeriod: 'Q4 2024',
+          reviewPeriod: reviewPeriod,
           status: 'Evaluation Complete'
         };
       }
@@ -369,6 +379,26 @@ export class ScoreCardDetails implements OnInit {
 
   navigateToEvaluation() {
     this.router.navigate(['/evaluation-periods']);
+  }
+
+  acceptGoal(goal: Goal) {
+    // Accept individual goal - remove it from the list or mark as accepted
+    const index = this.goals.indexOf(goal);
+    if (index > -1) {
+      this.goals.splice(index, 1);
+      console.log('Goal accepted and removed:', goal.name);
+      // In a real app, save to backend
+    }
+  }
+
+  rejectGoal(goal: Goal) {
+    // Reject individual goal - remove it from the list or mark as rejected
+    const index = this.goals.indexOf(goal);
+    if (index > -1) {
+      this.goals.splice(index, 1);
+      console.log('Goal rejected and removed:', goal.name);
+      // In a real app, save to backend
+    }
   }
 
   acceptScoreCard() {

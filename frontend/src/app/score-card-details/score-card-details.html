@@ -158,7 +158,6 @@
                     <th>Goal</th>
                     <th>Description</th>
                     <th>Success Criteria</th>
-                    <th>Status</th>
                     <th>Weight (%)</th>
                     <th>Added By</th>
                     <th>Review Period</th>
@@ -173,7 +172,6 @@
                     <td>{{ goal.name }}</td>
                     <td>{{ goal.description }}</td>
                     <td class="success-criteria-cell">{{ goal.successCriteria }}</td>
-                    <td>{{ goal.status }}</td>
                     <td>{{ goal.weight }}</td>
                     <td>
                       <span class="added-by-badge" [ngClass]="getRoleBadgeClass(goal.addedBy)">
@@ -184,24 +182,24 @@
                     <td>{{ goal.startDate }}</td>
                     <td>{{ goal.endDate }}</td>
                     <td *ngIf="showAcceptRejectButtons()" class="action-cell">
-                      <div class="action-buttons-inline" *ngIf="i === 0">
-                        <button class="btn-accept" (click)="acceptScoreCard()">
+                      <div class="action-buttons-inline" *ngIf="goal.addedBy !== 'HR'">
+                        <button class="btn-accept" (click)="acceptGoal(goal)">
                           <i class="fas fa-check"></i> Accept
                         </button>
-                        <button class="btn-reject" (click)="rejectScoreCard()">
+                        <button class="btn-reject" (click)="rejectGoal(goal)">
                           <i class="fas fa-times"></i> Reject
                         </button>
                       </div>
                     </td>
                   </tr>
                   <tr class="total-row">
-                    <td colspan="6"><strong>Total Weight</strong></td>
+                    <td colspan="4"><strong>Total Weight</strong></td>
                     <td><strong>{{ getTotalWeight() }}%</strong></td>
-                    <td colspan="3"></td>
+                    <td colspan="4"></td>
                     <td *ngIf="showAcceptRejectButtons()"></td>
                   </tr>
                   <tr *ngIf="goals.length === 0" class="no-goals-row">
-                    <td [attr.colspan]="showAcceptRejectButtons() ? 11 : 10" class="no-goals-message">
+                    <td [attr.colspan]="showAcceptRejectButtons() ? 10 : 9" class="no-goals-message">
                       <i class="fas fa-inbox"></i>
                       <p>No goals have been added to this score card yet.</p>
                     </td>

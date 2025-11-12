@@ -47,6 +47,10 @@ export class PlanningEmployeeDetailComponent implements OnInit {
     { id: 4, reviewPeriod: 'Q2 2024', status: 'Evaluation Complete', startDate: 'Apr 1, 2024', endDate: 'Jun 30, 2024' }
   ];
 
+  // Review Period Selection
+  selectedReviewPeriod: string = 'Q1 2025';
+  availableReviewPeriods: string[] = ['Q1 2025', 'Q4 2024', 'Q3 2024', 'Q2 2024'];
+
   // Modals
   showCreateScoreCardModal: boolean = false;
   showAddGoalModal: boolean = false;
@@ -58,6 +62,19 @@ export class PlanningEmployeeDetailComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.employeeId = +params['id'];
+      // For Jane Smith (id: 2), set blank score card
+      if (this.employeeId === 2) {
+        this.activeScoreCard = {
+          id: 2,
+          reviewPeriod: 'Q1 2025',
+          status: 'Plan Not Started',
+          startDate: 'Jan 1, 2025',
+          endDate: 'Mar 31, 2025'
+        };
+        this.employeeName = 'Jane Smith';
+        this.employeePosition = 'Product Manager';
+        this.employeeEmail = 'jane.smith@company.com';
+      }
     });
     this.route.queryParams.subscribe(params => {
       this.periodId = +params['periodId'] || 1;
@@ -94,14 +111,21 @@ export class PlanningEmployeeDetailComponent implements OnInit {
   }
 
   viewScoreCardDetails(scoreCardId: number) {
-    // Navigate to score card details with the score card ID
-    // For active score card (id=1), show planning phase with HR-added goals
-    // For completed score cards (id>1), show completed goals
-    this.router.navigate(['/score-card-details'], { queryParams: { id: scoreCardId } });
+    // Navigate to score card details with the score card ID and selected review period
+    // For Jane Smith (employeeId: 2), use scoreCardId: 2 to show blank score card
+    const idToUse = this.employeeId === 2 ? 2 : scoreCardId;
+    this.router.navigate(['/score-card-details'], { 
+      queryParams: { 
+        id: idToUse,
+        reviewPeriod: this.selectedReviewPeriod
+      } 
+    });
   }
 
   getStatusClass(status: string): string {
     switch (status) {
+      case 'Plan Not Started':
+        return 'status-plan-not-started';
       case 'Plan Started':
         return 'status-plan-started';
       case 'Planning in Progress':

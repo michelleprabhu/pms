@@ -153,6 +153,12 @@
                     {{ activeScoreCard.status }}
                   </span>
                 </div>
+                <div class="review-period-selector">
+                  <label for="reviewPeriodSelect">Review Period:</label>
+                  <select id="reviewPeriodSelect" [(ngModel)]="selectedReviewPeriod" class="review-period-dropdown">
+                    <option *ngFor="let period of availableReviewPeriods" [value]="period">{{ period }}</option>
+                  </select>
+                </div>
                 <button class="btn-view-details" (click)="viewScoreCardDetails(activeScoreCard.id)">
                   View Details <i class="fas fa-arrow-right"></i>
                 </button>

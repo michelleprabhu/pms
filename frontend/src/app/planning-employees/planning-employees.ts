@@ -26,7 +26,7 @@ export class PlanningEmployeesComponent implements OnInit {
 
   employees: Employee[] = [
     { id: 1, name: 'John Doe', department: 'Engineering', position: 'Senior Software Engineer', scoreCardStatus: 'Plan Started' },
-    { id: 2, name: 'Jane Smith', department: 'Engineering', position: 'Product Manager', scoreCardStatus: 'Planning in Progress' },
+    { id: 2, name: 'Jane Smith', department: 'Engineering', position: 'Product Manager', scoreCardStatus: 'Plan Not Started' },
     { id: 3, name: 'Mike Johnson', department: 'Sales', position: 'Sales Manager', scoreCardStatus: 'Pending Employee Acceptance' },
     { id: 4, name: 'Sarah Williams', department: 'Marketing', position: 'Marketing Director', scoreCardStatus: 'Plan Finalized' },
     { id: 5, name: 'David Brown', department: 'Engineering', position: 'Tech Lead', scoreCardStatus: 'Plan Started' },
@@ -91,6 +91,8 @@ export class PlanningEmployeesComponent implements OnInit {
 
   getStatusClass(status: string): string {
     switch (status) {
+      case 'Plan Not Started':
+        return 'status-plan-not-started';
       case 'Plan Started':
         return 'status-plan-started';
       case 'Planning in Progress':
