@@ -111,13 +111,12 @@ export class PlanningEmployeeDetailComponent implements OnInit {
   }
 
   viewScoreCardDetails(scoreCardId: number) {
-    // Navigate to score card details with the score card ID and selected review period
+    // Navigate to score card details with the score card ID
     // For Jane Smith (employeeId: 2), use scoreCardId: 2 to show blank score card
     const idToUse = this.employeeId === 2 ? 2 : scoreCardId;
     this.router.navigate(['/score-card-details'], { 
       queryParams: { 
-        id: idToUse,
-        reviewPeriod: this.selectedReviewPeriod
+        id: idToUse
       } 
     });
   }
