@@ -21,6 +21,10 @@ export class HrDashboard {
     this.router.navigate(['/review-period']);
   }
 
+  navigateToPlanning() {
+    this.router.navigate(['/planning']);
+  }
+
   navigateToScoreCards() {
     this.router.navigate(['/score-cards']);
   }

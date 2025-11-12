@@ -20,12 +20,18 @@ import { ManagerEvaluationComponent } from './manager-evaluation/manager-evaluat
 import { ManagerEvaluationDetailsComponent } from './manager-evaluation-details/manager-evaluation-details';
 import { ManagerEvaluationPeriodsComponent } from './manager-evaluation-periods/manager-evaluation-periods';
 import { EvaluationPeriodsComponent } from './evaluation-periods/evaluation-periods';
+import { PlanningComponent } from './planning/planning';
+import { PlanningEmployeesComponent } from './planning-employees/planning-employees';
+import { PlanningEmployeeDetailComponent } from './planning-employee-detail/planning-employee-detail';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: Login },
   { path: 'hr-dashboard', component: HrDashboard },
   { path: 'review-period', component: ReviewPeriod },
+  { path: 'planning', component: PlanningComponent },
+  { path: 'planning/employees', component: PlanningEmployeesComponent },
+  { path: 'planning/employee-detail/:id', component: PlanningEmployeeDetailComponent },
   { path: 'score-cards', component: ScoreCards },
   { path: 'score-card-details', component: ScoreCardDetails },
   { path: 'evaluation-periods', component: EvaluationPeriodsComponent },
