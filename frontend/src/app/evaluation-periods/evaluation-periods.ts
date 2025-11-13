@@ -60,6 +60,10 @@ export class EvaluationPeriodsComponent {
     this.router.navigate(['/evaluation'], { queryParams: { periodId: periodId } });
   }
 
+  viewEmployees(periodId: number) {
+    this.router.navigate(['/evaluation'], { queryParams: { periodId: periodId } });
+  }
+
   signOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
