@@ -411,6 +411,10 @@
   margin: 0;
 }
 
+.score-card-actions {
+  margin-top: 16px;
+}
+
 .btn-view-details {
   padding: 8px 16px;
   background-color: #8B2E3E;
@@ -428,6 +432,33 @@
 
 .btn-view-details:hover {
   background-color: #6d2431;
+}
+
+.btn-view-details-primary {
+  width: 100%;
+  padding: 12px 20px;
+  background-color: #8B2E3E;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-view-details-primary:hover {
+  background-color: #6b1f2e;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(139, 46, 62, 0.3);
+}
+
+.btn-view-details-primary:active {
+  transform: translateY(0);
 }
 
 .past-score-cards {
