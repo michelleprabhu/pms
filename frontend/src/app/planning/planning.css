@@ -280,6 +280,15 @@
   color: #8B2E3E;
 }
 
+.planning-icon {
+  margin-right: 2px;
+}
+
+.planning-stat-text {
+  font-size: 14px;
+  color: #4b5563;
+}
+
 .period-progress {
   margin-bottom: 20px;
 }
