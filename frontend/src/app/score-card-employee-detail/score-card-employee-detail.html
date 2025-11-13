@@ -179,9 +179,11 @@
                     {{ activeScoreCard.status }}
                   </span>
                 </div>
-                <button class="btn-view-details-primary" (click)="viewScoreCardDetails(activeScoreCard.id)">
-                  View Details <i class="fas fa-arrow-right"></i>
-                </button>
+                <div class="score-card-actions">
+                  <button class="btn-view-details-primary" (click)="viewScoreCardDetails(activeScoreCard.id)">
+                    View Details <i class="fas fa-arrow-right"></i>
+                  </button>
+                </div>
               </div>
               <div *ngIf="!activeScoreCard" class="no-data">
                 <i class="fas fa-clipboard"></i>
