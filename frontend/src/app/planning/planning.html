@@ -69,8 +69,15 @@
       <!-- Active Review Periods -->
       <div class="review-periods-section">
         <h2 class="section-heading">Active Review Periods</h2>
+        
+        <!-- Info Note -->
+        <div class="info-note">
+          <i class="fas fa-info-circle"></i>
+          <span>Note: Clicking "Start Planning" will automatically generate blank score cards for all employees matching the selected eligibility criteria.</span>
+        </div>
+
         <div class="periods-grid">
-          <div class="period-card" *ngFor="let period of activeReviewPeriods" (click)="viewPlanningEmployees(period.id)">
+          <div class="period-card" *ngFor="let period of activeReviewPeriods">
             <div class="period-header">
               <h3 class="period-name">{{ period.name }}</h3>
               <span class="status-badge active">{{ period.status }}</span>
@@ -85,8 +92,8 @@
                 <span>{{ period.employeeCount }} Employees</span>
               </div>
             </div>
-            <button class="btn-view-employees">
-              View Employees <i class="fas fa-arrow-right"></i>
+            <button class="btn-start-planning" (click)="openStartPlanningModal(period)">
+              Start Planning
             </button>
           </div>
         </div>
@@ -126,6 +133,163 @@
           </table>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- Start Planning Modal -->
+  <div class="modal-overlay" *ngIf="showStartPlanningModal" (click)="closeStartPlanningModal()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <div>
+          <h2 class="modal-title">Start Planning - {{ selectedPeriod?.name }}</h2>
+          <p class="modal-subtitle">Select eligibility profiles to generate score cards</p>
+        </div>
+        <button class="btn-close" (click)="closeStartPlanningModal()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <!-- Modal Content -->
+      <div class="modal-content">
+        <!-- Section 1: Eligibility Profile Selection -->
+        <div class="modal-section">
+          <h3 class="section-heading">Available Eligibility Profiles</h3>
+          
+          <div class="table-wrapper">
+            <table class="profiles-table">
+              <thead>
+                <tr>
+                  <th class="checkbox-column">Select</th>
+                  <th>Profile Name</th>
+                  <th>Description</th>
+                  <th>Department</th>
+                  <th>Position Criteria</th>
+                  <th>Goals %</th>
+                  <th>Comp %</th>
+                  <th>Values %</th>
+                  <th>Matching Employees</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let profile of eligibilityProfiles" 
+                    [class.selected]="profile.selected"
+                    (click)="toggleProfileSelection(profile)">
+                  <td class="checkbox-cell">
+                    <div class="custom-checkbox">
+                      <i class="fas fa-check" *ngIf="profile.selected"></i>
+                    </div>
+                  </td>
+                  <td>{{ profile.name }}</td>
+                  <td>{{ profile.description }}</td>
+                  <td>{{ profile.department }}</td>
+                  <td>{{ profile.positionCriteria }}</td>
+                  <td>{{ profile.goalsWeightage }}</td>
+                  <td>{{ profile.competenciesWeightage }}</td>
+                  <td>{{ profile.valuesWeightage }}</td>
+                  <td><strong>{{ profile.matchingEmployees }}</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Section 2: Weightage Configuration -->
+        <div class="modal-section">
+          <h3 class="section-heading">Performance Weightage Distribution</h3>
+          <p class="section-subtitle">(Applies to all selected employees)</p>
+          
+          <div class="weightage-container">
+            <div class="weightage-row">
+              <label class="weightage-label">Goals:</label>
+              <input type="number" class="weightage-input" [(ngModel)]="weightageConfig.goals" 
+                     (input)="calculateTotal()" min="0" max="100">
+              <span class="percentage-symbol">%</span>
+              <div class="progress-bar-container">
+                <div class="progress-bar goals" [style.width.%]="weightageConfig.goals"></div>
+              </div>
+            </div>
+
+            <div class="weightage-row">
+              <label class="weightage-label">Competencies:</label>
+              <input type="number" class="weightage-input" [(ngModel)]="weightageConfig.competencies" 
+                     (input)="calculateTotal()" min="0" max="100">
+              <span class="percentage-symbol">%</span>
+              <div class="progress-bar-container">
+                <div class="progress-bar competencies" [style.width.%]="weightageConfig.competencies"></div>
+              </div>
+            </div>
+
+            <div class="weightage-row">
+              <label class="weightage-label">Values:</label>
+              <input type="number" class="weightage-input" [(ngModel)]="weightageConfig.values" 
+                     (input)="calculateTotal()" min="0" max="100">
+              <span class="percentage-symbol">%</span>
+              <div class="progress-bar-container">
+                <div class="progress-bar values" [style.width.%]="weightageConfig.values"></div>
+              </div>
+            </div>
+
+            <div class="weightage-total" [class.valid]="totalWeightage === 100" [class.invalid]="totalWeightage !== 100">
+              <span class="total-label">Total:</span>
+              <span class="total-value">{{ totalWeightage }}%</span>
+              <i class="fas fa-check" *ngIf="totalWeightage === 100"></i>
+              <i class="fas fa-times" *ngIf="totalWeightage !== 100"></i>
+            </div>
+
+            <div class="validation-message" *ngIf="totalWeightage !== 100">
+              <i class="fas fa-exclamation-triangle"></i>
+              <span>Weightages must total 100%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3: Selection Summary -->
+        <div class="modal-section">
+          <div class="selection-summary">
+            <h3 class="summary-title">Selection Summary</h3>
+            <div class="summary-item">
+              <span>Selected Profiles:</span>
+              <strong>{{ getSelectedProfilesCount() }}</strong>
+            </div>
+            <div class="summary-item">
+              <span>Total Employees:</span>
+              <strong>{{ getTotalEmployees() }} employees</strong>
+            </div>
+            <div class="summary-item">
+              <span>Score Cards to Generate:</span>
+              <strong>{{ getTotalEmployees() }}</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <button class="btn-cancel" (click)="closeStartPlanningModal()">Cancel</button>
+        <button class="btn-generate" 
+                [disabled]="!canGenerate()" 
+                [class.loading]="isGenerating"
+                (click)="generateScoreCards()"
+                [title]="getGenerateButtonTooltip()">
+          <span *ngIf="!isGenerating">Generate Score Cards</span>
+          <span *ngIf="isGenerating">
+            <i class="fas fa-spinner fa-spin"></i> Generating...
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Notification Popup -->
+  <div class="success-overlay" *ngIf="showSuccessPopup">
+    <div class="success-popup">
+      <div class="success-icon">
+        <i class="fas fa-check"></i>
+      </div>
+      <h2 class="success-title">Success!</h2>
+      <p class="success-message">Score cards have been generated for {{ getTotalEmployees() }} employees.</p>
+      <button class="btn-ok" (click)="closeSuccessPopup()">OK</button>
     </div>
   </div>
 </div>

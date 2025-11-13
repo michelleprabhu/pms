@@ -499,6 +499,76 @@
   color: #374151;
 }
 
+/* Weightage Summary Card */
+.weightage-summary-card {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.weightage-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 20px 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.weightage-display-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.weightage-display-row:last-child {
+  margin-bottom: 0;
+}
+
+.weightage-display-label {
+  width: 150px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.weightage-display-percent {
+  width: 60px;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: right;
+  color: #1a1a1a;
+}
+
+.weightage-progress-container {
+  flex: 1;
+  height: 24px;
+  background-color: #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-left: 16px;
+}
+
+.weightage-progress-bar {
+  height: 100%;
+  border-radius: 12px;
+  transition: width 0.3s ease;
+}
+
+.weightage-progress-bar.goals-bar {
+  background-color: #8B2E3E;
+}
+
+.weightage-progress-bar.competencies-bar {
+  background-color: #2563eb;
+}
+
+.weightage-progress-bar.values-bar {
+  background-color: #16a34a;
+}
+
 /* Modal Styles */
 .modal-overlay {
   position: fixed;

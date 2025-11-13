@@ -688,6 +688,37 @@
   background-color: #b91c1c;
 }
 
+/* Tab Title with Badge */
+.tab-title-with-badge {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+/* Weightage Badges */
+.weightage-badge {
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  display: inline-block;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.weightage-badge.goals-badge {
+  background-color: #8B2E3E;
+}
+
+.weightage-badge.competencies-badge {
+  background-color: #2563eb;
+}
+
+.weightage-badge.values-badge {
+  background-color: #16a34a;
+}
+
 .no-goals-row {
   background-color: #f8f9fa;
 }

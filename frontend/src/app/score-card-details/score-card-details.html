@@ -111,7 +111,10 @@
         <div class="tabs-content">
           <!-- Goals Tab -->
           <div *ngIf="activeTab === 'goals'" class="tab-panel">
-            <h2 class="tab-title">Goals</h2>
+            <div class="tab-title-with-badge">
+              <h2 class="tab-title">Goals</h2>
+              <span class="weightage-badge goals-badge">Goals Weightage: 60%</span>
+            </div>
 
             <!-- Planning Progress Card (only shown during planning phase) -->
             <div *ngIf="isPlanningPhase()" class="planning-progress-card">
@@ -237,7 +240,10 @@
 
           <!-- Competencies Tab -->
           <div *ngIf="activeTab === 'competencies'" class="tab-panel">
-            <h2 class="tab-title">Competencies</h2>
+            <div class="tab-title-with-badge">
+              <h2 class="tab-title">Competencies</h2>
+              <span class="weightage-badge competencies-badge">Competencies Weightage: 25%</span>
+            </div>
             <div class="data-table-container">
               <table class="data-table">
                 <thead>
@@ -264,7 +270,10 @@
 
           <!-- Values Tab -->
           <div *ngIf="activeTab === 'values'" class="tab-panel">
-            <h2 class="tab-title">Values</h2>
+            <div class="tab-title-with-badge">
+              <h2 class="tab-title">Values</h2>
+              <span class="weightage-badge values-badge">Values Weightage: 15%</span>
+            </div>
             <div class="data-table-container">
               <table class="data-table">
                 <thead>
