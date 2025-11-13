@@ -77,11 +77,15 @@
             </div>
             <div class="period-stats">
               <div class="stat-item">
-                <i class="fas fa-users"></i>
-                <span>{{ period.employeeCount }} Employees</span>
+                <i class="fas fa-check-circle" style="color: #16a34a;"></i>
+                <span>{{ period.evaluationsCompleted }} Evaluations Completed</span>
+              </div>
+              <div class="stat-item">
+                <i class="fas fa-clock" style="color: #f59e0b;"></i>
+                <span>{{ period.evaluationsPending }} Evaluations Pending</span>
               </div>
             </div>
-            <button class="btn-view-employees">
+            <button class="btn-view-employees" (click)="viewPeriodEvaluations(period.id)">
               View Employees <i class="fas fa-arrow-right"></i>
             </button>
           </div>
