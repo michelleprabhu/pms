@@ -59,18 +59,6 @@ export class PlanningComponent {
 
   eligibilityProfiles: EligibilityProfile[] = [
     {
-      id: 1,
-      name: 'Executive Leadership Profile',
-      description: 'C-level executives and senior leadership team',
-      department: 'All',
-      positionCriteria: 'CEO|CFO|CTO|COO|VP|Vice President',
-      goalsWeightage: 40,
-      competenciesWeightage: 35,
-      valuesWeightage: 25,
-      matchingEmployees: 8,
-      selected: false
-    },
-    {
       id: 2,
       name: 'Manager Profile',
       description: 'All employees in managerial positions across departments',
@@ -276,22 +264,8 @@ export class PlanningComponent {
       .reduce((total, profile) => total + profile.matchingEmployees, 0);
   }
 
-  canGenerate(): boolean {
-    return this.getSelectedProfilesCount() > 0 && this.totalWeightage === 100 && !this.isGenerating;
-  }
-
-  getGenerateButtonTooltip(): string {
-    if (this.getSelectedProfilesCount() === 0) {
-      return 'Select at least one profile';
-    }
-    if (this.totalWeightage !== 100) {
-      return 'Weightages must total 100%';
-    }
-    return '';
-  }
-
   generateScoreCards() {
-    if (!this.canGenerate()) {
+    if (this.getSelectedProfilesCount() === 0) {
       return;
     }
 

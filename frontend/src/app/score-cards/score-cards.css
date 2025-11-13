@@ -803,6 +803,176 @@ textarea.form-control {
   }
 }
 
+/* Review Periods Section */
+.review-periods-section {
+  margin-bottom: 40px;
+}
+
+.section-heading {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 20px 0;
+}
+
+/* Periods Grid for Active */
+.periods-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 24px;
+}
+
+.period-card {
+  background: white;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 24px;
+  transition: all 0.3s ease;
+}
+
+.period-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: #8B2E3E;
+}
+
+.period-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.period-name {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.status-badge.active {
+  background-color: #d1fae5;
+  color: #065f46;
+  padding: 6px 14px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-badge.completed {
+  background-color: #dbeafe;
+  color: #1e40af;
+  padding: 6px 14px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.period-dates {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.period-dates i {
+  color: #8B2E3E;
+}
+
+.period-stats {
+  margin-bottom: 16px;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #666;
+  font-size: 14px;
+}
+
+.stat-item i {
+  color: #8B2E3E;
+}
+
+.btn-view-scorecards {
+  width: 100%;
+  padding: 10px 24px;
+  background-color: #8B2E3E;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-align: center;
+}
+
+.btn-view-scorecards:hover {
+  background-color: #6b1f2e;
+}
+
+/* Periods Table for Completed */
+.periods-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.periods-table thead {
+  background-color: #fafafa;
+}
+
+.periods-table th {
+  text-align: left;
+  padding: 14px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.periods-table td {
+  padding: 14px 16px;
+  font-size: 14px;
+  color: #333;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.periods-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.periods-table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.btn-view {
+  padding: 6px 16px;
+  background-color: white;
+  color: #8B2E3E;
+  border: 1px solid #8B2E3E;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-view:hover {
+  background-color: #8B2E3E;
+  color: white;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .content {

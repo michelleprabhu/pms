@@ -165,9 +165,6 @@
                   <th>Description</th>
                   <th>Department</th>
                   <th>Position Criteria</th>
-                  <th>Goals %</th>
-                  <th>Comp %</th>
-                  <th>Values %</th>
                   <th>Matching Employees</th>
                 </tr>
               </thead>
@@ -184,9 +181,6 @@
                   <td>{{ profile.description }}</td>
                   <td>{{ profile.department }}</td>
                   <td>{{ profile.positionCriteria }}</td>
-                  <td>{{ profile.goalsWeightage }}</td>
-                  <td>{{ profile.competenciesWeightage }}</td>
-                  <td>{{ profile.valuesWeightage }}</td>
                   <td><strong>{{ profile.matchingEmployees }}</strong></td>
                 </tr>
               </tbody>
@@ -194,57 +188,7 @@
           </div>
         </div>
 
-        <!-- Section 2: Weightage Configuration -->
-        <div class="modal-section">
-          <h3 class="section-heading">Performance Weightage Distribution</h3>
-          <p class="section-subtitle">(Applies to all selected employees)</p>
-          
-          <div class="weightage-container">
-            <div class="weightage-row">
-              <label class="weightage-label">Goals:</label>
-              <input type="number" class="weightage-input" [(ngModel)]="weightageConfig.goals" 
-                     (input)="calculateTotal()" min="0" max="100">
-              <span class="percentage-symbol">%</span>
-              <div class="progress-bar-container">
-                <div class="progress-bar goals" [style.width.%]="weightageConfig.goals"></div>
-              </div>
-            </div>
-
-            <div class="weightage-row">
-              <label class="weightage-label">Competencies:</label>
-              <input type="number" class="weightage-input" [(ngModel)]="weightageConfig.competencies" 
-                     (input)="calculateTotal()" min="0" max="100">
-              <span class="percentage-symbol">%</span>
-              <div class="progress-bar-container">
-                <div class="progress-bar competencies" [style.width.%]="weightageConfig.competencies"></div>
-              </div>
-            </div>
-
-            <div class="weightage-row">
-              <label class="weightage-label">Values:</label>
-              <input type="number" class="weightage-input" [(ngModel)]="weightageConfig.values" 
-                     (input)="calculateTotal()" min="0" max="100">
-              <span class="percentage-symbol">%</span>
-              <div class="progress-bar-container">
-                <div class="progress-bar values" [style.width.%]="weightageConfig.values"></div>
-              </div>
-            </div>
-
-            <div class="weightage-total" [class.valid]="totalWeightage === 100" [class.invalid]="totalWeightage !== 100">
-              <span class="total-label">Total:</span>
-              <span class="total-value">{{ totalWeightage }}%</span>
-              <i class="fas fa-check" *ngIf="totalWeightage === 100"></i>
-              <i class="fas fa-times" *ngIf="totalWeightage !== 100"></i>
-            </div>
-
-            <div class="validation-message" *ngIf="totalWeightage !== 100">
-              <i class="fas fa-exclamation-triangle"></i>
-              <span>Weightages must total 100%</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Section 3: Selection Summary -->
+        <!-- Section 2: Selection Summary -->
         <div class="modal-section">
           <div class="selection-summary">
             <h3 class="summary-title">Selection Summary</h3>
@@ -268,10 +212,9 @@
       <div class="modal-footer">
         <button class="btn-cancel" (click)="closeStartPlanningModal()">Cancel</button>
         <button class="btn-generate" 
-                [disabled]="!canGenerate()" 
+                [disabled]="getSelectedProfilesCount() === 0" 
                 [class.loading]="isGenerating"
-                (click)="generateScoreCards()"
-                [title]="getGenerateButtonTooltip()">
+                (click)="generateScoreCards()">
           <span *ngIf="!isGenerating">Generate Score Cards</span>
           <span *ngIf="isGenerating">
             <i class="fas fa-spinner fa-spin"></i> Generating...

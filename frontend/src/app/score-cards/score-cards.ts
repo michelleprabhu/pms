@@ -10,6 +10,15 @@ interface ScoreCard {
   approvalStatus: string;
 }
 
+interface ReviewPeriod {
+  id: number;
+  name: string;
+  startDate: string;
+  endDate: string;
+  status: string;
+  employeeCount: number;
+}
+
 @Component({
   selector: 'app-score-cards',
   imports: [CommonModule, FormsModule],
@@ -18,6 +27,16 @@ interface ScoreCard {
 })
 export class ScoreCards {
   isSidebarCollapsed = false;
+
+  activeReviewPeriods: ReviewPeriod[] = [
+    { id: 1, name: 'Q1 2025', startDate: 'Jan 1, 2025', endDate: 'Mar 31, 2025', status: 'Active', employeeCount: 50 }
+  ];
+
+  completedReviewPeriods: ReviewPeriod[] = [
+    { id: 2, name: 'Q1 2024', startDate: 'Jan 1, 2024', endDate: 'Mar 31, 2024', status: 'Completed', employeeCount: 248 },
+    { id: 3, name: 'Q1 2023', startDate: 'Jan 1, 2023', endDate: 'Mar 31, 2023', status: 'Completed', employeeCount: 240 },
+    { id: 4, name: 'Q1 2022', startDate: 'Jan 1, 2022', endDate: 'Mar 31, 2022', status: 'Completed', employeeCount: 235 }
+  ];
   
   scoreCards: ScoreCard[] = [
     // Q1 2025 - Planning Phase
@@ -109,6 +128,10 @@ export class ScoreCards {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     this.router.navigate(['/login']);
+  }
+
+  viewScoreCardsByPeriod(periodId: number) {
+    this.router.navigate(['/score-cards/list'], { queryParams: { periodId: periodId } });
   }
 
   getInitials(name: string): string {
