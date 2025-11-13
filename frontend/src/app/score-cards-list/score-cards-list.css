@@ -1,5 +1,5 @@
 /* Base styles - consistent with HR dashboard */
-.dashboard-container {
+.page-container {
   display: flex;
   height: 100vh;
   background-color: #fafafa;

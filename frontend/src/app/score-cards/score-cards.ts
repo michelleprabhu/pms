@@ -33,9 +33,9 @@ export class ScoreCards {
   ];
 
   completedReviewPeriods: ReviewPeriod[] = [
-    { id: 2, name: 'Q1 2024', startDate: 'Jan 1, 2024', endDate: 'Mar 31, 2024', status: 'Completed', employeeCount: 248 },
-    { id: 3, name: 'Q1 2023', startDate: 'Jan 1, 2023', endDate: 'Mar 31, 2023', status: 'Completed', employeeCount: 240 },
-    { id: 4, name: 'Q1 2022', startDate: 'Jan 1, 2022', endDate: 'Mar 31, 2022', status: 'Completed', employeeCount: 235 }
+    { id: 2, name: 'Q4 2024', startDate: 'Oct 1, 2024', endDate: 'Dec 31, 2024', status: 'Completed', employeeCount: 248 },
+    { id: 3, name: 'Q3 2024', startDate: 'Jul 1, 2024', endDate: 'Sep 30, 2024', status: 'Completed', employeeCount: 240 },
+    { id: 4, name: 'Q2 2024', startDate: 'Apr 1, 2024', endDate: 'Jun 30, 2024', status: 'Completed', employeeCount: 235 }
   ];
   
   scoreCards: ScoreCard[] = [

@@ -501,26 +501,26 @@
 
 /* Weightage Summary Card */
 .weightage-summary-card {
-  background-color: #f8fafc;
+  background-color: #fff;
   border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  padding: 24px;
-  margin-bottom: 24px;
+  border-radius: 6px;
+  padding: 16px;
+  margin-bottom: 20px;
 }
 
 .weightage-title {
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 600;
   color: #1a1a1a;
-  margin: 0 0 20px 0;
-  padding-bottom: 12px;
+  margin: 0 0 12px 0;
+  padding-bottom: 8px;
   border-bottom: 1px solid #e2e8f0;
 }
 
 .weightage-display-row {
   display: flex;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 
 .weightage-display-row:last-child {
@@ -528,15 +528,15 @@
 }
 
 .weightage-display-label {
-  width: 150px;
-  font-size: 16px;
+  width: 110px;
+  font-size: 13px;
   font-weight: 500;
   color: #374151;
 }
 
 .weightage-display-percent {
-  width: 60px;
-  font-size: 16px;
+  width: 45px;
+  font-size: 13px;
   font-weight: 700;
   text-align: right;
   color: #1a1a1a;
@@ -544,16 +544,16 @@
 
 .weightage-progress-container {
   flex: 1;
-  height: 24px;
-  background-color: #e2e8f0;
-  border-radius: 12px;
+  height: 18px;
+  background-color: #f3f4f6;
+  border-radius: 9px;
   overflow: hidden;
-  margin-left: 16px;
+  margin-left: 12px;
 }
 
 .weightage-progress-bar {
   height: 100%;
-  border-radius: 12px;
+  border-radius: 9px;
   transition: width 0.3s ease;
 }
 
@@ -562,11 +562,11 @@
 }
 
 .weightage-progress-bar.competencies-bar {
-  background-color: #2563eb;
+  background-color: #8B2E3E;
 }
 
 .weightage-progress-bar.values-bar {
-  background-color: #16a34a;
+  background-color: #8B2E3E;
 }
 
 /* Modal Styles */
