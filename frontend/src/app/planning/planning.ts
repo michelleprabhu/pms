@@ -318,5 +318,11 @@ export class PlanningComponent {
     this.showGeneratedEmployees = false;
     this.generatedEmployees = [];
   }
+
+  startScoreCardProcess() {
+    this.showGeneratedEmployees = false;
+    this.generatedEmployees = [];
+    this.router.navigate(['/score-cards/list'], { queryParams: { periodId: 1 } });
+  }
 }
 

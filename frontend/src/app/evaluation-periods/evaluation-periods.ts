@@ -9,6 +9,8 @@ interface ReviewPeriod {
   endDate: string;
   status: string;
   employeeCount: number;
+  evaluationsCompleted?: number;
+  evaluationsPending?: number;
 }
 
 @Component({
@@ -22,8 +24,7 @@ export class EvaluationPeriodsComponent {
   isSidebarCollapsed = false;
 
   activeReviewPeriods: ReviewPeriod[] = [
-    { id: 1, name: 'Q4 2024', startDate: 'Oct 1, 2024', endDate: 'Dec 31, 2024', status: 'Active', employeeCount: 15 },
-    { id: 2, name: 'Annual 2024', startDate: 'Jan 1, 2024', endDate: 'Dec 31, 2024', status: 'Active', employeeCount: 248 }
+    { id: 1, name: 'Q1 2025', startDate: 'Jan 1, 2025', endDate: 'Mar 31, 2025', status: 'Active', employeeCount: 14, evaluationsCompleted: 7, evaluationsPending: 7 }
   ];
 
   completedReviewPeriods: ReviewPeriod[] = [
