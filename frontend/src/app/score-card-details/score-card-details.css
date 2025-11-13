@@ -510,7 +510,7 @@
 }
 
 .badge-manager {
-  background-color: #2563eb;
+  background-color: #1e3a8a;
   color: white;
   padding: 4px 10px;
   border-radius: 12px;
@@ -520,7 +520,7 @@
 }
 
 .badge-employee {
-  background-color: #16a34a;
+  background-color: #1a1a1a;
   color: white;
   padding: 4px 10px;
   border-radius: 12px;
@@ -539,11 +539,11 @@
 }
 
 .goal-row-manager {
-  background-color: #f0f8ff !important;
+  background-color: #e8eef7 !important;
 }
 
 .goal-row-employee {
-  background-color: #f0fff4 !important;
+  background-color: #f5f5f5 !important;
 }
 
 .goal-row-hr:hover {
@@ -551,11 +551,11 @@
 }
 
 .goal-row-manager:hover {
-  background-color: #e0f0ff !important;
+  background-color: #d6e0f0 !important;
 }
 
 .goal-row-employee:hover {
-  background-color: #e0ffe0 !important;
+  background-color: #e5e5e5 !important;
 }
 
 /* Planning Discussion */
@@ -712,11 +712,11 @@
 }
 
 .weightage-badge.competencies-badge {
-  background-color: #2563eb;
+  background-color: #8B2E3E;
 }
 
 .weightage-badge.values-badge {
-  background-color: #16a34a;
+  background-color: #8B2E3E;
 }
 
 /* Weightage Compact Card */

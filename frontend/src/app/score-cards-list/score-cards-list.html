@@ -64,28 +64,25 @@
 
     <!-- Page Content -->
     <div class="page-content">
+      <button class="btn-back" (click)="backToReviewPeriods()">
+        <i class="fas fa-arrow-left"></i> Back to Review Periods
+      </button>
+
       <div class="page-header">
-        <button class="btn-back" (click)="backToReviewPeriods()">
-          <i class="fas fa-arrow-left"></i> Back to Review Periods
-        </button>
-        <h1 class="page-title">Active Score Cards - {{ reviewPeriodName }}</h1>
+        <h2>Active Score Cards - {{ reviewPeriodName }}</h2>
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input 
+            type="text" 
+            placeholder="Search employees..." 
+            [(ngModel)]="searchQuery"
+          />
+        </div>
       </div>
 
-      <!-- Search Bar -->
-      <div class="search-bar">
-        <i class="fas fa-search"></i>
-        <input 
-          type="text" 
-          [(ngModel)]="searchQuery" 
-          placeholder="Search employees by name..."
-          class="search-input"
-        />
-      </div>
-
-      <!-- Employees Table -->
       <div class="table-section">
         <div class="table-container">
-          <table class="employees-table">
+          <table class="data-table">
             <thead>
               <tr>
                 <th>S.No</th>
