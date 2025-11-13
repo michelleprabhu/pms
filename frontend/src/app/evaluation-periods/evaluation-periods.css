@@ -280,6 +280,36 @@
   color: #8B2E3E;
 }
 
+.period-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: #666;
+}
+
+.stat-text {
+  font-size: 13px;
+  color: #4b5563;
+}
+
+.evaluation-icon-completed {
+  color: #059669 !important;
+  margin-right: 2px;
+}
+
+.evaluation-icon-pending {
+  color: #d97706 !important;
+  margin-right: 2px;
+}
+
 .period-progress {
   margin-bottom: 20px;
 }
