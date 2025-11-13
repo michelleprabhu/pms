@@ -887,3 +887,37 @@
   background-color: #6b1f2e;
 }
 
+/* Generated Employees Modal */
+.modal-container-large {
+  width: 1400px;
+  max-width: 95vw;
+  max-height: 90vh;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.generated-employees-table {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.percentage-cell {
+  text-align: center;
+  font-weight: 600;
+  color: #666;
+}
+
+.status-plan-not-started {
+  background-color: #f3f4f6;
+  color: #374151;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+

@@ -84,7 +84,7 @@ export class ScoreCardsListComponent implements OnInit {
   }
 
   viewScoreCardDetail(employeeId: number) {
-    this.router.navigate(['/score-card-details'], { queryParams: { id: employeeId } });
+    this.router.navigate(['/score-cards/employee-detail', employeeId], { queryParams: { periodId: this.periodId } });
   }
 
   get filteredEmployees() {

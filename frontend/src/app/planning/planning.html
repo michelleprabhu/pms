@@ -224,15 +224,60 @@
     </div>
   </div>
 
-  <!-- Success Notification Popup -->
-  <div class="success-overlay" *ngIf="showSuccessPopup">
-    <div class="success-popup">
-      <div class="success-icon">
-        <i class="fas fa-check"></i>
+  <!-- Generated Employees Modal -->
+  <div class="modal-overlay" *ngIf="showGeneratedEmployees" (click)="closeGeneratedEmployees()">
+    <div class="modal-container-large" (click)="$event.stopPropagation()">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <div>
+          <h2 class="modal-title">Score Cards Generated Successfully</h2>
+          <p class="modal-subtitle">{{ generatedEmployees.length }} blank score cards have been created</p>
+        </div>
+        <button class="btn-close" (click)="closeGeneratedEmployees()">
+          <i class="fas fa-times"></i>
+        </button>
       </div>
-      <h2 class="success-title">Success!</h2>
-      <p class="success-message">Score cards have been generated for {{ getTotalEmployees() }} employees.</p>
-      <button class="btn-ok" (click)="closeSuccessPopup()">OK</button>
+
+      <!-- Modal Content -->
+      <div class="modal-content">
+        <div class="generated-employees-table">
+          <table class="profiles-table">
+            <thead>
+              <tr>
+                <th>S.No</th>
+                <th>Employee Name</th>
+                <th>Department</th>
+                <th>Position</th>
+                <th>Goals</th>
+                <th>Competencies</th>
+                <th>Values</th>
+                <th>Score Card Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let employee of generatedEmployees; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ employee.name }}</td>
+                <td>{{ employee.department }}</td>
+                <td>{{ employee.position }}</td>
+                <td class="percentage-cell">0%</td>
+                <td class="percentage-cell">0%</td>
+                <td class="percentage-cell">0%</td>
+                <td>
+                  <span class="status-badge status-plan-not-started">Plan Not Started</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <button class="btn-generate" (click)="closeGeneratedEmployees()">
+          Close
+        </button>
+      </div>
     </div>
   </div>
 </div>

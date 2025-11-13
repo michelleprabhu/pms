@@ -25,6 +25,12 @@ interface EligibilityProfile {
   selected?: boolean;
 }
 
+interface GeneratedEmployee {
+  name: string;
+  department: string;
+  position: string;
+}
+
 @Component({
   selector: 'app-planning',
   standalone: true,
@@ -36,6 +42,7 @@ export class PlanningComponent {
   isSidebarCollapsed = false;
   showStartPlanningModal = false;
   showSuccessPopup = false;
+  showGeneratedEmployees = false;
   isGenerating = false;
   selectedPeriod: ReviewPeriod | null = null;
   totalWeightage = 100;
@@ -45,6 +52,8 @@ export class PlanningComponent {
     competencies: 25,
     values: 15
   };
+
+  generatedEmployees: GeneratedEmployee[] = [];
 
   activeReviewPeriods: ReviewPeriod[] = [
     { id: 1, name: 'Q1 2025', startDate: 'Jan 1, 2025', endDate: 'Mar 31, 2025', status: 'Active', employeeCount: 50 }
@@ -275,17 +284,39 @@ export class PlanningComponent {
     setTimeout(() => {
       this.isGenerating = false;
       this.closeStartPlanningModal();
-      this.showSuccessPopup = true;
-
-      // Auto-dismiss after 3 seconds
-      setTimeout(() => {
-        this.closeSuccessPopup();
-      }, 3000);
+      
+      // Generate mock employee data
+      this.generatedEmployees = this.generateMockEmployees();
+      this.showGeneratedEmployees = true;
     }, 2000);
+  }
+
+  generateMockEmployees(): GeneratedEmployee[] {
+    const mockEmployees: GeneratedEmployee[] = [
+      { name: 'John Doe', department: 'Engineering', position: 'Senior Software Engineer' },
+      { name: 'Jane Smith', department: 'Engineering', position: 'Product Manager' },
+      { name: 'Mike Johnson', department: 'Sales', position: 'Sales Manager' },
+      { name: 'Sarah Williams', department: 'HR', position: 'HR Manager' },
+      { name: 'Robert Brown', department: 'Engineering', position: 'Software Engineer' },
+      { name: 'Emily Davis', department: 'Marketing', position: 'Marketing Director' },
+      { name: 'James Wilson', department: 'Finance', position: 'Financial Analyst' },
+      { name: 'Linda Martinez', department: 'Operations', position: 'Operations Manager' },
+      { name: 'David Garcia', department: 'Engineering', position: 'Tech Lead' },
+      { name: 'Jennifer Lopez', department: 'Sales', position: 'Account Executive' },
+      { name: 'William Taylor', department: 'Engineering', position: 'DevOps Engineer' },
+      { name: 'Elizabeth Anderson', department: 'Marketing', position: 'Content Manager' }
+    ];
+    
+    return mockEmployees.slice(0, this.getTotalEmployees());
   }
 
   closeSuccessPopup() {
     this.showSuccessPopup = false;
+  }
+
+  closeGeneratedEmployees() {
+    this.showGeneratedEmployees = false;
+    this.generatedEmployees = [];
   }
 }
 

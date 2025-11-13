@@ -24,6 +24,7 @@ import { PlanningComponent } from './planning/planning';
 import { PlanningEmployeesComponent } from './planning-employees/planning-employees';
 import { PlanningEmployeeDetailComponent } from './planning-employee-detail/planning-employee-detail';
 import { ScoreCardsListComponent } from './score-cards-list/score-cards-list';
+import { ScoreCardEmployeeDetailComponent } from './score-card-employee-detail/score-card-employee-detail';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -35,6 +36,7 @@ export const routes: Routes = [
   { path: 'planning/employee-detail/:id', component: PlanningEmployeeDetailComponent },
   { path: 'score-cards', component: ScoreCards },
   { path: 'score-cards/list', component: ScoreCardsListComponent },
+  { path: 'score-cards/employee-detail/:id', component: ScoreCardEmployeeDetailComponent },
   { path: 'score-card-details', component: ScoreCardDetails },
   { path: 'evaluation-periods', component: EvaluationPeriodsComponent },
   { path: 'evaluation', component: EvaluationComponent },
