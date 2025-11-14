@@ -1,10 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+
+interface ScoreCard {
+  employeeName: string;
+  reviewPeriod: string;
+  createdOn: string;
+  createdBy: string;
+  status: string;
+}
 
 interface Goal {
+  id: number;
   name: string;
-  type: string;
   description: string;
   successCriteria: string;
   status: string;
@@ -12,6 +21,7 @@ interface Goal {
   reviewPeriod: string;
   startDate: string;
   endDate: string;
+  addedBy: 'HR' | 'Manager' | 'Employee';
 }
 
 interface Competency {
@@ -26,9 +36,16 @@ interface Value {
   description: string;
 }
 
+interface PlanningComment {
+  id: number;
+  role: 'HR' | 'Manager' | 'Employee';
+  text: string;
+  timestamp: Date;
+}
+
 @Component({
   selector: 'app-employee-score-card-details',
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './employee-score-card-details.html',
   styleUrl: './employee-score-card-details.css',
 })
@@ -36,68 +53,91 @@ export class EmployeeScoreCardDetailsComponent implements OnInit {
   isSidebarCollapsed = false;
   activeTab: string = 'goals';
   employeeName = 'Sarah Johnson';
-  scoreCardId: number = 1;
-  reviewPeriod: string = 'Q4 2024';
-  assignedBy: string = 'HR Admin';
-  startDate: string = 'Oct 1, 2024';
-  endDate: string = 'Dec 31, 2024';
-  status: string = 'Active';
+  scoreCard: ScoreCard | null = null;
+  newComment: string = '';
+  periodId: number = 1;
+  
+  planningComments: PlanningComment[] = [
+    {
+      id: 1,
+      role: 'HR',
+      text: 'Please ensure all goals are measurable and aligned with company objectives.',
+      timestamp: new Date('2025-01-05T10:30:00')
+    },
+    {
+      id: 2,
+      role: 'Manager',
+      text: 'I will add team collaboration goals by end of this week.',
+      timestamp: new Date('2025-01-06T14:20:00')
+    },
+    {
+      id: 3,
+      role: 'Employee',
+      text: 'Thank you! I will review and add my personal development goals by tomorrow.',
+      timestamp: new Date('2025-01-07T09:15:00')
+    }
+  ];
   
   goals: Goal[] = [
     {
+      id: 1,
       name: 'Increase Sales Revenue',
-      type: 'Personal Goal',
       description: 'Achieve 20% growth in quarterly sales',
       successCriteria: 'Revenue increases by $500K and meets or exceeds 20% growth target with documented customer acquisitions',
       status: 'In Progress',
-      weight: 30,
-      reviewPeriod: 'Q4 2024',
-      startDate: 'Oct 1, 2024',
-      endDate: 'Dec 31, 2024'
+      weight: 20,
+      reviewPeriod: 'Q1 2025',
+      startDate: 'Jan 1, 2025',
+      endDate: 'Mar 31, 2025',
+      addedBy: 'HR'
     },
     {
+      id: 2,
       name: 'Improve Customer Satisfaction',
-      type: 'Personal Goal',
       description: 'Increase CSAT score to 4.5/5',
       successCriteria: 'CSAT survey results show consistent scores of 4.5 or higher across all customer touchpoints for 3 consecutive months',
       status: 'In Progress',
-      weight: 25,
-      reviewPeriod: 'Q4 2024',
-      startDate: 'Oct 1, 2024',
-      endDate: 'Dec 31, 2024'
-    },
-    {
-      name: 'Complete Product Launch',
-      type: 'Personal Goal',
-      description: 'Successfully launch new product line',
-      successCriteria: 'Product is live in production, all features are functional, user documentation is published, and 100+ active users within first month',
-      status: 'Not Started',
       weight: 20,
-      reviewPeriod: 'Q4 2024',
-      startDate: 'Oct 15, 2024',
-      endDate: 'Dec 31, 2024'
+      reviewPeriod: 'Q1 2025',
+      startDate: 'Jan 1, 2025',
+      endDate: 'Mar 31, 2025',
+      addedBy: 'HR'
     },
     {
-      name: 'Team Development',
-      type: 'Development Goal',
-      description: 'Conduct training sessions for team members',
-      successCriteria: 'Complete 8 training sessions with 90%+ attendance and positive feedback scores above 4/5 from participants',
+      id: 3,
+      name: 'Complete Team Code Review Process',
+      description: 'Implement and lead team code review sessions',
+      successCriteria: 'Conduct weekly code reviews with documented feedback and track improvement metrics',
       status: 'In Progress',
       weight: 15,
-      reviewPeriod: 'Q4 2024',
-      startDate: 'Oct 1, 2024',
-      endDate: 'Dec 15, 2024'
+      reviewPeriod: 'Q1 2025',
+      startDate: 'Jan 1, 2025',
+      endDate: 'Mar 31, 2025',
+      addedBy: 'HR'
     },
     {
-      name: 'Process Improvement',
-      type: 'Development Goal',
-      description: 'Streamline workflow processes',
-      successCriteria: 'Process efficiency improved by 25%, documented procedures created, and team adoption rate of 80% or higher',
+      id: 4,
+      name: 'Mentor Junior Team Members',
+      description: 'Provide guidance and support to junior developers',
+      successCriteria: 'Conduct bi-weekly mentoring sessions and track progress of mentees',
+      status: 'In Progress',
+      weight: 15,
+      reviewPeriod: 'Q1 2025',
+      startDate: 'Jan 1, 2025',
+      endDate: 'Mar 31, 2025',
+      addedBy: 'Manager'
+    },
+    {
+      id: 5,
+      name: 'Learn New Technology Stack',
+      description: 'Complete training on React and TypeScript',
+      successCriteria: 'Build a demo project using React and TypeScript and present to team',
       status: 'Not Started',
-      weight: 10,
-      reviewPeriod: 'Q4 2024',
-      startDate: 'Nov 1, 2024',
-      endDate: 'Dec 31, 2024'
+      weight: 30,
+      reviewPeriod: 'Q1 2025',
+      startDate: 'Jan 15, 2025',
+      endDate: 'Mar 31, 2025',
+      addedBy: 'Employee'
     }
   ];
 
@@ -207,17 +247,17 @@ export class EmployeeScoreCardDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      this.scoreCardId = +params['id'] || 1;
-      // In a real application, you would fetch score card data based on this.scoreCardId
+      this.periodId = +params['periodId'] || 1;
     });
-  }
 
-  getTotalWeight(): number {
-    return this.goals.reduce((total, goal) => total + goal.weight, 0);
-  }
-
-  getGoalsByType(type: string): Goal[] {
-    return this.goals.filter(goal => goal.type === type);
+    // Initialize with mock data
+    this.scoreCard = {
+      employeeName: 'Sarah Johnson',
+      reviewPeriod: 'Q1 2025',
+      createdOn: 'Jan 1, 2025',
+      createdBy: 'HR Admin',
+      status: 'Planning in Progress'
+    };
   }
 
   toggleSidebar() {
@@ -232,10 +272,132 @@ export class EmployeeScoreCardDetailsComponent implements OnInit {
     this.router.navigate(['/employee-score-cards']);
   }
 
+  navigateToSelfEvaluation() {
+    this.router.navigate(['/employee-self-evaluation']);
+  }
+
+  navigateToMyScoreCard() {
+    this.router.navigate(['/employee-score-cards']);
+  }
+
+  navigateToRatings() {
+    this.router.navigate(['/employee-ratings']);
+  }
+
   signOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     this.router.navigate(['/login']);
   }
-}
 
+  // Employee-specific permission methods
+  canEditGoal(goal: Goal): boolean {
+    return goal.addedBy === 'Employee';
+  }
+
+  canDeleteGoal(goal: Goal): boolean {
+    return goal.addedBy === 'Employee';
+  }
+
+  isViewOnlyGoal(goal: Goal): boolean {
+    return goal.addedBy === 'HR' || goal.addedBy === 'Manager';
+  }
+
+  getGoalsByRole(role: 'HR' | 'Manager' | 'Employee'): Goal[] {
+    return this.goals.filter(goal => goal.addedBy === role);
+  }
+
+  getGoalsWeightByRole(role: 'HR' | 'Manager' | 'Employee'): number {
+    return this.goals
+      .filter(goal => goal.addedBy === role)
+      .reduce((sum, goal) => sum + goal.weight, 0);
+  }
+
+  getTotalWeight(): number {
+    return this.goals.reduce((sum, goal) => sum + goal.weight, 0);
+  }
+
+  getRoleBadgeClass(role: 'HR' | 'Manager' | 'Employee'): string {
+    switch (role) {
+      case 'HR':
+        return 'badge-hr';
+      case 'Manager':
+        return 'badge-manager';
+      case 'Employee':
+        return 'badge-employee';
+      default:
+        return '';
+    }
+  }
+
+  getGoalRowClass(role: 'HR' | 'Manager' | 'Employee'): string {
+    switch (role) {
+      case 'HR':
+        return 'goal-row-hr';
+      case 'Manager':
+        return 'goal-row-manager';
+      case 'Employee':
+        return 'goal-row-employee';
+      default:
+        return '';
+    }
+  }
+
+  editGoal(goal: Goal) {
+    if (!this.canEditGoal(goal)) {
+      alert('You can only edit your own goals');
+      return;
+    }
+    console.log(`Employee editing goal: ${goal.name}`);
+    alert(`Edit functionality for "${goal.name}" would open a modal here`);
+  }
+
+  deleteGoal(goalId: number) {
+    const goal = this.goals.find(g => g.id === goalId);
+    if (goal && this.canDeleteGoal(goal)) {
+      if (confirm(`Are you sure you want to delete the goal "${goal.name}"?`)) {
+        this.goals = this.goals.filter(g => g.id !== goalId);
+        console.log(`Employee deleted goal: ${goal.name}`);
+        alert(`Goal "${goal.name}" deleted`);
+      }
+    } else {
+      alert('You can only delete your own goals');
+    }
+  }
+
+  isPlanningPhase(): boolean {
+    return this.scoreCard?.status?.includes('Plan') || this.scoreCard?.status?.includes('Planning') || false;
+  }
+
+  canSaveAndNotify(): boolean {
+    return this.getTotalWeight() === 100;
+  }
+
+  saveAndNotify() {
+    if (!this.canSaveAndNotify()) {
+      alert('Total weight must equal 100% before saving and notifying');
+      return;
+    }
+    console.log('Employee saving and notifying manager');
+    alert('Score card saved and notification sent to manager!');
+  }
+
+  openAddGoalModal() {
+    console.log('Opening Add Goal modal for employee');
+    alert('Add Goal modal would open here (implement modal in future iteration)');
+  }
+
+  addComment() {
+    if (this.newComment.trim()) {
+      const comment: PlanningComment = {
+        id: this.planningComments.length + 1,
+        role: 'Employee',
+        text: this.newComment.trim(),
+        timestamp: new Date()
+      };
+      this.planningComments.push(comment);
+      this.newComment = '';
+      console.log('Employee added comment:', comment);
+    }
+  }
+}
