@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
-interface ScoreCard {
+interface ReviewPeriod {
   id: number;
-  reviewPeriod: string;
-  assignedBy: string;
+  name: string;
   startDate: string;
   endDate: string;
   status: string;
@@ -13,7 +13,7 @@ interface ScoreCard {
 
 @Component({
   selector: 'app-employee-score-cards',
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './employee-score-cards.html',
   styleUrl: './employee-score-cards.css',
 })
@@ -21,16 +21,14 @@ export class EmployeeScoreCardsComponent {
   isSidebarCollapsed = false;
   employeeName = 'Sarah Johnson';
 
-  activeScoreCards: ScoreCard[] = [
-    { id: 1, reviewPeriod: 'Q4 2024', assignedBy: 'HR Admin', startDate: 'Oct 1, 2024', endDate: 'Dec 31, 2024', status: 'Active' },
-    { id: 2, reviewPeriod: 'Q3 2024', assignedBy: 'Manager', startDate: 'Jul 1, 2024', endDate: 'Sep 30, 2024', status: 'Active' },
-    { id: 3, reviewPeriod: 'Annual 2024', assignedBy: 'HR Admin', startDate: 'Jan 1, 2024', endDate: 'Dec 31, 2024', status: 'Active' }
+  activeReviewPeriods: ReviewPeriod[] = [
+    { id: 1, name: 'Q1 2025', startDate: 'Jan 1, 2025', endDate: 'Mar 31, 2025', status: 'Active' }
   ];
 
-  completedScoreCards: ScoreCard[] = [
-    { id: 4, reviewPeriod: 'Q2 2024', assignedBy: 'HR Admin', startDate: 'Apr 1, 2024', endDate: 'Jun 30, 2024', status: 'Completed' },
-    { id: 5, reviewPeriod: 'Q1 2024', assignedBy: 'Manager', startDate: 'Jan 1, 2024', endDate: 'Mar 31, 2024', status: 'Completed' },
-    { id: 6, reviewPeriod: 'Annual 2023', assignedBy: 'HR Admin', startDate: 'Jan 1, 2023', endDate: 'Dec 31, 2023', status: 'Completed' }
+  completedReviewPeriods: ReviewPeriod[] = [
+    { id: 2, name: 'Q4 2024', startDate: 'Oct 1, 2024', endDate: 'Dec 31, 2024', status: 'Completed' },
+    { id: 3, name: 'Q3 2024', startDate: 'Jul 1, 2024', endDate: 'Sep 30, 2024', status: 'Completed' },
+    { id: 4, name: 'Q2 2024', startDate: 'Apr 1, 2024', endDate: 'Jun 30, 2024', status: 'Completed' }
   ];
 
   constructor(private router: Router) {}
@@ -47,8 +45,16 @@ export class EmployeeScoreCardsComponent {
     this.router.navigate(['/employee-score-cards']);
   }
 
-  viewScoreCardDetails(scoreCardId: number) {
-    this.router.navigate(['/employee-score-card-details'], { queryParams: { id: scoreCardId } });
+  navigateToSelfEvaluation() {
+    this.router.navigate(['/employee-self-evaluation']);
+  }
+
+  navigateToMyScoreCard() {
+    this.router.navigate(['/employee-score-cards']);
+  }
+
+  navigateToRatings() {
+    this.router.navigate(['/employee-ratings']);
   }
 
   signOut() {
@@ -56,5 +62,8 @@ export class EmployeeScoreCardsComponent {
     localStorage.removeItem('user');
     this.router.navigate(['/login']);
   }
-}
 
+  viewScoreCardDetails(periodId: number) {
+    this.router.navigate(['/employee-score-card-details'], { queryParams: { periodId: periodId } });
+  }
+}

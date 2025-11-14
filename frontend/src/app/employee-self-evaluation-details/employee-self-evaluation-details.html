@@ -17,6 +17,10 @@
           <span class="nav-icon"><i class="fas fa-clipboard-check"></i></span>
           <span class="nav-text" *ngIf="!isSidebarCollapsed">Self Evaluation</span>
         </div>
+        <div class="nav-item" (click)="navigateToMyScoreCard()">
+          <span class="nav-icon"><i class="fas fa-clipboard-list"></i></span>
+          <span class="nav-text" *ngIf="!isSidebarCollapsed">My Score Card</span>
+        </div>
         <div class="nav-item" (click)="navigateToRatings()">
           <span class="nav-icon"><i class="fas fa-star"></i></span>
           <span class="nav-text" *ngIf="!isSidebarCollapsed">Ratings</span>

@@ -26,6 +26,10 @@ export class EmployeeDashboard {
     this.router.navigate(['/employee-self-evaluation']);
   }
 
+  navigateToMyScoreCard() {
+    this.router.navigate(['/employee-score-cards']);
+  }
+
   navigateToRatings() {
     this.router.navigate(['/employee-ratings']);
   }
