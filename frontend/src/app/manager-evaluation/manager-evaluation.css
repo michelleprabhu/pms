@@ -286,7 +286,55 @@
 
 .status-badge {
   padding: 5px 12px;
-  border-radius: 4px;
-  font-size: 13px;
-  font-weight: 500;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status-evaluation-started {
+  background-color: #f3e8ff;
+  color: #6b21a8;
+}
+
+.status-pending-manager {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.status-pending-hr {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.status-pending-acceptance {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.status-evaluation-complete {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.score-column {
+  text-align: center;
+}
+
+.score-cell {
+  text-align: center;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.emp-score {
+  color: #1a1a1a;
+}
+
+.mgr-score {
+  color: #1e3a8a;
+}
+
+.hr-score {
+  color: #8B2E3E;
 }
