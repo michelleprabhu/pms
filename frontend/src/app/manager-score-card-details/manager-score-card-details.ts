@@ -11,6 +11,7 @@ interface ScoreCard {
 }
 
 interface Goal {
+  id: number;
   name: string;
   description: string;
   successCriteria: string;
@@ -19,6 +20,7 @@ interface Goal {
   reviewPeriod: string;
   startDate: string;
   endDate: string;
+  addedBy: 'HR' | 'Manager' | 'Employee';
 }
 
 interface Competency {
@@ -46,54 +48,52 @@ export class ManagerScoreCardDetailsComponent implements OnInit {
   
   goals: Goal[] = [
     {
+      id: 1,
       name: 'Increase Sales Revenue',
       description: 'Achieve 20% growth in quarterly sales',
       successCriteria: 'Revenue increases by $500K and meets or exceeds 20% growth target with documented customer acquisitions',
       status: 'In Progress',
-      weight: 30,
-      reviewPeriod: 'Q3 2024',
-      startDate: 'Jul 1, 2024',
-      endDate: 'Sep 30, 2024'
+      weight: 20,
+      reviewPeriod: 'Q1 2025',
+      startDate: 'Jan 1, 2025',
+      endDate: 'Mar 31, 2025',
+      addedBy: 'HR'
     },
     {
+      id: 2,
       name: 'Improve Customer Satisfaction',
       description: 'Increase CSAT score to 4.5/5',
       successCriteria: 'CSAT survey results show consistent scores of 4.5 or higher across all customer touchpoints for 3 consecutive months',
       status: 'In Progress',
-      weight: 25,
-      reviewPeriod: 'Q3 2024',
-      startDate: 'Jul 1, 2024',
-      endDate: 'Sep 30, 2024'
-    },
-    {
-      name: 'Complete Product Launch',
-      description: 'Successfully launch new product line',
-      successCriteria: 'Product is live in production, all features are functional, user documentation is published, and 100+ active users within first month',
-      status: 'Not Started',
       weight: 20,
-      reviewPeriod: 'Q3 2024',
-      startDate: 'Aug 1, 2024',
-      endDate: 'Sep 30, 2024'
+      reviewPeriod: 'Q1 2025',
+      startDate: 'Jan 1, 2025',
+      endDate: 'Mar 31, 2025',
+      addedBy: 'HR'
     },
     {
-      name: 'Team Development',
-      description: 'Conduct training sessions for team members',
-      successCriteria: 'Complete 8 training sessions with 90%+ attendance and positive feedback scores above 4/5 from participants',
+      id: 3,
+      name: 'Complete Team Code Review Process',
+      description: 'Implement and lead team code review sessions',
+      successCriteria: 'Conduct weekly code reviews with documented feedback and track improvement metrics',
       status: 'In Progress',
-      weight: 15,
-      reviewPeriod: 'Q3 2024',
-      startDate: 'Jul 15, 2024',
-      endDate: 'Sep 15, 2024'
+      weight: 30,
+      reviewPeriod: 'Q1 2025',
+      startDate: 'Jan 1, 2025',
+      endDate: 'Mar 31, 2025',
+      addedBy: 'Manager'
     },
     {
-      name: 'Process Improvement',
-      description: 'Streamline workflow processes',
-      successCriteria: 'Process efficiency improved by 25%, documented procedures created, and team adoption rate of 80% or higher',
-      status: 'Completed',
-      weight: 10,
-      reviewPeriod: 'Q3 2024',
-      startDate: 'Jul 1, 2024',
-      endDate: 'Aug 31, 2024'
+      id: 4,
+      name: 'Learn New Technology Stack',
+      description: 'Complete training on React and TypeScript',
+      successCriteria: 'Build a demo project using React and TypeScript and present to team',
+      status: 'Not Started',
+      weight: 30,
+      reviewPeriod: 'Q1 2025',
+      startDate: 'Jan 15, 2025',
+      endDate: 'Mar 31, 2025',
+      addedBy: 'Employee'
     }
   ];
 
@@ -207,14 +207,16 @@ export class ManagerScoreCardDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    // If no score card data, redirect back to score cards list
+    // If no score card data, initialize with mock data
     if (!this.scoreCard) {
-      this.navigateToScoreCards();
+      this.scoreCard = {
+        employeeName: 'Sarah Johnson',
+        reviewPeriod: 'Q1 2025',
+        createdOn: 'Jan 1, 2025',
+        createdBy: 'HR Admin',
+        status: 'Planning in Progress'
+      };
     }
-  }
-
-  getTotalWeight(): number {
-    return this.goals.reduce((total, goal) => total + goal.weight, 0);
   }
 
   toggleSidebar() {
@@ -237,6 +239,97 @@ export class ManagerScoreCardDetailsComponent implements OnInit {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     this.router.navigate(['/login']);
+  }
+
+  // Manager-specific permission methods
+  canEditGoal(goal: Goal): boolean {
+    return goal.addedBy === 'Manager';
+  }
+
+  canAcceptRejectGoal(goal: Goal): boolean {
+    return goal.addedBy === 'Employee';
+  }
+
+  getGoalsByRole(role: 'HR' | 'Manager' | 'Employee'): Goal[] {
+    return this.goals.filter(goal => goal.addedBy === role);
+  }
+
+  getGoalsWeightByRole(role: 'HR' | 'Manager' | 'Employee'): number {
+    return this.goals
+      .filter(goal => goal.addedBy === role)
+      .reduce((sum, goal) => sum + goal.weight, 0);
+  }
+
+  getTotalWeight(): number {
+    return this.goals.reduce((sum, goal) => sum + goal.weight, 0);
+  }
+
+  getRoleBadgeClass(role: 'HR' | 'Manager' | 'Employee'): string {
+    switch (role) {
+      case 'HR':
+        return 'badge-hr';
+      case 'Manager':
+        return 'badge-manager';
+      case 'Employee':
+        return 'badge-employee';
+      default:
+        return '';
+    }
+  }
+
+  getGoalRowClass(role: 'HR' | 'Manager' | 'Employee'): string {
+    switch (role) {
+      case 'HR':
+        return 'goal-row-hr';
+      case 'Manager':
+        return 'goal-row-manager';
+      case 'Employee':
+        return 'goal-row-employee';
+      default:
+        return '';
+    }
+  }
+
+  acceptGoal(goalId: number) {
+    const goal = this.goals.find(g => g.id === goalId);
+    if (goal) {
+      console.log(`Manager accepted goal: ${goal.name}`);
+      // In real app, update backend
+      alert(`Goal "${goal.name}" accepted by manager`);
+    }
+  }
+
+  rejectGoal(goalId: number) {
+    const goal = this.goals.find(g => g.id === goalId);
+    if (goal) {
+      console.log(`Manager rejected goal: ${goal.name}`);
+      // In real app, update backend
+      if (confirm(`Are you sure you want to reject the goal "${goal.name}"?`)) {
+        // Remove the goal from the list
+        this.goals = this.goals.filter(g => g.id !== goalId);
+        alert(`Goal "${goal.name}" rejected and removed`);
+      }
+    }
+  }
+
+  editGoal(goal: Goal) {
+    console.log(`Manager editing goal: ${goal.name}`);
+    // In real app, open edit modal
+    alert(`Edit functionality for "${goal.name}" would open a modal here`);
+  }
+
+  deleteGoal(goalId: number) {
+    const goal = this.goals.find(g => g.id === goalId);
+    if (goal && confirm(`Are you sure you want to delete the goal "${goal.name}"?`)) {
+      this.goals = this.goals.filter(g => g.id !== goalId);
+      console.log(`Manager deleted goal: ${goal.name}`);
+      alert(`Goal "${goal.name}" deleted`);
+    }
+  }
+
+  isPlanningPhase(): boolean {
+    // Check if the score card is in planning phase
+    return this.scoreCard?.status?.includes('Plan') || this.scoreCard?.status?.includes('Planning') || false;
   }
 }
 

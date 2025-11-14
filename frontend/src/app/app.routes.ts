@@ -25,6 +25,8 @@ import { PlanningEmployeesComponent } from './planning-employees/planning-employ
 import { PlanningEmployeeDetailComponent } from './planning-employee-detail/planning-employee-detail';
 import { ScoreCardsListComponent } from './score-cards-list/score-cards-list';
 import { ScoreCardEmployeeDetailComponent } from './score-card-employee-detail/score-card-employee-detail';
+import { ManagerScoreCardsListComponent } from './manager-score-cards-list/manager-score-cards-list';
+import { ManagerScoreCardEmployeeDetailComponent } from './manager-score-card-employee-detail/manager-score-card-employee-detail';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -43,6 +45,8 @@ export const routes: Routes = [
   { path: 'evaluation-details', component: EvaluationDetailsComponent },
   { path: 'manager-dashboard', component: ManagerDashboard },
   { path: 'manager-score-cards', component: ManagerScoreCardsComponent },
+  { path: 'manager-score-cards/list', component: ManagerScoreCardsListComponent },
+  { path: 'manager-score-cards/employee-detail/:id', component: ManagerScoreCardEmployeeDetailComponent },
   { path: 'manager-score-card-details', component: ManagerScoreCardDetailsComponent },
   { path: 'manager-evaluation-periods', component: ManagerEvaluationPeriodsComponent },
   { path: 'manager-evaluation', component: ManagerEvaluationComponent },

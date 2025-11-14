@@ -100,6 +100,33 @@
           <!-- Goals Tab -->
           <div *ngIf="activeTab === 'goals'" class="tab-panel">
             <h2 class="tab-title">Goals</h2>
+            
+            <!-- Planning Progress Card (Manager View) -->
+            <div *ngIf="isPlanningPhase()" class="planning-progress-card">
+              <h3 class="progress-card-title">Planning Progress</h3>
+              <div class="progress-stats">
+                <div class="progress-stat-item">
+                  <span class="stat-label">HR Goals:</span>
+                  <span class="stat-value">{{ getGoalsWeightByRole('HR') }}%</span>
+                  <span class="stat-count">({{ getGoalsByRole('HR').length }} goals)</span>
+                </div>
+                <div class="progress-stat-item">
+                  <span class="stat-label">Manager Goals:</span>
+                  <span class="stat-value">{{ getGoalsWeightByRole('Manager') }}%</span>
+                  <span class="stat-count">({{ getGoalsByRole('Manager').length }} goals)</span>
+                </div>
+                <div class="progress-stat-item">
+                  <span class="stat-label">Employee Goals:</span>
+                  <span class="stat-value">{{ getGoalsWeightByRole('Employee') }}%</span>
+                  <span class="stat-count">({{ getGoalsByRole('Employee').length }} goals)</span>
+                </div>
+                <div class="progress-stat-item total">
+                  <span class="stat-label">Total Weight:</span>
+                  <span class="stat-value">{{ getTotalWeight() }}%</span>
+                </div>
+              </div>
+            </div>
+
             <div class="data-table-container">
               <table class="data-table">
                 <thead>
@@ -110,27 +137,58 @@
                     <th>Success Criteria</th>
                     <th>Status</th>
                     <th>Weight (%)</th>
+                    <th>Added By</th>
                     <th>Review Period</th>
                     <th>Start Date</th>
                     <th>End Date</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let goal of goals; let i = index">
+                  <tr *ngFor="let goal of goals; let i = index" [ngClass]="getGoalRowClass(goal.addedBy)">
                     <td>{{ i + 1 }}</td>
                     <td>{{ goal.name }}</td>
                     <td>{{ goal.description }}</td>
                     <td class="success-criteria-cell">{{ goal.successCriteria }}</td>
                     <td>{{ goal.status }}</td>
                     <td>{{ goal.weight }}</td>
+                    <td>
+                      <span class="role-badge" [ngClass]="getRoleBadgeClass(goal.addedBy)">
+                        {{ goal.addedBy }}
+                      </span>
+                    </td>
                     <td>{{ goal.reviewPeriod }}</td>
                     <td>{{ goal.startDate }}</td>
                     <td>{{ goal.endDate }}</td>
+                    <td class="action-cell">
+                      <!-- Manager's own goals: Edit/Delete -->
+                      <div *ngIf="canEditGoal(goal)" class="action-buttons-inline">
+                        <button class="btn-edit" (click)="editGoal(goal)">
+                          <i class="fas fa-edit"></i> Edit
+                        </button>
+                        <button class="btn-delete" (click)="deleteGoal(goal.id)">
+                          <i class="fas fa-trash"></i> Delete
+                        </button>
+                      </div>
+                      <!-- Employee goals: Accept/Reject -->
+                      <div *ngIf="canAcceptRejectGoal(goal)" class="action-buttons-inline">
+                        <button class="btn-accept" (click)="acceptGoal(goal.id)">
+                          <i class="fas fa-check"></i> Accept
+                        </button>
+                        <button class="btn-reject" (click)="rejectGoal(goal.id)">
+                          <i class="fas fa-times"></i> Reject
+                        </button>
+                      </div>
+                      <!-- HR goals: No action (read-only) -->
+                      <div *ngIf="goal.addedBy === 'HR'" class="action-buttons-inline">
+                        <span class="no-action">View Only</span>
+                      </div>
+                    </td>
                   </tr>
                   <tr class="total-row">
                     <td colspan="5"><strong>Total Weight</strong></td>
                     <td><strong>{{ getTotalWeight() }}%</strong></td>
-                    <td colspan="3"></td>
+                    <td colspan="5"></td>
                   </tr>
                 </tbody>
               </table>

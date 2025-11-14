@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
-interface ScoreCard {
-  employeeName: string;
-  reviewPeriod: string;
-  createdOn: string;
-  createdBy: string;
+interface ReviewPeriod {
+  id: number;
+  name: string;
+  startDate: string;
+  endDate: string;
   status: string;
-  approvalStatus: string;
+  employeeCount: number;
 }
 
 @Component({
@@ -20,94 +20,15 @@ interface ScoreCard {
 })
 export class ManagerScoreCardsComponent {
   isSidebarCollapsed = false;
-  showGoalForm = false;
-  showProcessForm = false;
-  processFormActiveTab: string = 'goals';
-  
-  scoreCards: ScoreCard[] = [
-    // Q3 2024
-    {
-      employeeName: 'Sarah Johnson',
-      reviewPeriod: 'Q3 2024',
-      createdOn: 'Jul 15, 2024',
-      createdBy: 'HR Admin',
-      status: 'Active',
-      approvalStatus: 'Approved'
-    },
-    {
-      employeeName: 'Michael Chen',
-      reviewPeriod: 'Q3 2024',
-      createdOn: 'Jul 16, 2024',
-      createdBy: 'HR Admin',
-      status: 'Active',
-      approvalStatus: 'Approved'
-    },
-    {
-      employeeName: 'Emily Rodriguez',
-      reviewPeriod: 'Q3 2024',
-      createdOn: 'Jul 17, 2024',
-      createdBy: 'Manager',
-      status: 'Active',
-      approvalStatus: 'Pending'
-    },
-    {
-      employeeName: 'Christopher Lee',
-      reviewPeriod: 'Q3 2024',
-      createdOn: 'Jul 18, 2024',
-      createdBy: 'Manager',
-      status: 'Active',
-      approvalStatus: 'Pending'
-    },
-    // Q4 2024
-    {
-      employeeName: 'David Thompson',
-      reviewPeriod: 'Q4 2024',
-      createdOn: 'Oct 5, 2024',
-      createdBy: 'HR Admin',
-      status: 'Active',
-      approvalStatus: 'Approved'
-    },
-    {
-      employeeName: 'Jessica Williams',
-      reviewPeriod: 'Q4 2024',
-      createdOn: 'Oct 6, 2024',
-      createdBy: 'Manager',
-      status: 'Active',
-      approvalStatus: 'Pending'
-    },
-    {
-      employeeName: 'Kevin Martinez',
-      reviewPeriod: 'Q4 2024',
-      createdOn: 'Oct 8, 2024',
-      createdBy: 'HR Admin',
-      status: 'Active',
-      approvalStatus: 'Approved'
-    },
-    // Annual 2024
-    {
-      employeeName: 'Robert Martinez',
-      reviewPeriod: 'Annual 2024',
-      createdOn: 'Jan 10, 2024',
-      createdBy: 'HR Admin',
-      status: 'Active',
-      approvalStatus: 'Approved'
-    },
-    {
-      employeeName: 'Amanda Brown',
-      reviewPeriod: 'Annual 2024',
-      createdOn: 'Jan 12, 2024',
-      createdBy: 'HR Admin',
-      status: 'Active',
-      approvalStatus: 'Approved'
-    },
-    {
-      employeeName: 'Patricia Davis',
-      reviewPeriod: 'Annual 2024',
-      createdOn: 'Jan 15, 2024',
-      createdBy: 'Manager',
-      status: 'Active',
-      approvalStatus: 'Pending'
-    }
+
+  activeReviewPeriods: ReviewPeriod[] = [
+    { id: 1, name: 'Q1 2025', startDate: 'Jan 1, 2025', endDate: 'Mar 31, 2025', status: 'Active', employeeCount: 3 }
+  ];
+
+  completedReviewPeriods: ReviewPeriod[] = [
+    { id: 2, name: 'Q4 2024', startDate: 'Oct 1, 2024', endDate: 'Dec 31, 2024', status: 'Completed', employeeCount: 3 },
+    { id: 3, name: 'Q3 2024', startDate: 'Jul 1, 2024', endDate: 'Sep 30, 2024', status: 'Completed', employeeCount: 3 },
+    { id: 4, name: 'Q2 2024', startDate: 'Apr 1, 2024', endDate: 'Jun 30, 2024', status: 'Completed', employeeCount: 3 }
   ];
 
   constructor(private router: Router) {}
@@ -125,7 +46,7 @@ export class ManagerScoreCardsComponent {
   }
 
   navigateToEvaluation() {
-    this.router.navigate(['/manager-evaluation']);
+    this.router.navigate(['/manager-evaluation-periods']);
   }
 
   signOut() {
@@ -134,55 +55,7 @@ export class ManagerScoreCardsComponent {
     this.router.navigate(['/login']);
   }
 
-  getInitials(name: string): string {
-    return name
-      .split(' ')
-      .map(n => n[0])
-      .join('')
-      .toUpperCase();
-  }
-
-  viewScoreCardDetails(scoreCard: ScoreCard) {
-    this.router.navigate(['/manager-score-card-details'], {
-      state: { scoreCard }
-    });
-  }
-
-  showAddGoalForm() {
-    this.showGoalForm = true;
-  }
-
-  closeAddGoalForm() {
-    this.showGoalForm = false;
-  }
-
-  showStartProcessForm() {
-    this.showProcessForm = true;
-  }
-
-  closeStartProcessForm() {
-    this.showProcessForm = false;
-  }
-
-  updateScoreCardStatus(scoreCard: ScoreCard) {
-    console.log(`Updated status for ${scoreCard.employeeName} to ${scoreCard.status}`);
-    // In a real app, you would save this to the backend
-  }
-
-  setProcessFormTab(tab: string) {
-    this.processFormActiveTab = tab;
-  }
-
-  approveScoreCard(scoreCard: ScoreCard) {
-    scoreCard.approvalStatus = 'Approved';
-    console.log(`Approved score card for ${scoreCard.employeeName}`);
-    // In a real app, you would save this to the backend
-  }
-
-  rejectScoreCard(scoreCard: ScoreCard) {
-    scoreCard.approvalStatus = 'Rejected';
-    console.log(`Rejected score card for ${scoreCard.employeeName}`);
-    // In a real app, you would save this to the backend
+  viewScoreCardsByPeriod(periodId: number) {
+    this.router.navigate(['/manager-score-cards/list'], { queryParams: { periodId: periodId } });
   }
 }
-
