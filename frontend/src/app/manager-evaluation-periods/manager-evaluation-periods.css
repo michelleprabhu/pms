@@ -400,3 +400,22 @@
   color: white;
 }
 
+/* Evaluation Icons */
+.evaluation-icon-completed {
+  color: #059669;
+}
+
+.evaluation-icon-pending {
+  color: #d97706;
+}
+
+.stat-text {
+  font-size: 13px;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
