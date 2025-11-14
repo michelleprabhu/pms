@@ -17,7 +17,7 @@
           <span class="nav-icon"><i class="fas fa-clipboard-check"></i></span>
           <span class="nav-text" *ngIf="!isSidebarCollapsed">Self Evaluation</span>
         </div>
-        <div class="nav-item active" (click)="navigateToMyScoreCard()">
+        <div class="nav-item" (click)="navigateToMyScoreCard()">
           <span class="nav-icon"><i class="fas fa-clipboard-list"></i></span>
           <span class="nav-text" *ngIf="!isSidebarCollapsed">My Score Card</span>
         </div>
@@ -75,7 +75,7 @@
             class="tab-button" 
             [class.active]="activeTab === 'scorecards'"
             (click)="activeTab = 'scorecards'">
-            Score Cards
+            Score Card
           </button>
           <button 
             class="tab-button" 
@@ -149,39 +149,47 @@
             </div>
 
             <!-- Active Score Card -->
-            <div *ngIf="activeScoreCard" class="section">
-              <h3 class="section-title">Current Score Card</h3>
-              <div class="score-card-item">
+            <div class="score-card-section">
+              <h3 class="section-subtitle">Active Score Card</h3>
+              <div *ngIf="activeScoreCard" class="score-card">
                 <div class="score-card-header">
-                  <div class="score-card-info">
-                    <h4 class="score-card-period">{{ activeScoreCard.reviewPeriod }}</h4>
-                    <span class="status-badge" [ngClass]="getStatusClass(activeScoreCard.status)">
-                      {{ activeScoreCard.status }}
-                    </span>
+                  <div>
+                    <h4 class="score-card-title">{{ activeScoreCard.reviewPeriod }}</h4>
+                    <p class="score-card-dates">{{ activeScoreCard.startDate }} - {{ activeScoreCard.endDate }}</p>
                   </div>
-                  <button class="btn-view-details" (click)="viewScoreCardDetails(activeScoreCard.id)">
+                  <span class="status-badge" [ngClass]="getStatusClass(activeScoreCard.status)">
+                    {{ activeScoreCard.status }}
+                  </span>
+                </div>
+                <div class="score-card-actions">
+                  <button class="btn-view-details-primary" (click)="viewScoreCardDetails(activeScoreCard.id)">
                     View Details <i class="fas fa-arrow-right"></i>
                   </button>
                 </div>
               </div>
+              <div *ngIf="!activeScoreCard" class="no-data">
+                <i class="fas fa-clipboard"></i>
+                <p>No active score card for this review period</p>
+              </div>
             </div>
 
             <!-- Past Score Cards -->
-            <div *ngIf="pastScoreCards.length > 0" class="section">
-              <h3 class="section-title">Past Score Cards</h3>
-              <div class="score-cards-list">
-                <div *ngFor="let scoreCard of pastScoreCards" class="score-card-item">
+            <div class="score-card-section">
+              <h3 class="section-subtitle">Past Score Cards</h3>
+              <div class="past-score-cards">
+                <div *ngFor="let card of pastScoreCards" class="score-card" (click)="viewScoreCardDetails(card.id)">
                   <div class="score-card-header">
-                    <div class="score-card-info">
-                      <h4 class="score-card-period">{{ scoreCard.reviewPeriod }}</h4>
-                      <span class="status-badge status-evaluation-complete">
-                        {{ scoreCard.status }}
-                      </span>
+                    <div>
+                      <h4 class="score-card-title">{{ card.reviewPeriod }}</h4>
+                      <p class="score-card-dates">{{ card.startDate }} - {{ card.endDate }}</p>
                     </div>
-                    <button class="btn-view" (click)="viewScoreCardDetails(scoreCard.id)">
-                      View <i class="fas fa-eye"></i>
-                    </button>
+                    <span class="status-badge" [ngClass]="getStatusClass(card.status)">
+                      {{ card.status }}
+                    </span>
                   </div>
+                  <button class="btn-view-details">
+                    View <i class="fas fa-arrow-right"></i>
+                  </button>
                 </div>
               </div>
             </div>
