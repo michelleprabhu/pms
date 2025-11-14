@@ -44,12 +44,16 @@ export class ReviewPeriod {
     this.router.navigate(['/hr-dashboard']);
   }
 
+  navigateToPlanning() {
+    this.router.navigate(['/planning']);
+  }
+
   navigateToScoreCards() {
     this.router.navigate(['/score-cards']);
   }
 
   navigateToEvaluation() {
-    this.router.navigate(['/evaluation']);
+    this.router.navigate(['/evaluation-periods']);
   }
 
   signOut() {

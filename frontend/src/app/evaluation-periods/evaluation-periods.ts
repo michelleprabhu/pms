@@ -44,6 +44,10 @@ export class EvaluationPeriodsComponent {
     this.router.navigate(['/hr-dashboard']);
   }
 
+  navigateToPlanning() {
+    this.router.navigate(['/planning']);
+  }
+
   navigateToReviewPeriods() {
     this.router.navigate(['/review-period']);
   }
