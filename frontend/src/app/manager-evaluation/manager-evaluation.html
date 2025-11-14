@@ -41,7 +41,7 @@
       </button>
       <div class="page-name">Performance Management System</div>
       <div class="user-info">
-        <span>HR Admin</span>
+        <span>Manager</span>
         <i class="fas fa-user-circle"></i>
       </div>
     </header>
@@ -64,8 +64,9 @@
               <th>S.No</th>
               <th>Employee Name</th>
               <th>Review Period</th>
-              <th>Created On</th>
-              <th>Created By</th>
+              <th class="score-column">Emp Score</th>
+              <th class="score-column">Mgr Score</th>
+              <th class="score-column">HR Score</th>
               <th>Status</th>
             </tr>
           </thead>
@@ -74,9 +75,10 @@
               <td>{{ i + 1 }}</td>
               <td>{{ evaluation.employeeName }}</td>
               <td>{{ evaluation.reviewPeriod }}</td>
-              <td>{{ evaluation.createdOn }}</td>
-              <td>{{ evaluation.createdBy }}</td>
-              <td><span class="status-badge">{{ evaluation.status }}</span></td>
+              <td class="score-cell emp-score">{{ evaluation.employeeScore || 'N/A' }}</td>
+              <td class="score-cell mgr-score">{{ evaluation.managerScore || 'N/A' }}</td>
+              <td class="score-cell hr-score">{{ evaluation.hrScore || 'N/A' }}</td>
+              <td><span class="status-badge" [ngClass]="getStatusClass(evaluation.status)">{{ evaluation.status }}</span></td>
             </tr>
           </tbody>
         </table>

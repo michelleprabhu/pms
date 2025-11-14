@@ -13,11 +13,9 @@ export class ManagerEvaluationComponent {
   isSidebarCollapsed = false;
 
   evaluations = [
-    { id: 1, employeeName: 'John Doe', reviewPeriod: 'Q4 2024', createdOn: '2024-10-01', createdBy: 'HR Admin', status: 'Completed' },
-    { id: 2, employeeName: 'Jane Smith', reviewPeriod: 'Q4 2024', createdOn: '2024-10-05', createdBy: 'HR Admin', status: 'Completed' },
-    { id: 3, employeeName: 'Mike Johnson', reviewPeriod: 'Q4 2024', createdOn: '2024-10-10', createdBy: 'HR Admin', status: 'Completed' },
-    { id: 4, employeeName: 'Sarah Williams', reviewPeriod: 'Q3 2024', createdOn: '2024-07-15', createdBy: 'HR Admin', status: 'Completed' },
-    { id: 5, employeeName: 'David Brown', reviewPeriod: 'Q3 2024', createdOn: '2024-07-20', createdBy: 'HR Admin', status: 'Completed' }
+    { id: 1, employeeName: 'Sarah Johnson', reviewPeriod: 'Q1 2025', employeeScore: 4.2, managerScore: 4.0, hrScore: null, status: 'Pending HR Evaluation' },
+    { id: 2, employeeName: 'Michael Chen', reviewPeriod: 'Q1 2025', employeeScore: 4.5, managerScore: null, hrScore: null, status: 'Pending Manager Evaluation' },
+    { id: 3, employeeName: 'Emily Rodriguez', reviewPeriod: 'Q1 2025', employeeScore: null, managerScore: null, hrScore: null, status: 'Evaluation Started' }
   ];
 
   constructor(private router: Router) {}
@@ -44,6 +42,23 @@ export class ManagerEvaluationComponent {
 
   viewEvaluationDetails(evaluationId: number) {
     this.router.navigate(['/manager-evaluation-details'], { queryParams: { id: evaluationId } });
+  }
+
+  getStatusClass(status: string): string {
+    switch (status) {
+      case 'Evaluation Started':
+        return 'status-evaluation-started';
+      case 'Pending Manager Evaluation':
+        return 'status-pending-manager';
+      case 'Pending HR Evaluation':
+        return 'status-pending-hr';
+      case 'Pending Employee Acceptance':
+        return 'status-pending-acceptance';
+      case 'Evaluation Complete':
+        return 'status-evaluation-complete';
+      default:
+        return '';
+    }
   }
 
   signOut() {

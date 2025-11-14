@@ -405,56 +405,45 @@
 
 /* Planning Progress Card */
 .planning-progress-card {
-  background-color: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background-color: #f8f9fa;
+  border: 1px solid #e5e5e5;
   border-radius: 8px;
   padding: 20px;
-  margin-bottom: 24px;
+  margin-bottom: 25px;
 }
 
 .progress-card-title {
   font-size: 16px;
   font-weight: 600;
   color: #1a1a1a;
-  margin: 0 0 16px 0;
+  margin: 0 0 15px 0;
 }
 
 .progress-stats {
   display: flex;
-  gap: 24px;
   flex-wrap: wrap;
+  gap: 20px;
 }
 
-.progress-stat-item {
-  flex: 1;
-  min-width: 150px;
+.progress-stat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.progress-stat-item.total {
-  border-top: 2px solid #e2e8f0;
-  padding-top: 12px;
-  font-weight: 600;
+.progress-stat.total-weight {
+  margin-left: auto;
+  font-size: 16px;
 }
 
 .stat-label {
-  display: inline-block;
+  font-weight: 600;
   font-size: 14px;
-  color: #64748b;
-  margin-right: 8px;
 }
 
 .stat-value {
-  display: inline-block;
-  font-size: 18px;
-  font-weight: 700;
-  color: #1a1a1a;
-  margin-right: 8px;
-}
-
-.stat-count {
-  display: inline-block;
-  font-size: 12px;
-  color: #94a3b8;
+  font-size: 14px;
+  color: #333;
 }
 
 /* Role Badges */
@@ -468,18 +457,33 @@
 }
 
 .badge-hr {
-  background-color: #fee2e2;
-  color: #8B2E3E;
+  background-color: #8B2E3E;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
 .badge-manager {
-  background-color: #dbeafe;
-  color: #1e3a8a;
+  background-color: #1e3a8a;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
 .badge-employee {
-  background-color: #e5e5e5;
-  color: #1a1a1a;
+  background-color: #1a1a1a;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
 /* Goal Row Color-Coding */
@@ -606,8 +610,8 @@
 .planning-actions {
   display: flex;
   gap: 12px;
-  margin-bottom: 20px;
-  justify-content: flex-start;
+  margin-bottom: 25px;
+  justify-content: flex-end;
 }
 
 .btn-secondary {

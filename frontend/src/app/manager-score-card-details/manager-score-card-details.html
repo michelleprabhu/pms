@@ -105,22 +105,19 @@
             <div *ngIf="isPlanningPhase()" class="planning-progress-card">
               <h3 class="progress-card-title">Planning Progress</h3>
               <div class="progress-stats">
-                <div class="progress-stat-item">
-                  <span class="stat-label">HR Goals:</span>
-                  <span class="stat-value">{{ getGoalsWeightByRole('HR') }}%</span>
-                  <span class="stat-count">({{ getGoalsByRole('HR').length }} goals)</span>
+                <div class="progress-stat">
+                  <span class="stat-label badge-hr">HR:</span>
+                  <span class="stat-value">{{ getGoalsByRole('HR').length }} goals ({{ getGoalsWeightByRole('HR') }}% weight)</span>
                 </div>
-                <div class="progress-stat-item">
-                  <span class="stat-label">Manager Goals:</span>
-                  <span class="stat-value">{{ getGoalsWeightByRole('Manager') }}%</span>
-                  <span class="stat-count">({{ getGoalsByRole('Manager').length }} goals)</span>
+                <div class="progress-stat">
+                  <span class="stat-label badge-manager">Manager:</span>
+                  <span class="stat-value">{{ getGoalsByRole('Manager').length }} goals ({{ getGoalsWeightByRole('Manager') }}% weight)</span>
                 </div>
-                <div class="progress-stat-item">
-                  <span class="stat-label">Employee Goals:</span>
-                  <span class="stat-value">{{ getGoalsWeightByRole('Employee') }}%</span>
-                  <span class="stat-count">({{ getGoalsByRole('Employee').length }} goals)</span>
+                <div class="progress-stat">
+                  <span class="stat-label badge-employee">Employee:</span>
+                  <span class="stat-value">{{ getGoalsByRole('Employee').length }} goals ({{ getGoalsWeightByRole('Employee') }}% weight)</span>
                 </div>
-                <div class="progress-stat-item total">
+                <div class="progress-stat total-weight">
                   <span class="stat-label"><strong>Total Weight:</strong></span>
                   <span class="stat-value"><strong>{{ getTotalWeight() }}%</strong></span>
                 </div>
