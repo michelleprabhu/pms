@@ -173,6 +173,23 @@
   color: #333;
 }
 
+.top-bar-spacer {
+  flex: 1;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: #666;
+}
+
+.user-info i {
+  font-size: 24px;
+  color: #8B2E3E;
+}
+
 /* Content */
 .content {
   flex: 1;

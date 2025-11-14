@@ -46,6 +46,20 @@ export class EmployeeMyProfileComponent implements OnInit {
     { id: 4, reviewPeriod: 'Q2 2024', status: 'Evaluation Complete', startDate: 'Apr 1, 2024', endDate: 'Jun 30, 2024' }
   ];
 
+  // Add Goal Modal
+  showAddGoalModal: boolean = false;
+  newGoal = {
+    name: '',
+    description: '',
+    status: '',
+    weight: 0,
+    startDate: '',
+    endDate: '',
+    deadlineDate: '',
+    updatedBy: '',
+    performanceDocuments: null as File | null
+  };
+
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
@@ -108,6 +122,48 @@ export class EmployeeMyProfileComponent implements OnInit {
       default:
         return '';
     }
+  }
+
+  openAddGoalModal() {
+    this.showAddGoalModal = true;
+  }
+
+  closeAddGoalModal() {
+    this.showAddGoalModal = false;
+    this.resetGoalForm();
+  }
+
+  resetGoalForm() {
+    this.newGoal = {
+      name: '',
+      description: '',
+      status: '',
+      weight: 0,
+      startDate: '',
+      endDate: '',
+      deadlineDate: '',
+      updatedBy: '',
+      performanceDocuments: null
+    };
+  }
+
+  onFileSelect(event: any) {
+    if (event.target.files.length > 0) {
+      this.newGoal.performanceDocuments = event.target.files[0];
+    }
+  }
+
+  addGoal() {
+    // Validation
+    if (!this.newGoal.name || !this.newGoal.description || !this.newGoal.status || 
+        !this.newGoal.weight || !this.newGoal.startDate || !this.newGoal.endDate) {
+      alert('Please fill in all required fields');
+      return;
+    }
+
+    console.log('Adding goal:', this.newGoal);
+    alert('Goal added successfully!');
+    this.closeAddGoalModal();
   }
 
   signOut() {

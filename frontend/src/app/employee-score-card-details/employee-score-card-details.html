@@ -17,7 +17,7 @@
           <span class="nav-icon"><i class="fas fa-clipboard-check"></i></span>
           <span class="nav-text" *ngIf="!isSidebarCollapsed">Self Evaluation</span>
         </div>
-        <div class="nav-item active" (click)="navigateToMyScoreCard()">
+        <div class="nav-item" (click)="navigateToMyScoreCard()">
           <span class="nav-icon"><i class="fas fa-clipboard-list"></i></span>
           <span class="nav-text" *ngIf="!isSidebarCollapsed">My Score Card</span>
         </div>
@@ -44,6 +44,7 @@
         <i class="fas fa-bars"></i>
       </button>
       <div class="page-name">Performance Management System</div>
+      <div class="top-bar-spacer"></div>
       <div class="user-info">
         <span>{{ employeeName }}</span>
         <i class="fas fa-user-circle"></i>
