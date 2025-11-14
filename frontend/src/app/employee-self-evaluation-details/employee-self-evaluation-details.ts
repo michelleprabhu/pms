@@ -43,9 +43,9 @@ export class EmployeeSelfEvaluationDetailsComponent implements OnInit {
   reviewPeriodId: number = 1;
 
   reviewPeriodInfo = {
-    name: 'Q4 2024',
-    startDate: 'Oct 1, 2024',
-    endDate: 'Dec 31, 2024',
+    name: 'Q1 2025',
+    startDate: 'Jan 1, 2025',
+    endDate: 'Mar 31, 2025',
     status: 'Active'
   };
 

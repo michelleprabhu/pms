@@ -22,8 +22,7 @@ export class EmployeeSelfEvaluationComponent {
   employeeName = 'Sarah Johnson';
 
   activeReviewPeriods: ReviewPeriod[] = [
-    { id: 1, name: 'Q4 2024', startDate: 'Oct 1, 2024', endDate: 'Dec 31, 2024', status: 'Active', progress: 60 },
-    { id: 2, name: 'Annual 2024', startDate: 'Jan 1, 2024', endDate: 'Dec 31, 2024', status: 'Active', progress: 35 }
+    { id: 1, name: 'Q1 2025', startDate: 'Jan 1, 2025', endDate: 'Mar 31, 2025', status: 'Active', progress: 60 }
   ];
 
   completedReviewPeriods: ReviewPeriod[] = [
