@@ -13,7 +13,7 @@
           <span class="nav-icon"><i class="fas fa-chart-line"></i></span>
           <span class="nav-text" *ngIf="!isSidebarCollapsed">Dashboard</span>
         </div>
-        <div class="nav-item active" (click)="navigateToScoreCards()">
+        <div class="nav-item" (click)="navigateToScoreCards()">
           <span class="nav-icon"><i class="fas fa-clipboard-check"></i></span>
           <span class="nav-text" *ngIf="!isSidebarCollapsed">Score Cards</span>
         </div>
@@ -71,7 +71,7 @@
               </div>
             </div>
             <button class="btn-view-scorecards" (click)="viewScoreCardsByPeriod(period.id)">
-              View Score Cards
+              Start Score Card Planning
             </button>
           </div>
         </div>
