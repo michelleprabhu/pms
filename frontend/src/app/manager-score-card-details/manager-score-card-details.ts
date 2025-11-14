@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 interface ScoreCard {
   employeeName: string;
@@ -35,9 +36,16 @@ interface Value {
   description: string;
 }
 
+interface PlanningComment {
+  id: number;
+  role: 'HR' | 'Manager' | 'Employee';
+  text: string;
+  timestamp: Date;
+}
+
 @Component({
   selector: 'app-manager-score-card-details',
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './manager-score-card-details.html',
   styleUrl: './manager-score-card-details.css',
 })
@@ -45,6 +53,21 @@ export class ManagerScoreCardDetailsComponent implements OnInit {
   isSidebarCollapsed = false;
   activeTab: string = 'goals';
   scoreCard: ScoreCard | null = null;
+  newComment: string = '';
+  planningComments: PlanningComment[] = [
+    {
+      id: 1,
+      role: 'HR',
+      text: 'Please ensure all goals are measurable and aligned with company objectives.',
+      timestamp: new Date('2025-01-05T10:30:00')
+    },
+    {
+      id: 2,
+      role: 'Manager',
+      text: 'I will add team collaboration goals by end of this week.',
+      timestamp: new Date('2025-01-06T14:20:00')
+    }
+  ];
   
   goals: Goal[] = [
     {
@@ -330,6 +353,38 @@ export class ManagerScoreCardDetailsComponent implements OnInit {
   isPlanningPhase(): boolean {
     // Check if the score card is in planning phase
     return this.scoreCard?.status?.includes('Plan') || this.scoreCard?.status?.includes('Planning') || false;
+  }
+
+  canSaveAndNotify(): boolean {
+    return this.getTotalWeight() === 100;
+  }
+
+  saveAndNotify() {
+    if (!this.canSaveAndNotify()) {
+      alert('Total weight must equal 100% before saving and notifying');
+      return;
+    }
+    console.log('Manager saving and notifying employee');
+    alert('Score card saved and notification sent to employee!');
+  }
+
+  openAddGoalModal() {
+    console.log('Opening Add Goal modal for manager');
+    alert('Add Goal modal would open here (implement modal in future iteration)');
+  }
+
+  addComment() {
+    if (this.newComment.trim()) {
+      const comment: PlanningComment = {
+        id: this.planningComments.length + 1,
+        role: 'Manager',
+        text: this.newComment.trim(),
+        timestamp: new Date()
+      };
+      this.planningComments.push(comment);
+      this.newComment = '';
+      console.log('Manager added comment:', comment);
+    }
   }
 }
 

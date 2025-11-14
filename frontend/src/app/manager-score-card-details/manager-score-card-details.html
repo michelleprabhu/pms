@@ -121,10 +121,24 @@
                   <span class="stat-count">({{ getGoalsByRole('Employee').length }} goals)</span>
                 </div>
                 <div class="progress-stat-item total">
-                  <span class="stat-label">Total Weight:</span>
-                  <span class="stat-value">{{ getTotalWeight() }}%</span>
+                  <span class="stat-label"><strong>Total Weight:</strong></span>
+                  <span class="stat-value"><strong>{{ getTotalWeight() }}%</strong></span>
                 </div>
               </div>
+            </div>
+
+            <!-- Action Buttons (only shown during planning phase) -->
+            <div *ngIf="isPlanningPhase()" class="planning-actions">
+              <button class="btn-secondary" (click)="openAddGoalModal()">
+                <i class="fas fa-plus"></i> Add Goal
+              </button>
+              <button 
+                class="btn-primary" 
+                [disabled]="!canSaveAndNotify()"
+                [title]="canSaveAndNotify() ? '' : 'Total weight must equal 100%'"
+                (click)="saveAndNotify()">
+                <i class="fas fa-bell"></i> Save and Notify
+              </button>
             </div>
 
             <div class="data-table-container">
@@ -192,6 +206,36 @@
                   </tr>
                 </tbody>
               </table>
+            </div>
+
+            <!-- Planning Discussion Section (only shown during planning phase) -->
+            <div *ngIf="isPlanningPhase()" class="planning-discussion">
+              <h3 class="discussion-title">Planning Discussion</h3>
+              <div class="comments-list">
+                <div *ngFor="let comment of planningComments" class="comment-item">
+                  <div class="comment-header">
+                    <span class="comment-badge" [ngClass]="getRoleBadgeClass(comment.role)">
+                      {{ comment.role }}
+                    </span>
+                    <span class="comment-timestamp">{{ comment.timestamp | date:'short' }}</span>
+                  </div>
+                  <div class="comment-text">{{ comment.text }}</div>
+                </div>
+                <div *ngIf="planningComments.length === 0" class="no-comments">
+                  <i class="fas fa-comments"></i>
+                  <p>No comments yet. Start a discussion about this score card.</p>
+                </div>
+              </div>
+              <div class="add-comment-section">
+                <textarea 
+                  [(ngModel)]="newComment" 
+                  class="comment-input" 
+                  placeholder="Add a comment to the discussion...">
+                </textarea>
+                <button class="btn-primary" (click)="addComment()">
+                  <i class="fas fa-comment"></i> Add Comment
+                </button>
+              </div>
             </div>
           </div>
 
