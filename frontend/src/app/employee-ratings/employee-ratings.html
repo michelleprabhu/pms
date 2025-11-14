@@ -17,6 +17,10 @@
           <span class="nav-icon"><i class="fas fa-clipboard-check"></i></span>
           <span class="nav-text" *ngIf="!isSidebarCollapsed">Self Evaluation</span>
         </div>
+        <div class="nav-item" (click)="navigateToMyScoreCard()">
+          <span class="nav-icon"><i class="fas fa-clipboard-list"></i></span>
+          <span class="nav-text" *ngIf="!isSidebarCollapsed">My Score Card</span>
+        </div>
         <div class="nav-item active" (click)="navigateToRatings()">
           <span class="nav-icon"><i class="fas fa-star"></i></span>
           <span class="nav-text" *ngIf="!isSidebarCollapsed">Ratings</span>
@@ -59,8 +63,9 @@
               <tr>
                 <th>S.No</th>
                 <th>Review Period</th>
-                <th>Start Date</th>
-                <th>End Date</th>
+                <th>My Rating</th>
+                <th>Manager Rating</th>
+                <th>HR Rating</th>
                 <th>Overall Rating</th>
               </tr>
             </thead>
@@ -70,8 +75,9 @@
                   (click)="viewRatingDetails(period.id)">
                 <td>{{ i + 1 }}</td>
                 <td class="period-name">{{ period.name }}</td>
-                <td>{{ period.startDate }}</td>
-                <td>{{ period.endDate }}</td>
+                <td class="rating-cell">{{ period.myRating ? period.myRating.toFixed(1) : 'N/A' }}</td>
+                <td class="rating-cell">{{ period.managerRating ? period.managerRating.toFixed(1) : 'N/A' }}</td>
+                <td class="rating-cell">{{ period.hrRating ? period.hrRating.toFixed(1) : 'N/A' }}</td>
                 <td>
                   <div class="rating-display">
                     <span class="rating-value">{{ period.overallRating.toFixed(1) }}</span>
