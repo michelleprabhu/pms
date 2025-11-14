@@ -424,3 +424,55 @@
   margin-bottom: 0;
 }
 
+/* Evaluation Stats Section */
+.period-stats {
+  margin-bottom: 20px;
+}
+
+/* Button alignment */
+.btn-view-employees {
+  width: 100%;
+  padding: 12px;
+  background-color: #8B2E3E;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.btn-view-employees:hover {
+  background-color: #6d2431;
+}
+
+.btn-view-small {
+  padding: 6px 16px;
+  background-color: white;
+  color: #8B2E3E;
+  border: 1px solid #8B2E3E;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-view-small:hover {
+  background-color: #8B2E3E;
+  color: white;
+}
+
+.clickable-row {
+  cursor: pointer;
+}
+

@@ -754,3 +754,93 @@
   box-shadow: 0 0 0 2px rgba(139, 46, 62, 0.2);
 }
 
+/* Tab Title with Badge */
+.tab-title-with-badge {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+/* Weightage Badges */
+.weightage-badge {
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  display: inline-block;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.weightage-badge.goals-badge {
+  background-color: #8B2E3E;
+}
+
+.weightage-badge.competencies-badge {
+  background-color: #8B2E3E;
+}
+
+.weightage-badge.values-badge {
+  background-color: #8B2E3E;
+}
+
+/* Weightage Compact Card */
+.weightage-compact-card {
+  background-color: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.weightage-compact-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 12px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.weightage-compact-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.weightage-compact-row:last-child {
+  margin-bottom: 0;
+}
+
+.weightage-compact-label {
+  width: 110px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.weightage-compact-percent {
+  width: 45px;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: right;
+  color: #1a1a1a;
+}
+
+.weightage-compact-bar-container {
+  flex: 1;
+  height: 18px;
+  background-color: #f3f4f6;
+  border-radius: 9px;
+  overflow: hidden;
+  margin-left: 12px;
+}
+
+.weightage-compact-bar {
+  height: 100%;
+  background-color: #8B2E3E;
+  border-radius: 9px;
+  transition: width 0.3s ease;
+}
+
