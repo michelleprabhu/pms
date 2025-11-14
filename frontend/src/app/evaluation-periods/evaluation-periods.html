@@ -13,6 +13,10 @@
           <span class="nav-icon"><i class="fas fa-chart-line"></i></span>
           <span class="nav-text" *ngIf="!isSidebarCollapsed">Dashboard</span>
         </div>
+        <div class="nav-item" (click)="navigateToPlanning()">
+          <span class="nav-icon"><i class="fas fa-tasks"></i></span>
+          <span class="nav-text" *ngIf="!isSidebarCollapsed">Planning</span>
+        </div>
         <div class="nav-item" (click)="navigateToScoreCards()">
           <span class="nav-icon"><i class="fas fa-clipboard-check"></i></span>
           <span class="nav-text" *ngIf="!isSidebarCollapsed">Score Cards</span>
@@ -28,10 +32,6 @@
         <div class="nav-item" (click)="navigateToReviewPeriods()">
           <span class="nav-icon"><i class="fas fa-calendar-alt"></i></span>
           <span class="nav-text" *ngIf="!isSidebarCollapsed">Review Periods</span>
-        </div>
-        <div class="nav-item">
-          <span class="nav-icon"><i class="fas fa-user-check"></i></span>
-          <span class="nav-text" *ngIf="!isSidebarCollapsed">Eligibility Profile</span>
         </div>
       </div>
       
