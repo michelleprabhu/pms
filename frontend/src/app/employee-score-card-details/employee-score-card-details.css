@@ -295,15 +295,6 @@
   margin: 0 0 24px 0;
 }
 
-.subsection-title {
-  font-size: 16px;
-  font-weight: 600;
-  color: #1a1a1a;
-  margin: 0 0 16px 0;
-  padding-bottom: 8px;
-  border-bottom: 2px solid #8B2E3E;
-}
-
 /* Data Table */
 .data-table-container {
   width: 100%;
@@ -410,5 +401,446 @@
     border-left-color: #000;
     border-bottom-color: transparent;
   }
+}
+
+/* Planning Progress Card */
+.planning-progress-card {
+  background-color: #f8f9fa;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+.progress-card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 15px 0;
+}
+
+.progress-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.progress-stat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.progress-stat.total-weight {
+  margin-left: auto;
+  font-size: 16px;
+}
+
+.stat-label {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.stat-value {
+  font-size: 14px;
+  color: #333;
+}
+
+/* Role Badges */
+.role-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.badge-hr {
+  background-color: #8B2E3E;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.badge-manager {
+  background-color: #1e3a8a;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.badge-employee {
+  background-color: #1a1a1a;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Goal Row Color-Coding */
+.goal-row-hr {
+  background-color: #fef2f2;
+}
+
+.goal-row-hr:hover {
+  background-color: #fee2e2;
+}
+
+.goal-row-manager {
+  background-color: #e8eef7;
+}
+
+.goal-row-manager:hover {
+  background-color: #d6e0f0;
+}
+
+.goal-row-employee {
+  background-color: #f5f5f5;
+}
+
+.goal-row-employee:hover {
+  background-color: #e5e5e5;
+}
+
+/* Action Buttons */
+.action-cell {
+  white-space: nowrap;
+  text-align: center;
+}
+
+.action-buttons-inline {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-edit {
+  padding: 6px 12px;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: background-color 0.3s;
+}
+
+.btn-edit:hover {
+  background-color: #1d4ed8;
+}
+
+.btn-delete {
+  padding: 6px 12px;
+  background-color: #dc2626;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: background-color 0.3s;
+}
+
+.btn-delete:hover {
+  background-color: #b91c1c;
+}
+
+.btn-accept {
+  padding: 6px 12px;
+  background-color: #16a34a;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: background-color 0.3s;
+}
+
+.btn-accept:hover {
+  background-color: #15803d;
+}
+
+.btn-reject {
+  padding: 6px 12px;
+  background-color: #dc2626;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: background-color 0.3s;
+}
+
+.btn-reject:hover {
+  background-color: #b91c1c;
+}
+
+.no-action {
+  font-size: 12px;
+  color: #94a3b8;
+  font-style: italic;
+}
+
+/* Planning Actions */
+.planning-actions {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 25px;
+  justify-content: flex-end;
+}
+
+.btn-secondary {
+  padding: 10px 20px;
+  background-color: #1a1a1a;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.3s;
+}
+
+.btn-secondary:hover {
+  background-color: #000;
+}
+
+.btn-primary {
+  padding: 10px 20px;
+  background-color: #8B2E3E;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #6b1f2e;
+}
+
+.btn-primary:disabled {
+  background-color: #d1d5db;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Planning Discussion */
+.planning-discussion {
+  margin-top: 30px;
+  padding-top: 25px;
+  border-top: 2px solid #e5e5e5;
+}
+
+.discussion-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 20px 0;
+}
+
+.comments-list {
+  margin-bottom: 20px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.comment-item {
+  background-color: #f8f9fa;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 12px;
+}
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.comment-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.comment-timestamp {
+  font-size: 12px;
+  color: #666;
+  margin-left: auto;
+}
+
+.comment-text {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.5;
+}
+
+.no-comments {
+  text-align: center;
+  padding: 40px 20px;
+  color: #94a3b8;
+}
+
+.no-comments i {
+  font-size: 48px;
+  margin-bottom: 12px;
+  color: #cbd5e1;
+}
+
+.no-comments p {
+  font-size: 14px;
+  margin: 0;
+}
+
+.add-comment-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.comment-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 80px;
+}
+
+.comment-input:focus {
+  outline: none;
+  border-color: #8B2E3E;
+  box-shadow: 0 0 0 2px rgba(139, 46, 62, 0.2);
+}
+
+/* Tab Title with Badge */
+.tab-title-with-badge {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+/* Weightage Badges */
+.weightage-badge {
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  display: inline-block;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.weightage-badge.goals-badge {
+  background-color: #8B2E3E;
+}
+
+.weightage-badge.competencies-badge {
+  background-color: #8B2E3E;
+}
+
+.weightage-badge.values-badge {
+  background-color: #8B2E3E;
+}
+
+/* Weightage Compact Card */
+.weightage-compact-card {
+  background-color: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.weightage-compact-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 12px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.weightage-compact-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.weightage-compact-row:last-child {
+  margin-bottom: 0;
+}
+
+.weightage-compact-label {
+  width: 110px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.weightage-compact-percent {
+  width: 45px;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: right;
+  color: #1a1a1a;
+}
+
+.weightage-compact-bar-container {
+  flex: 1;
+  height: 18px;
+  background-color: #f3f4f6;
+  border-radius: 9px;
+  overflow: hidden;
+  margin-left: 12px;
+}
+
+.weightage-compact-bar {
+  height: 100%;
+  background-color: #8B2E3E;
+  border-radius: 9px;
+  transition: width 0.3s ease;
 }
 
