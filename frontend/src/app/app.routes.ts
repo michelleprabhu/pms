@@ -9,6 +9,7 @@ import { ScoreCardDetails } from './score-card-details/score-card-details';
 import { EvaluationComponent } from './evaluation/evaluation';
 import { EvaluationDetailsComponent } from './evaluation-details/evaluation-details';
 import { EmployeeScoreCardsComponent } from './employee-score-cards/employee-score-cards';
+import { EmployeeMyProfileComponent } from './employee-my-profile/employee-my-profile';
 import { EmployeeScoreCardDetailsComponent } from './employee-score-card-details/employee-score-card-details';
 import { EmployeeSelfEvaluationComponent } from './employee-self-evaluation/employee-self-evaluation';
 import { EmployeeSelfEvaluationDetailsComponent } from './employee-self-evaluation-details/employee-self-evaluation-details';
@@ -53,6 +54,7 @@ export const routes: Routes = [
   { path: 'manager-evaluation-details', component: ManagerEvaluationDetailsComponent },
   { path: 'employee-dashboard', component: EmployeeDashboard },
   { path: 'employee-score-cards', component: EmployeeScoreCardsComponent },
+  { path: 'employee-my-profile', component: EmployeeMyProfileComponent },
   { path: 'employee-score-card-details', component: EmployeeScoreCardDetailsComponent },
   { path: 'employee-self-evaluation', component: EmployeeSelfEvaluationComponent },
   { path: 'employee-self-evaluation-details', component: EmployeeSelfEvaluationDetailsComponent },

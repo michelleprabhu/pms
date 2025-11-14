@@ -64,6 +64,6 @@ export class EmployeeScoreCardsComponent {
   }
 
   viewScoreCardDetails(periodId: number) {
-    this.router.navigate(['/employee-score-card-details'], { queryParams: { periodId: periodId } });
+    this.router.navigate(['/employee-my-profile'], { queryParams: { periodId: periodId } });
   }
 }
